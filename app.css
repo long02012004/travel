@@ -1340,6 +1340,7 @@ body.dark-theme .empty-state h2 {
 .planner-nav {
     display: flex;
     gap: 32px;
+    margin-left: 40px; /* Add space from logo */
 }
 
 .planner-nav a {
@@ -1806,6 +1807,11 @@ body.dark-theme .empty-state h2 {
     padding: 0 32px;
 }
 
+.planner-main {
+    padding-top: 100px; /* Space for fixed header */
+    min-height: calc(100vh - 72px);
+}
+
 .bg-gray-50 {
     background-color: #f8fafc;
 }
@@ -1838,7 +1844,6 @@ body.dark-theme .empty-state h2 {
 
 .header-search {
     position: relative;
-    flex: 1;
     max-width: 400px;
     margin: 0 40px;
 }

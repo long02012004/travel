@@ -872,17 +872,7 @@
             offset: 50, // offset (in px) from the original trigger point
         });
 
-        // Hero Search Widget Redirect
-        document.addEventListener('DOMContentLoaded', () => {
-            const searchForm = document.getElementById('hero-search-form');
-            if(searchForm) {
-                searchForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    // Redirect to login (or dashboard)
-                    window.location.href = 'login.html';
-                });
-            }
-        });
+
 
         // Locations Slider and Tabs Logic
         document.addEventListener('DOMContentLoaded', () => {
@@ -1047,8 +1037,8 @@
                     submitBtn.innerHTML = '<i class="ph-bold ph-circle-notch spin"></i> <span>Đang tối ưu lộ trình...</span>';
 
                     setTimeout(() => {
-                        // Redirect to optimization with URL parameters
-                        const url = new URL('optimization.html', window.location.href);
+                        // Redirect to planner with URL parameters
+                        const url = new URL('planner.html', window.location.href);
                         url.searchParams.set('dest', dest);
                         if (dates) url.searchParams.set('dates', dates);
                         if (guests) url.searchParams.set('guests', guests);
