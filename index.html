@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel | Hành trình Du lịch Thông minh với AI</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Icons (Phosphor Icons - clean and modern) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Flatpickr (Date Picker) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Animated Background Blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <header class="navbar" data-aos="fade-down" data-aos-duration="800">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="ph-fill ph-sparkle"></i>
+                </div>
+                <span>AI Travel</span>
+            </a>
+
+            <nav class="nav-links">
+                <a href="dashboard.html">Lên kế hoạch</a>
+                <a href="review.html">Đánh giá</a>
+                <a href="explore.html">Khám phá</a>
+                <a href="destination.html">Địa điểm</a>
+                <a href="#">Tin tức</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="login.html" class="login-btn">Đăng nhập</a>
+                <a href="register.html" class="cta-btn">Bắt đầu ngay</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-container" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="hero-badge" data-aos="fade-up" data-aos-delay="200">
+                    <span class="badge-icon">✨</span>
+                    <span class="badge-text">MỚI: TRẢI NGHIỆM AI LÊN KẾ HOẠCH</span>
+                </div>
+
+                <h1 class="hero-title" data-aos="fade-up" data-aos-delay="400">
+                    Hành trình Du lịch <br>
+                    <span class="gradient-text animated-gradient">Thông minh với AI</span>
+                </h1>
+
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="600">
+                    Khám phá thế giới theo cách riêng của bạn với sự trợ giúp từ trí tuệ nhân tạo. <br>
+                    Chúng tôi biến ý tưởng thành lịch trình hoàn hảo chỉ trong giây lát.
+                </p>
+
+                <div class="hero-buttons" data-aos="fade-up" data-aos-delay="800">
+                    <a href="register.html" class="btn btn-primary">
+                        <i class="ph-fill ph-rocket-launch"></i>
+                        Bắt đầu Hành trình
+                    </a>
+                    <a href="login.html" class="btn btn-secondary">
+                        <i class="ph-bold ph-play-circle"></i>
+                        Xem Demo
+                    </a>
+                </div>
+
+                <!-- Hero Search Widget (Ultra-Premium) -->
+                <div class="hero-search-wrapper" data-aos="zoom-in-up" data-aos-delay="1000">
+                    <form class="premium-search-widget" id="hero-search-form">
+                        <div class="search-field" id="dest-field">
+                            <i class="ph-duotone ph-map-pin"></i>
+                            <div class="field-info">
+                                <label for="dest-input">Điểm đến</label>
+                                <input type="text" id="dest-input" autocomplete="off" placeholder="Bạn muốn đi đâu?" required>
+                            </div>
+                            
+                            <!-- Premium Suggestions Dropdown -->
+                            <div class="suggestions-dropdown" id="dest-suggestions">
+                                <div class="suggestions-header">ĐỊA ĐIỂM NỔI BẬT</div>
+                                <div class="suggestion-item" data-value="Hà Nội">
+                                    <i class="ph-duotone ph-buildings"></i>
+                                    <div class="suggestion-text">
+                                        <span class="city">Hà Nội</span>
+                                        <span class="region">Thủ đô nghìn năm văn hiến</span>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item" data-value="Hà Giang">
+                                    <i class="ph-duotone ph-mountains"></i>
+                                    <div class="suggestion-text">
+                                        <span class="city">Hà Giang</span>
+                                        <span class="region">Vẻ đẹp hùng vĩ nơi biên cương</span>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item" data-value="Đà Nẵng">
+                                    <i class="ph-duotone ph-waves"></i>
+                                    <div class="suggestion-text">
+                                        <span class="city">Đà Nẵng</span>
+                                        <span class="region">Thành phố đáng sống nhất</span>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item" data-value="Đà Lạt">
+                                    <i class="ph-duotone ph-cloud-sun"></i>
+                                    <div class="suggestion-text">
+                                        <span class="city">Đà Lạt</span>
+                                        <span class="region">Xứ sở sương mù mộng mơ</span>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item" data-value="Hội An">
+                                    <i class="ph-duotone ph-lantern"></i>
+                                    <div class="suggestion-text">
+                                        <span class="city">Hội An</span>
+                                        <span class="region">Nét đẹp cổ kính hoài niệm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="search-divider"></div>
+
+                        <div class="search-field">
+                            <i class="ph-duotone ph-calendar-blank"></i>
+                            <div class="field-info">
+                                <label for="dates-input">Ngày đi - Ngày về</label>
+                                <input type="text" id="dates-input" placeholder="Thêm ngày" required>
+                            </div>
+                        </div>
+
+                        <div class="search-divider"></div>
+
+                        <div class="search-field">
+                            <i class="ph-duotone ph-users"></i>
+                            <div class="field-info">
+                                <label for="guests-input">Số khách</label>
+                                <input type="number" id="guests-input" placeholder="Thêm khách" min="1" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-search-submit">
+                            <i class="ph-fill ph-sparkle"></i>
+                            <span>Tạo lịch trình</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- End Hero -->
+
+        <!-- Timeline Section -->
+        <section class="timeline">
+            <div class="container timeline-container">
+                <!-- SVG Wave Background -->
+                <svg class="timeline-wave" viewBox="0 0 1000 200" preserveAspectRatio="none">
+                    <path d="M 50 100 Q 250 10, 500 100 T 950 100" fill="none" stroke="#cbd5e1" stroke-width="3"
+                        stroke-dasharray="6,6" stroke-linecap="round" />
+                </svg>
+
+                <div class="timeline-grid">
+                    <!-- Card 1 -->
+                    <div class="timeline-item item-1">
+                        <div class="icon-box icon-blue">
+                            <i class="ph-bold ph-calendar-blank"></i>
+                        </div>
+                        <h3>Lên kế hoạch</h3>
+                        <p>Tự động hóa lịch trình của bạn bằng AI</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="timeline-item item-2">
+                        <div class="icon-box icon-green">
+                            <i class="ph-bold ph-map-pin"></i>
+                        </div>
+                        <h3>Địa điểm</h3>
+                        <p>Khám phá những điểm đến hấp dẫn nhất</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="timeline-item item-3">
+                        <div class="icon-box icon-yellow">
+                            <i class="ph-bold ph-fork-knife"></i>
+                        </div>
+                        <h3>Quán ăn</h3>
+                        <p>Thưởng thức đặc sản vùng miền</p>
+                    </div>
+                    
+                    <!-- Card 4 -->
+                    <div class="timeline-item item-4">
+                        <div class="icon-box icon-red">
+                            <i class="ph-bold ph-bed"></i>
+                        </div>
+                        <h3>Khách sạn</h3>
+                        <p>Nơi nghỉ dưỡng tiện nghi, thoải mái</p>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="timeline-item item-5">
+                        <div class="icon-box icon-purple">
+                            <i class="ph-bold ph-newspaper"></i>
+                        </div>
+                        <h3>Tin tức</h3>
+                        <p>Cập nhật xu hướng du lịch mới nhất</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Timeline -->
+
+        <!-- Why Choose Us Section -->
+        <section class="why-us">
+            <div class="container why-us-container">
+                <div class="why-us-header" data-aos="fade-up">
+                    <h2 class="section-title">Tại sao chọn <br><span class="gradient-text">chúng tôi?</span></h2>
+                    <p class="section-description mx-auto">Sự kết hợp hoàn hảo giữa công nghệ AI tiên tiến và dữ liệu du lịch khổng lồ để tạo ra những trải nghiệm không thể nào quên.</p>
+                </div>
+                
+                <div class="why-us-grid">
+                    <!-- Glass Card 1 -->
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="glass-icon"><i class="ph-fill ph-lightning"></i></div>
+                        <h3>Tốc độ chớp nhoáng</h3>
+                        <p>Nhận được kế hoạch chi tiết cho chuyến đi nhiều ngày chỉ trong vài giây.</p>
+                    </div>
+
+                    <!-- Glass Card 2 -->
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="glass-icon"><i class="ph-fill ph-target"></i></div>
+                        <h3>Cá nhân hóa 100%</h3>
+                        <p>Lịch trình được thiết kế may đo dựa trên sở thích, ngân sách và thói quen của riêng bạn.</p>
+                    </div>
+
+                    <!-- Glass Card 3 -->
+                    <div class="glass-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="glass-icon"><i class="ph-fill ph-currency-circle-dollar"></i></div>
+                        <h3>Tối ưu chi phí</h3>
+                        <p>AI tự động tìm kiếm và đề xuất lộ trình với chi phí hợp lý nhất, giúp bạn tiết kiệm đáng kể.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Why Choose Us -->
+
+        <!-- Expert Itinerary Section -->
+        <section class="expert-itinerary">
+            <div class="container expert-itinerary-container">
+                <div class="expert-content" data-aos="fade-right">
+                    <span class="sub-heading">DÀNH RIÊNG CHO BẠN</span>
+                    <h2 class="section-title">Lịch trình mẫu được thiết kế <br>bởi chuyên gia</h2>
+                    <p class="section-description">
+                        Không biết bắt đầu từ đâu? Hãy tham khảo các lịch trình du lịch mẫu của chúng tôi, được tinh chỉnh hoàn hảo cho từng đối tượng và thời gian cụ thể.
+                    </p>
+                    
+                    <ul class="feature-list">
+                        <li>
+                            <i class="ph-fill ph-check-circle"></i>
+                            <span>Tiết kiệm thời gian lên kế hoạch</span>
+                        </li>
+                        <li>
+                            <i class="ph-fill ph-check-circle"></i>
+                            <span>Tối ưu hóa chi phí chuyến đi</span>
+                        </li>
+                        <li>
+                            <i class="ph-fill ph-check-circle"></i>
+                            <span>Trải nghiệm được những điểm tốt nhất</span>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="btn btn-primary-blue shadow-btn">Xem Lịch Trình Mẫu</a>
+                </div>
+
+                <div class="expert-images" data-aos="fade-left">
+                    <div class="image-main">
+                        <img src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&q=80&w=800" alt="Hồ nước xanh thiên nhiên">
+                    </div>
+                    <div class="image-overlay">
+                        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80&w=600" alt="Bãi biển hoàng hôn">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Expert Itinerary -->
+
+        <!-- Features/Map Section -->
+        <section class="features">
+            <div class="container features-container">
+                <!-- Left: Phone Mockup -->
+                <div class="feature-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <!-- CSS Map -->
+                            <div class="css-map">
+                                <div class="road road-1"></div>
+                                <div class="road road-2"></div>
+                                <div class="road road-3"></div>
+                                <div class="river"></div>
+                                <div class="route-line"></div>
+                                <div class="map-pin-point start"></div>
+                                <div class="map-pin-point end"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Card -->
+                    <div class="floating-card">
+                        <div class="floating-icon">
+                            <i class="ph-fill ph-map-pin"></i>
+                        </div>
+                        <div class="floating-text">
+                            <span class="label">ĐIỂM ĐẾN</span>
+                            <span class="value">Đà Nẵng, VN</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Content -->
+                <div class="feature-content">
+                    <h2 class="section-title">
+                        Bản đồ tương tác <br>
+                        <span class="gradient-text">Định hình chuyến đi</span>
+                    </h2>
+                    <p class="section-description">
+                        Giao diện trực quan giúp bạn dễ dàng kéo thả các địa điểm yêu thích vào lộ trình. AI sẽ tự động
+                        tính toán thời gian di chuyển và gợi ý các điểm dừng chân thú vị dọc đường.
+                    </p>
+
+                    <ul class="feature-checklist">
+                        <li>
+                            <div class="check-icon"><i class="ph-bold ph-check"></i></div>
+                            <span>Tối ưu hóa quãng đường di chuyển</span>
+                        </li>
+                        <li>
+                            <div class="check-icon"><i class="ph-bold ph-check"></i></div>
+                            <span>Cảnh báo thời tiết theo thời gian thực</span>
+                        </li>
+                        <li>
+                            <div class="check-icon"><i class="ph-bold ph-check"></i></div>
+                            <span>Chia sẻ vị trí với bạn bè dễ dàng</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- End Features -->
+
+        <!-- Highlight Locations Section -->
+        <section class="locations">
+            <div class="container locations-container">
+                <div class="locations-header-wrapper" data-aos="fade-up">
+                    <div class="locations-header">
+                        <h2 class="section-title">Gợi ý <span class="highlight-underline">nổi bật</span></h2>
+                        <p class="section-description">Khám phá những điểm đến, nơi lưu trú và ẩm thực được yêu thích nhất bởi cộng đồng du khách của chúng tôi.</p>
+                    </div>
+                    
+                    <div class="slider-tabs">
+                        <button class="slider-tab active" data-target="locations">Địa điểm</button>
+                        <button class="slider-tab" data-target="hotels">Khách sạn</button>
+                        <button class="slider-tab" data-target="restaurants">Quán ăn</button>
+                    </div>
+
+                    <div class="slider-nav">
+                        <button class="slider-btn" id="loc-prev" aria-label="Previous Location">
+                            <i class="ph-bold ph-caret-left"></i>
+                        </button>
+                        <button class="slider-btn" id="loc-next" aria-label="Next Location">
+                            <i class="ph-bold ph-caret-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="locations-slider-wrap">
+                    <div class="slider-content active" id="locations-slider">
+                        <!-- Location 1 -->
+                    <div class="location-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="location-image">
+                            <!-- Placeholder image, as actual images are not provided -->
+                            <img src="https://images.unsplash.com/photo-1555921015-5532091f6026?auto=format&fit=crop&q=80&w=800" alt="Phố cổ Hội An">
+                            <span class="location-badge"><i class="ph-fill ph-map-pin"></i> Quảng Nam</span>
+                        </div>
+                        <div class="location-content">
+                            <h3>Phố cổ Hội An</h3>
+                            <div class="location-rating">
+                                <div class="stars">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </div>
+                                <span>(4.8/5 từ 1.2k đánh giá)</span>
+                            </div>
+                            <p>Hội An nổi tiếng với vẻ đẹp lãng mạn, cổ kính, yên bình với những ngôi nhà cổ, phố đèn lồng và dòng sông Hoài thơ mộng.</p>
+                            <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Location 2 -->
+                    <div class="location-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?auto=format&fit=crop&q=80&w=800" alt="Vịnh Hạ Long">
+                            <span class="location-badge"><i class="ph-fill ph-map-pin"></i> Quảng Ninh</span>
+                        </div>
+                        <div class="location-content">
+                            <h3>Vịnh Hạ Long</h3>
+                            <div class="location-rating">
+                                <div class="stars">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </div>
+                                <span>(4.9/5 từ 3.5k đánh giá)</span>
+                            </div>
+                            <p>Di sản thiên nhiên thế giới với hàng nghìn hòn đảo kỳ vĩ, hang động tuyệt đẹp và làn nước xanh lục bảo.</p>
+                            <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Location 3 -->
+                    <div class="location-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&q=80&w=800" alt="Thành phố Đà Lạt">
+                            <span class="location-badge"><i class="ph-fill ph-map-pin"></i> Lâm Đồng</span>
+                        </div>
+                        <div class="location-content">
+                            <h3>Thành phố Đà Lạt</h3>
+                            <div class="location-rating">
+                                <div class="stars">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                                </div>
+                                <span>(4.7/5 từ 2.8k đánh giá)</span>
+                            </div>
+                            <p>Thành phố ngàn hoa với khí hậu mát mẻ quanh năm, những đồi thông reo và nhiều cảnh điểm lãng mạn.</p>
+                            <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Location 4 -->
+                    <div class="location-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&q=80&w=800" alt="Sapa, Lào Cai">
+                            <span class="location-badge"><i class="ph-fill ph-map-pin"></i> Lào Cai</span>
+                        </div>
+                        <div class="location-content">
+                            <h3>Sapa mờ sương</h3>
+                            <div class="location-rating">
+                                <div class="stars">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                </div>
+                                <span>(4.9/5 từ 2.1k đánh giá)</span>
+                            </div>
+                            <p>Chiêm ngưỡng ruộng bậc thang hùng vĩ, chinh phục đỉnh Fansipan và trải nghiệm văn hóa bản địa độc đáo.</p>
+                            <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Location 5 -->
+                    <div class="location-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="location-image">
+                            <img src="https://images.unsplash.com/photo-1580983546765-b772dbda9408?auto=format&fit=crop&q=80&w=800" alt="Đảo Phú Quốc">
+                            <span class="location-badge"><i class="ph-fill ph-map-pin"></i> Kiên Giang</span>
+                        </div>
+                        <div class="location-content">
+                            <h3>Đảo ngọc Phú Quốc</h3>
+                            <div class="location-rating">
+                                <div class="stars">
+                                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                                </div>
+                                <span>(4.8/5 từ 4k đánh giá)</span>
+                            </div>
+                            <p>Thiên đường biển đảo với bờ cát trắng mịn, nước trong xanh và những khu nghỉ dưỡng đẳng cấp thế giới.</p>
+                            <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    </div>
+
+                    <!-- Slider: Hotels -->
+                    <div class="slider-content" id="hotels-slider">
+                        <!-- Hotel 1 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800" alt="Khách sạn InterContinental">
+                                <span class="location-badge"><i class="ph-fill ph-bed"></i> Đà Nẵng</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>InterContinental Resort</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                    </div>
+                                    <span>(4.9/5 từ 2.2k đánh giá)</span>
+                                </div>
+                                <p>Khu nghỉ dưỡng sang trọng bậc nhất tọa lạc tại bán đảo Sơn Trà, với thiết kế độc đáo và dịch vụ đẳng cấp thế giới.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- Hotel 2 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1551882547-ff40c0d5f9af?auto=format&fit=crop&q=80&w=800" alt="Topas Ecolodge">
+                                <span class="location-badge"><i class="ph-fill ph-bed"></i> Sapa</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>Topas Ecolodge</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                                    </div>
+                                    <span>(4.7/5 từ 1.8k đánh giá)</span>
+                                </div>
+                                <p>Trải nghiệm nghỉ dưỡng giữa thiên nhiên hoang sơ với hồ bơi vô cực ngắm nhìn toàn cảnh thung lũng Mường Hoa.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- Hotel 3 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="300">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1542314831-c6a4d27df08f?auto=format&fit=crop&q=80&w=800" alt="JW Marriott">
+                                <span class="location-badge"><i class="ph-fill ph-bed"></i> Phú Quốc</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>JW Marriott Emerald Bay</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                    </div>
+                                    <span>(4.8/5 từ 3.1k đánh giá)</span>
+                                </div>
+                                <p>Kiệt tác kiến trúc của Bill Bensley, tọa lạc bên bãi Khem tuyệt đẹp với ý tưởng thiết kế mô phỏng một trường đại học.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- Hotel 4 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="400">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1618773928120-2c15c58971f1?auto=format&fit=crop&q=80&w=800" alt="Sofitel Legend Metropole">
+                                <span class="location-badge"><i class="ph-fill ph-bed"></i> Hà Nội</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>Sofitel Legend Metropole</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                    </div>
+                                    <span>(4.9/5 từ 4.5k đánh giá)</span>
+                                </div>
+                                <p>Khách sạn lâu đời mang nét kiến trúc Pháp cổ kính nguyên bản ngay giữa lòng thủ đô, mang đậm dấu ấn lịch sử.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- Hotel 5 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="500">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=800" alt="Amanoi Resort">
+                                <span class="location-badge"><i class="ph-fill ph-bed"></i> Ninh Thuận</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>Amanoi Resort</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                    </div>
+                                    <span>(5.0/5 từ 850 đánh giá)</span>
+                                </div>
+                                <p>Ẩn mình giữa Vườn Quốc gia Núi Chúa, khu nghỉ dưỡng sinh thái đem lại sự yên bình tuyệt đối hòa quyện với thiên nhiên hùng vĩ.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slider: Restaurants -->
+                    <div class="slider-content" id="restaurants-slider">
+                        <!-- Restaurant 1 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=800" alt="Nhà hàng Gạo">
+                                <span class="location-badge"><i class="ph-fill ph-fork-knife"></i> TP HCM</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>Nhà hàng Gạo</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                                    </div>
+                                    <span>(4.5/5 từ 950 đánh giá)</span>
+                                </div>
+                                <p>Mang đến hương vị ẩm thực Việt Nam tinh tế, ấm cúng giữa không gian kiến trúc Đông Dương độc đáo ngay trung tâm Sài Gòn.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- Restaurant 2 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1588674994248-26159c9d0903?auto=format&fit=crop&q=80&w=800" alt="Chả Cá Lã Vọng">
+                                <span class="location-badge"><i class="ph-fill ph-fork-knife"></i> Hà Nội</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>Chả Cá Lã Vọng</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                    </div>
+                                    <span>(4.8/5 từ 4.2k đánh giá)</span>
+                                </div>
+                                <p>Hương vị truyền thống trăm năm của ẩm thực Hà Thành, với chả cá lăng nướng than hoa thơm lừng ăn kèm mắm tôm chuẩn vị.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- Restaurant 3 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="300">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1626202495819-dfc949be620a?auto=format&fit=crop&q=80&w=800" alt="Hải sản Ốc Hương">
+                                <span class="location-badge"><i class="ph-fill ph-fork-knife"></i> Nha Trang</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>Hải sản Ốc Hương</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                                    </div>
+                                    <span>(4.6/5 từ 1.5k đánh giá)</span>
+                                </div>
+                                <p>Thưởng thức hải sản tươi sống đánh bắt trong ngày với đa dạng cách chế biến từ nướng sa tế, mỡ hành đến sốt me đậm đà.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- Restaurant 4 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="400">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1547573854-74d2a71d0826?auto=format&fit=crop&q=80&w=800" alt="Bún Bò Huế Mụ Rơi">
+                                <span class="location-badge"><i class="ph-fill ph-fork-knife"></i> Huế</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>Bún Bò Huế Mụ Rơi</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                                    </div>
+                                    <span>(4.7/5 từ 1.2k đánh giá)</span>
+                                </div>
+                                <p>Chuẩn vị hoàng cung với nước dùng thanh ngọt, thịt bò gân dòn và chả tôm thơm lừng níu chân du khách.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- Restaurant 5 -->
+                        <div class="location-card" data-aos="fade-up" data-aos-delay="500">
+                            <div class="location-image">
+                                <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&q=80&w=800" alt="Cơm Gà Bà Buội">
+                                <span class="location-badge"><i class="ph-fill ph-fork-knife"></i> Hội An</span>
+                            </div>
+                            <div class="location-content">
+                                <h3>Cơm Gà Bà Buội</h3>
+                                <div class="location-rating">
+                                    <div class="stars">
+                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                                    </div>
+                                    <span>(4.6/5 từ 3.5k đánh giá)</span>
+                                </div>
+                                <p>Đặc sản nức tiếng phố cổ Hội An với gạo tẻ dẻo thơm, gà thả râm chắc thịt trộn cùng gỏi đu đủ chua ngọt thanh mát.</p>
+                                <a href="#" class="more-link">Xem chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="locations-action" data-aos="fade-up">
+                    <a href="#" class="btn btn-outline-blue">Xem Tất Cả Địa Điểm <i class="ph-bold ph-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+        <!-- End Highlight Locations -->
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container testimonials-container">
+                <div class="testimonials-header" data-aos="fade-up">
+                    <h2 class="section-title">Khách hàng <span class="gradient-text">Nói gì?</span></h2>
+                    <p class="section-description mx-auto">Hàng ngàn chuyến đi thành công đã được lên kế hoạch một cách 완 hảo.</p>
+                </div>
+                
+                <div class="testimonials-grid">
+                    <!-- Review 1 -->
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stars">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="review-text">"Ứng dụng thực sự kì diệu! Chỉ mất 2 phút để lên xong toàn bộ lịch trình 5 ngày ở Đà Lạt. Cảm ơn AI Travel."</p>
+                        <div class="user-info">
+                            <div class="avatar bg-blue">HL</div>
+                            <div class="user-details">
+                                <h4>Hoàng Linh</h4>
+                                <span>Travel Blogger</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stars">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                        <p class="review-text">"Lộ trình được sắp xếp rất logic. Quán ăn AI gợi ý rất ngon và rẻ. Mình đã tiết kiệm được rất nhiều thời gian."</p>
+                        <div class="user-info">
+                            <div class="avatar bg-green">MA</div>
+                            <div class="user-details">
+                                <h4>Minh Anh</h4>
+                                <span>Doanh nhân</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="stars">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
+                        </div>
+                        <p class="review-text">"Tính năng bản đồ kéo thả hoạt động cực mượt. Có thêm cảnh báo thời tiết là một điểm cộng lớn!"</p>
+                        <div class="user-info">
+                            <div class="avatar bg-purple">TV</div>
+                            <div class="user-details">
+                                <h4>Tuấn Việt</h4>
+                                <span>Sinh viên</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Testimonials -->
+
+        <!-- Bottom CTA -->
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <h2>Sẵn sàng cho chuyến đi <br> tiếp theo của bạn?</h2>
+                    <p>Tham gia cùng hàng ngàn người dùng đã tạo nên những kỷ niệm <br> không thể nào quên cùng AI
+                        Travel Planner.</p>
+                    <div class="cta-buttons">
+                        <a href="register.html" class="btn btn-primary-blue">Bắt đầu ngay miễn phí</a>
+                        <a href="login.html" class="btn btn-dark-outline">Khám phá cộng đồng</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Bottom CTA -->
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-col brand-col" data-aos="fade-up" data-aos-delay="100">
+                    <a href="#" class="logo">
+                        <div class="logo-icon small-icon">
+                            <i class="ph-fill ph-sparkle"></i>
+                        </div>
+                        <span>AI Travel Planner</span>
+                    </a>
+                    <p class="footer-desc">
+                        Nền tảng du lịch thông minh, giúp bạn tạo lịch trình cá nhân hóa nhanh chóng và dễ dàng bằng sức mạnh của AI.
+                    </p>
+                    <div class="footer-socials">
+                        <a href="#" class="social-icon"><i class="ph-fill ph-facebook-logo"></i></a>
+                        <a href="#" class="social-icon"><i class="ph-fill ph-instagram-logo"></i></a>
+                        <a href="#" class="social-icon"><i class="ph-fill ph-twitter-logo"></i></a>
+                        <a href="#" class="social-icon"><i class="ph-fill ph-youtube-logo"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Links -->
+                <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="footer-heading">Khám phá</h4>
+                    <ul class="footer-links-list">
+                        <li><a href="dashboard.html">Lên kế hoạch AI</a></li>
+                        <li><a href="#">Địa điểm nổi bật</a></li>
+                        <li><a href="#">Lịch trình mẫu</a></li>
+                        <li><a href="#">Cộng đồng chia sẻ</a></li>
+                        <li><a href="#">Cẩm nang du lịch</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact -->
+                <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
+                    <h4 class="footer-heading">Liên hệ</h4>
+                    <ul class="footer-contact-list">
+                        <li>
+                            <i class="ph-fill ph-map-pin"></i>
+                            <span>123 Đường Du Lịch, Quận Trung Tâm, TP. HCM</span>
+                        </li>
+                        <li>
+                            <i class="ph-fill ph-phone-call"></i>
+                            <span>1900 1234</span>
+                        </li>
+                        <li>
+                            <i class="ph-fill ph-envelope-simple"></i>
+                            <span>hello@aitravel.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Newsletter -->
+                <div class="footer-col" data-aos="fade-up" data-aos-delay="400">
+                    <h4 class="footer-heading">Bản tin</h4>
+                    <p class="footer-desc">Đăng ký để nhận những thông tin du lịch và ưu đãi mới nhất.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email của bạn" required>
+                        <button type="submit" class="btn-subscribe"><i class="ph-bold ph-paper-plane-right"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 AI Travel Planner. Bảo lưu mọi quyền.</p>
+                    <div class="footer-legal">
+                        <a href="#">Điều khoản sử dụng</a>
+                        <a href="#">Chính sách bảo mật</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chatbot -->
+    <div class="chatbot-wrapper" data-aos="fade-up" data-aos-delay="500">
+        <button class="chatbot-toggle" id="chatbot-toggle">
+            <i class="ph-fill ph-chat-circle-dots"></i>
+        </button>
+        <div class="chatbot-window" id="chatbot-window">
+            <div class="chatbot-header">
+                <div class="chatbot-title">
+                    <i class="ph-fill ph-sparkle"></i>
+                    AI Assistant
+                </div>
+                <button class="chatbot-close" id="chatbot-close">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages">
+                <div class="chat-message bot">
+                    <div class="avatar"><i class="ph-fill ph-robot"></i></div>
+                    <div class="message-content">
+                        Xin chào! Tôi là trợ lý AI. Tôi có thể giúp gì cho lịch trình du lịch của bạn hôm nay?
+                    </div>
+                </div>
+                <!-- user message example -->
+                <!-- <div class="chat-message user">
+                    <div class="message-content">
+                        Gợi ý cho tôi vài nhà hàng ở Đà Lạt.
+                    </div>
+                </div> -->
+            </div>
+            <div class="chatbot-input">
+                <input type="text" placeholder="Nhập câu hỏi của bạn...">
+                <button class="btn-send"><i class="ph-bold ph-paper-plane-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: true, // whether animation should happen only once - while scrolling down
+            offset: 50, // offset (in px) from the original trigger point
+        });
+
+        // Hero Search Widget Redirect
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchForm = document.getElementById('hero-search-form');
+            if(searchForm) {
+                searchForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    // Redirect to login (or dashboard)
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+
+        // Locations Slider and Tabs Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.slider-tab');
+            const sliders = document.querySelectorAll('.slider-content');
+            let currentSliderId = 'locations-slider'; // default
+
+            // Tab Switching Logic
+            if(tabs.length > 0) {
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        // Remove active class from all tabs
+                        tabs.forEach(t => t.classList.remove('active'));
+                        // Add active class to clicked tab
+                        tab.classList.add('active');
+
+                        // Get target slider id
+                        const targetId = tab.getAttribute('data-target') + '-slider';
+                        currentSliderId = targetId;
+
+                        // Hide all sliders
+                        sliders.forEach(slider => {
+                            slider.classList.remove('active');
+                        });
+
+                        // Show target slider
+                        const activeSlider = document.getElementById(targetId);
+                        if (activeSlider) {
+                            activeSlider.classList.add('active');
+                            // Optional: Reset scroll position when switching tabs
+                            activeSlider.scrollLeft = 0;
+                        }
+                    });
+                });
+            }
+
+            const prevBtn = document.getElementById('loc-prev');
+            const nextBtn = document.getElementById('loc-next');
+
+            if (prevBtn && nextBtn) {
+                // Calculate item width including gap
+                const getItemWidth = (sliderEle) => {
+                    const item = sliderEle.querySelector('.location-card');
+                    if(item) {
+                        const style = window.getComputedStyle(sliderEle);
+                        const gap = parseFloat(style.gap) || 0;
+                        return item.offsetWidth + gap;
+                    }
+                    return 0;
+                };
+
+                prevBtn.addEventListener('click', () => {
+                    const slider = document.getElementById(currentSliderId);
+                    if(slider) {
+                        slider.scrollBy({ left: -getItemWidth(slider), behavior: 'smooth' });
+                    }
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    const slider = document.getElementById(currentSliderId);
+                    if(slider) {
+                        slider.scrollBy({ left: getItemWidth(slider), behavior: 'smooth' });
+                    }
+                });
+            }
+        });
+
+        // Chatbot Toggle Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatToggle = document.getElementById('chatbot-toggle');
+            const chatWindow = document.getElementById('chatbot-window');
+            const chatClose = document.getElementById('chatbot-close');
+
+            if (chatToggle && chatWindow && chatClose) {
+                chatToggle.addEventListener('click', () => {
+                    chatWindow.classList.toggle('active');
+                });
+
+                chatClose.addEventListener('click', () => {
+                    chatWindow.classList.remove('active');
+                });
+            }
+        });
+    </script>
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/vn.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Flatpickr setup
+            flatpickr("#dates-input", {
+                mode: "range",
+                minDate: "today",
+                dateFormat: "d/m/Y",
+                locale: "vn"
+            });
+
+            // Custom Suggestions Logic
+            const destInput = document.getElementById('dest-input');
+            const suggestions = document.getElementById('dest-suggestions');
+            const items = document.querySelectorAll('.suggestion-item');
+
+            if (destInput && suggestions) {
+                // Prevent dropdown close when clicking inside
+                suggestions.addEventListener('mousedown', (e) => e.preventDefault());
+
+                // Handle item clicks
+                items.forEach(item => {
+                    item.addEventListener('click', () => {
+                        const val = item.getAttribute('data-value');
+                        destInput.value = val;
+                        suggestions.style.opacity = '0';
+                        suggestions.style.visibility = 'hidden';
+                        setTimeout(() => {
+                            suggestions.style.opacity = '';
+                            suggestions.style.visibility = '';
+                            destInput.blur();
+                        }, 100);
+                    });
+                });
+
+                // Filter logic with empty state handling
+                destInput.addEventListener('input', () => {
+                    const val = destInput.value.toLowerCase().trim();
+                    let hasMatch = false;
+                    
+                    items.forEach(item => {
+                        const city = item.getAttribute('data-value').toLowerCase();
+                        if (city.includes(val) || val === '') {
+                            item.style.display = 'flex';
+                            hasMatch = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    const header = suggestions.querySelector('.suggestions-header');
+                    if (header) header.style.display = hasMatch ? 'block' : 'none';
+                });
+            }
+
+            // Handle Search Submit
+            const searchForm = document.getElementById('hero-search-form');
+            const dateInput = document.getElementById('dates-input');
+            
+            if (searchForm) {
+                searchForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const dest = destInput.value.trim();
+                    const dates = dateInput.value.trim();
+                    const guests = document.getElementById('guests-input').value;
+                    
+                    if (!dest) {
+                        alert('Vui lòng chọn hoặc nhập điểm đến!');
+                        return;
+                    }
+
+                    // Redirect to planner with URL parameters
+                    const url = new URL('planner.html', window.location.href);
+                    url.searchParams.set('dest', dest);
+                    if (dates) url.searchParams.set('dates', dates);
+                    if (guests) url.searchParams.set('guests', guests);
+                    
+                    window.location.href = url.toString();
+                });
+            }
+        });
+    </script>
+    <script src="auth.js"></script>
+</body>
+</html>  

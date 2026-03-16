@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đánh giá & Phản hồi | AI Travel Planner</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="review.css">
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Top Navbar -->
+    <header class="app-header">
+        <div class="header-container full-width-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon small-icon"><i class="ph-fill ph-sparkle"></i></div>
+                <span>AI Travel Planner</span>
+            </a>
+
+            <nav class="nav-links desktop-nav">
+                <a href="index.html">Trang chủ</a>
+                <a href="explore.html">Khám phá</a>
+                <a href="destination.html">Địa điểm</a>
+                <a href="news.html">Tin tức</a>
+                <a href="review.html" class="active">Đánh giá</a>
+            </nav>
+            <div class="header-actions">
+                <div class="user-avatar-mini">
+                    <img src="https://i.pravatar.cc/150?u=user-reviewer" alt="User">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="review-main container">
+        <section class="review-intro">
+            <h1 class="review-title">Chia sẻ trải nghiệm của bạn</h1>
+            <p class="review-subtitle">Ý kiến của bạn giúp chúng tôi hoàn thiện hành trình cho mọi người.</p>
+        </section>
+
+        <div class="review-layout">
+            <!-- Left Panel: Satisfaction Summary -->
+            <aside class="review-stats-card">
+                <h3>Mức độ hài lòng</h3>
+                <div class="overall-rating">
+                    <span class="rating-value">4.8</span>
+                    <div class="stars">
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                        <i class="ph-fill ph-star"></i>
+                    </div>
+                </div>
+                <p class="rating-sub">Dựa trên 1,240 đánh giá</p>
+
+                <div class="metric-bars">
+                    <div class="metric">
+                        <div class="metric-label"><span>Lịch trình tối ưu</span> <span>95%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 95%;"></div></div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label"><span>Giá cả hợp lý</span> <span>88%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 88%;"></div></div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-label"><span>Độ chính xác thông tin</span> <span>92%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 92%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="thank-you-box">
+                    <h4>Cảm ơn bạn!</h4>
+                    <p>Mỗi phản hồi là một món quà giúp chúng tôi nỗ lực hơn mỗi ngày.</p>
+                </div>
+            </aside>
+
+            <!-- Right Panel: Feedback Form -->
+            <section class="feedback-form-card">
+                <div class="form-group">
+                    <h4>Bạn đánh giá thế nào về trải nghiệm này?</h4>
+                    <div class="star-rating-interactive">
+                        <i class="ph ph-star" data-rating="1"></i>
+                        <i class="ph ph-star" data-rating="2"></i>
+                        <i class="ph ph-star" data-rating="3"></i>
+                        <i class="ph ph-star" data-rating="4"></i>
+                        <i class="ph ph-star" data-rating="5"></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h4>Chi tiết phản hồi</h4>
+                    <textarea placeholder="Hãy cho chúng tôi biết điều gì bạn thích hoặc cần cải thiện..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <h4>Thêm hình ảnh</h4>
+                    <div class="upload-grid">
+                        <div class="upload-btn">
+                            <i class="ph-bold ph-camera"></i>
+                            <span>Tải ảnh lên</span>
+                        </div>
+                        <div class="upload-thumb">
+                            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Thumb">
+                            <button class="btn-remove-img"><i class="ph-bold ph-x"></i></button>
+                        </div>
+                        <div class="upload-thumb">
+                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Thumb">
+                            <button class="btn-remove-img"><i class="ph-bold ph-x"></i></button>
+                        </div>
+                        <div class="upload-thumb">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Thumb">
+                            <button class="btn-remove-img"><i class="ph-bold ph-x"></i></button>
+                        </div>
+                    </div>
+                    <p class="upload-meta">Tối đa 5 ảnh, định dạng JPG hoặc PNG. Dung lượng < 5MB.</p>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn-submit-review" onclick="alert('Cảm ơn bạn đã gửi đánh giá! Ý kiến của bạn đã được ghi nhận.'); window.location.href='dashboard.html'"><i class="ph-bold ph-paper-plane-tilt"></i> Gửi đánh giá</button>
+                    <button class="btn-cancel-review" onclick="window.location.href='dashboard.html'">Hủy bỏ</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Recent Reviews -->
+        <section class="recent-reviews-section">
+            <h2 class="section-title">Đánh giá gần đây</h2>
+            <div class="reviews-grid">
+                <div class="review-user-card">
+                    <div class="user-row">
+                        <img src="https://i.pravatar.cc/150?u=user1" alt="Linh">
+                        <div class="user-meta">
+                            <strong>Linh Nguyễn</strong>
+                            <span>2 ngày trước</span>
+                        </div>
+                        <div class="stars-fixed">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">“Chuyến đi thật tuyệt vời! Lịch trình rất hợp lý, tôi không cảm thấy quá mệt mỏi nhưng vẫn tham quan được nhiều địa điểm đẹp.”</p>
+                </div>
+
+                <div class="review-user-card">
+                    <div class="user-row">
+                        <img src="https://i.pravatar.cc/150?u=user2" alt="Minh">
+                        <div class="user-meta">
+                            <strong>Minh Trần</strong>
+                            <span>1 tuần trước</span>
+                        </div>
+                        <div class="stars-fixed">
+                            <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                        </div>
+                    </div>
+                    <p class="review-text">“Giá cả khá cạnh tranh so với mặt bằng chung. Hướng dẫn viên rất nhiệt tình và chu đáo với khách hàng.”</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- App Global Footer -->
+    <footer class="app-global-footer">
+        <div class="footer-container">
+            <div class="footer-top-row">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon small-icon"><i class="ph-fill ph-sparkle"></i></div>
+                        <span>AI Travel Planner</span>
+                    </a>
+                    <p class="footer-tagline">Kiến tạo hành trình, kết nối đam mê cùng trí tuệ nhân tạo.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Sản phẩm</h4>
+                        <a href="planner.html">AI Planner</a>
+                        <a href="explore.html">Khám phá</a>
+                        <a href="destination.html">Địa điểm</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Cộng đồng</h4>
+                        <a href="news.html">Tin tức du lịch</a>
+                        <a href="review.html">Đánh giá khách hàng</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Hỗ trợ</h4>
+                        <a href="#">Trung tâm trợ giúp</a>
+                        <a href="#">Điều khoản sử dụng</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-row">
+                <p>&copy; 2024 AI Travel Planner. Bảo lưu mọi quyền.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="ph-bold ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph-bold ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph-bold ph-twitter-logo"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple star rating interactivity
+        const starRating = document.querySelector('.star-rating-interactive');
+        const stars = starRating.querySelectorAll('i');
+        
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                stars.forEach((s, idx) => {
+                    if(idx <= index) {
+                        s.classList.replace('ph', 'ph-fill');
+                        s.style.color = '#3b82f6';
+                    } else {
+                        s.classList.replace('ph-fill', 'ph');
+                        s.style.color = '#cbd5e1';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+/* ==================== 
+   Itinerary Split-View Styling
+==================== */
+
+.split-view-container {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 72px); /* Subtract header height */
+    margin-top: 72px;
+    overflow: hidden;
+}
+
+/* Sidebar Styling */
+.itinerary-sidebar {
+    width: 400px;
+    background: white;
+    border-right: 1px solid var(--app-border-dark);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.03);
+}
+
+.iti-sidebar-header {
+    padding: 24px;
+    border-bottom: 1px solid var(--app-border-dark);
+}
+
+.status-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--app-primary);
+    background: #eff6ff;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+}
+
+.iti-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.iti-main-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--app-text-dark);
+    line-height: 1.2;
+}
+
+.btn-edit-inline {
+    background: none;
+    border: none;
+    color: var(--app-text-gray);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn-edit-inline:hover {
+    background: #f1f5f9;
+    color: var(--app-text-dark);
+}
+
+.iti-date-range {
+    font-size: 0.9rem;
+    color: var(--app-text-gray);
+    margin-bottom: 24px;
+}
+
+.view-toggle-row {
+    display: flex;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 12px;
+    gap: 4px;
+}
+
+.toggle-btn {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+    background: transparent;
+    color: var(--app-text-gray);
+}
+
+.toggle-btn.active {
+    background: var(--app-primary);
+    color: white;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.25);
+}
+
+/* Tabs */
+.iti-days-tabs {
+    display: flex;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--app-border-dark);
+    overflow-x: auto;
+}
+
+.day-tab {
+    padding: 16px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--app-text-gray);
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+}
+
+.day-tab.active {
+    color: var(--app-primary);
+}
+
+.day-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 20px;
+    right: 20px;
+    height: 3px;
+    background: var(--app-primary);
+    border-radius: 3px 3px 0 0;
+}
+
+/* Content Area */
+.iti-content-scrollable {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.time-group {
+    margin-bottom: 32px;
+}
+
+.group-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.iti-item {
+    display: flex;
+    gap: 16px;
+    position: relative;
+}
+
+.item-number {
+    width: 24px;
+    height: 24px;
+    background: var(--app-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 800;
+    z-index: 2;
+    margin-top: 10px;
+}
+
+.item-card {
+    flex: 1;
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.item-card:hover {
+    background: white;
+    border-color: var(--app-border-dark);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.item-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-info h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--app-text-dark);
+    margin-bottom: 4px;
+}
+
+.item-meta {
+    font-size: 0.8rem;
+    color: var(--app-text-gray);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.badge-success {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #059669;
+    margin-top: 6px;
+}
+
+.transport-info {
+    margin: 12px 0 12px 12px;
+    padding-left: 28px;
+    border-left: 2px dashed #cbd5e1;
+    font-size: 0.8rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+}
+
+.btn-add-spot {
+    width: 100%;
+    padding: 14px;
+    border: 1px dashed var(--app-border-dark);
+    background: white;
+    border-radius: 12px;
+    color: var(--app-text-dark);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+    transition: all 0.2s;
+}
+
+.btn-add-spot:hover {
+    background: #f8fafc;
+    border-color: var(--app-primary);
+    color: var(--app-primary);
+}
+
+/* Map Area */
+.map-view-container {
+    flex: 1;
+    position: relative;
+    background: #e5e7eb;
+}
+
+.map-mockup {
+    width: 100%;
+    height: 100%;
+    background-image: url('images/vietnam_map.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.map-options {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: white;
+    padding: 6px;
+    border-radius: 10px;
+    display: flex;
+    gap: 4px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.map-opt {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    background: transparent;
+    color: var(--app-text-gray);
+}
+
+.map-opt.active {
+    background: var(--app-primary);
+    color: white;
+}
+
+.map-ctrl-stack {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ctrl-group {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.ctrl-group button, .ctrl-btn {
+    width: 44px;
+    height: 44px;
+    background: white;
+    border: none;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--app-text-dark);
+}
+
+.ctrl-btn {
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border: none;
+}
+
+/* Pins & Paths */
+.map-path-overlay {
+    position: absolute;
+    inset: 0;
+}
+
+.map-pin {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: var(--app-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    border: 3px solid white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 5;
+    transform: translate(-50%, -50%);
+}
+
+.map-line-svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Bottom Overlay Item */
+.map-bottom-search {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 600px;
+}
+
+.search-wrap {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border: 1px solid white;
+}
+
+.search-icons {
+    display: flex;
+    gap: 8px;
+    font-size: 1.5rem;
+}
+
+.search-text-col h4 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--app-text-dark);
+}
+
+.search-text-col p {
+    font-size: 0.8rem;
+    color: var(--app-text-gray);
+}
+
+.btn-find-now {
+    margin-left: auto;
+    background: var(--app-primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-find-now:hover {
+    background: #2563eb;
+}

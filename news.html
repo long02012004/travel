@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin tức Du lịch | AI Travel Planner</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="news.css">
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Animated Background Blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <!-- Top Navbar -->
+    <header class="app-header">
+        <div class="header-container full-width-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon small-icon"><i class="ph-fill ph-sparkle"></i></div>
+                <span>AI Travel Planner</span>
+            </a>
+
+            <nav class="nav-links desktop-nav">
+                <a href="index.html">Trang chủ</a>
+                <a href="explore.html">Khám phá</a>
+                <a href="destination.html">Địa điểm</a>
+                <a href="news.html" class="active">Tin tức</a>
+                <a href="review.html">Đánh giá</a>
+            </nav>
+
+            <div class="header-search">
+                <i class="ph-bold ph-magnifying-glass search-icon"></i>
+                <input type="text" placeholder="Tìm kiếm tin tức, sự kiện...">
+            </div>
+
+            <div class="header-actions">
+                <a href="register.html" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng ký</a>
+                <div class="user-avatar" style="margin-left: 8px;">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="news-main container">
+        <!-- News Hero Section -->
+        <section class="news-hero">
+            <div class="featured-article">
+                <div class="featured-image">
+                    <img src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1200&auto=format&fit=crop" alt="Hội An">
+                    <span class="badge-tag">XU HƯỚNG</span>
+                </div>
+                <div class="featured-content">
+                    <div class="article-meta">
+                        <span class="date">15 Th03, 2024</span> &bull; <span class="read-time">5 phút đọc</span>
+                    </div>
+                    <h1 class="featured-title">Hội An Lọt Top Những Điểm Đến Lãng Mạn Nhất Thế Giới 2024</h1>
+                    <p class="featured-excerpt">Khám phá vẻ đẹp cổ kính và lung linh của phố Hội qua góc nhìn mới, cùng những gợi ý lịch trình đêm tuyệt vời nhất...</p>
+                    <a href="#" class="btn-read-more">Đọc chi tiết <i class="ph-bold ph-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Categories -->
+        <div class="news-categories">
+            <button class="news-tab active">Tất cả</button>
+            <button class="news-tab">Điểm đến</button>
+            <button class="news-tab">Ẩm thực</button>
+            <button class="news-tab">Mẹo du lịch</button>
+            <button class="news-tab">Sự kiện</button>
+            <button class="news-tab">Văn hóa</button>
+        </div>
+
+        <!-- News Grid -->
+        <div class="news-grid">
+            <!-- Article 1 -->
+            <article class="news-card">
+                <div class="news-card-image">
+                    <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=600&auto=format&fit=crop" alt="Paris">
+                    <span class="badge-tag category">Điểm đến</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="article-meta">
+                        <span class="date">12 Th03, 2024</span>
+                    </div>
+                    <h2 class="news-card-title">Cẩm nang du lịch Paris tiết kiệm mùa Olympics 2024</h2>
+                    <p class="news-card-excerpt">Làm thế nào để tận hưởng không khí lễ hội tại kinh đô ánh sáng mà không tốn quá nhiều chi phí...</p>
+                    <a href="#" class="link-more">Xem thêm</a>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="news-card">
+                <div class="news-card-image">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=600&auto=format&fit=crop" alt="Ẩm thực">
+                    <span class="badge-tag category">Ẩm thực</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="article-meta">
+                        <span class="date">10 Th03, 2024</span>
+                    </div>
+                    <h2 class="news-card-title">10 Món Ăn Đường Phố Phải Thử Khi Đến Bangkok</h2>
+                    <p class="news-card-excerpt">Trải nghiệm tinh hoa ẩm thực Thái Lan qua những gian hàng rảnh rỗi trên khắp đường phố Bangkok...</p>
+                    <a href="#" class="link-more">Xem thêm</a>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="news-card">
+                <div class="news-card-image">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=600&auto=format&fit=crop" alt="Hike">
+                    <span class="badge-tag category">Mẹo du lịch</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="article-meta">
+                        <span class="date">08 Th03, 2024</span>
+                    </div>
+                    <h2 class="news-card-title">Cách Sắp Xếp Hành Lý Gọn Nhẹ Cho Chuyến Leo Núi</h2>
+                    <p class="news-card-excerpt">Những vật dụng thiết yếu và mẹo tối ưu không gian balo cho những tín đồ xê dịch ưa mạo hiểm...</p>
+                    <a href="#" class="link-more">Xem thêm</a>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="news-card">
+                <div class="news-card-image">
+                    <img src="https://images.unsplash.com/photo-1533923156502-be31530547c4?q=80&w=600&auto=format&fit=crop" alt="Tokyo">
+                    <span class="badge-tag category">Điểm đến</span>
+                </div>
+                <div class="news-card-content">
+                    <div class="article-meta">
+                        <span class="date">05 Th03, 2024</span>
+                    </div>
+                    <h2 class="news-card-title">Mùa Hoa Anh Đào Nhật Bản: Lịch Nở Hoa Dự Kiến 2024</h2>
+                    <p class="news-card-excerpt">Đừng bỏ lỡ khoảnh khắc đẹp nhất trong năm tại xứ sở mặt trời mọc với lịch trình theo dõi hoa nở...</p>
+                    <a href="#" class="link-more">Xem thêm</a>
+                </div>
+            </article>
+        </div>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="newsletter-card">
+                <div class="newsletter-content">
+                    <h2>Đăng ký nhận tin tức mới nhất</h2>
+                    <p>Cập nhật xu hướng du lịch và ưu đãi độc quyền hàng tuần vào hộp thư của bạn.</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email của bạn..." required>
+                    <button type="submit" class="btn btn-primary">Đăng ký ngay</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- App Global Footer -->
+    <footer class="app-global-footer">
+        <div class="footer-container">
+            <div class="footer-top-row">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon small-icon"><i class="ph-fill ph-sparkle"></i></div>
+                        <span>AI Travel Planner</span>
+                    </a>
+                    <p class="footer-tagline">Kiến tạo hành trình, kết nối đam mê cùng trí tuệ nhân tạo.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Sản phẩm</h4>
+                        <a href="planner.html">AI Planner</a>
+                        <a href="explore.html">Khám phá</a>
+                        <a href="destination.html">Địa điểm</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Cộng đồng</h4>
+                        <a href="news.html">Tin tức du lịch</a>
+                        <a href="review.html">Đánh giá khách hàng</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Hỗ trợ</h4>
+                        <a href="#">Trung tâm trợ giúp</a>
+                        <a href="#">Điều khoản sử dụng</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-row">
+                <p>&copy; 2024 AI Travel Planner. Bảo lưu mọi quyền.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="ph-bold ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph-bold ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph-bold ph-twitter-logo"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

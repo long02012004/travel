@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tối ưu hóa lộ trình AI | AI Travel Planner</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css"> <!-- Base styles -->
+    <link rel="stylesheet" href="app.css">   <!-- App specific styles -->
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Top Navbar -->
+    <header class="app-header">
+        <div class="header-container full-width-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon small-icon">
+                    <i class="ph-fill ph-sparkle"></i>
+                </div>
+                <span>AI Travel Planner</span>
+            </a>
+
+            <nav class="nav-links desktop-nav">
+                <a href="index.html">Trang chủ</a>
+                <a href="explore.html">Khám phá</a>
+                <a href="destination.html">Địa điểm</a>
+                <a href="news.html">Tin tức</a>
+                <a href="review.html">Đánh giá</a>
+                <a href="#">Cài đặt</a>
+            </nav>
+
+            <div class="header-search">
+                <i class="ph-bold ph-magnifying-glass search-icon"></i>
+                <input type="text" placeholder="Tìm kiếm địa điểm...">
+            </div>
+
+            <div class="header-actions">
+                <button class="notification-btn" style="margin-right: 12px; position: relative;">
+                    <i class="ph-fill ph-bell" style="font-size: 1.4rem; color: var(--app-text-gray);"></i>
+                    <span class="notification-dot"></span>
+                </button>
+                <div class="user-avatar">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="opt-main container">
+        
+        <!-- Page Header -->
+        <div class="opt-header">
+            <div class="breadcrumbs">
+                <a href="dashboard.html">Chuyến đi của tôi</a>
+                <i class="ph-bold ph-caret-right"></i>
+                <span class="active">Tối ưu hóa lộ trình AI</span>
+            </div>
+            <div class="opt-title-row">
+                <div class="opt-title-info">
+                    <h1 class="opt-title">Tối ưu hóa lộ trình bằng AI</h1>
+                    <p class="opt-subtitle">Sử dụng trí tuệ nhân tạo để tìm quãng đường ngắn nhất, tiết kiệm thời gian và chi phí cho hành trình của bạn.</p>
+                </div>
+                <div class="opt-actions">
+                    <button class="btn-opt-primary">
+                        <i class="ph-bold ph-lightning"></i> Optimize Route
+                    </button>
+                    <button class="btn-opt-success">
+                        <i class="ph-bold ph-floppy-disk"></i> Save Itinerary
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="opt-content-grid">
+            
+            <!-- Left Sidebar (Selection) -->
+            <aside class="opt-sidebar">
+                <div class="opt-card selected-places-card">
+                    <div class="opt-card-header">
+                        <i class="ph-fill ph-map-pin"></i>
+                        <h3>Địa điểm đã chọn (5)</h3>
+                    </div>
+                    
+                    <div class="places-list">
+                        <div class="selected-place-item">
+                            <div class="place-thumb-mini">
+                                <img src="https://images.unsplash.com/photo-1544413660-299165566b1d?q=80&w=200&auto=format&fit=crop" alt="Pho Co">
+                            </div>
+                            <div class="place-details-mini">
+                                <span class="place-name-mini">Phố Cổ Hà Nội</span>
+                                <span class="place-addr-mini">Hoàn Kiếm, Hà Nội</span>
+                                <span class="tag-mini culture">VĂN HÓA</span>
+                            </div>
+                        </div>
+                        
+                        <div class="selected-place-item">
+                            <div class="place-thumb-mini">
+                                <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=200&auto=format&fit=crop" alt="Nha Tho Lon">
+                            </div>
+                            <div class="place-details-mini">
+                                <span class="place-name-mini">Nhà Thờ Lớn</span>
+                                <span class="place-addr-mini">Hàng Trống, Hoàn Kiếm</span>
+                                <span class="tag-mini architecture">KIẾN TRÚC</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-add-place-dashed">
+                            <i class="ph-bold ph-plus"></i> Thêm địa điểm khác
+                        </button>
+                    </div>
+                </div>
+
+                <div class="opt-stats-grid">
+                    <div class="opt-stat-card dist">
+                        <div class="stat-icon-circle blue">
+                            <i class="ph-fill ph-map-pin-line"></i>
+                        </div>
+                        <div class="stat-val-group">
+                            <span class="stat-label-mini">TỔNG QUÃNG ĐƯỜNG</span>
+                            <span class="stat-value-mini">12.5 km</span>
+                        </div>
+                    </div>
+                    <div class="opt-stat-card time">
+                        <div class="stat-icon-circle green">
+                            <i class="ph-fill ph-clock"></i>
+                        </div>
+                        <div class="stat-val-group">
+                            <span class="stat-label-mini">THỜI GIAN DI CHUYỂN</span>
+                            <span class="stat-value-mini">45 phút</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right Column (Analysis) -->
+            <div class="opt-analysis">
+                <div class="opt-card analysis-card">
+                    <div class="opt-card-header split">
+                        <div class="header-left">
+                            <i class="ph-fill ph-chart-bar"></i>
+                            <h3>Phân tích chi phí & Thời gian (Dự kiến)</h3>
+                        </div>
+                        <span class="badge-opt-status active">Tối ưu bởi AI</span>
+                    </div>
+
+                    <div class="analysis-table-container">
+                        <table class="analysis-table">
+                            <thead>
+                                <tr>
+                                    <th>CHẶNG ĐI</th>
+                                    <th>KHOẢNG CÁCH</th>
+                                    <th>THỜI GIAN</th>
+                                    <th>CHI PHÍ (GRAB/TAXI)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="route-step">
+                                            <span>Phố Cổ</span> <i class="ph-bold ph-arrow-right"></i> <span>Nhà Thờ Lớn</span>
+                                        </div>
+                                    </td>
+                                    <td>0.8 km</td>
+                                    <td>5 - 8 phút</td>
+                                    <td class="est-cost">~ 25.000đ</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="route-step">
+                                            <span>Nhà Thờ Lớn</span> <i class="ph-bold ph-arrow-right"></i> <span>Văn Miếu</span>
+                                        </div>
+                                    </td>
+                                    <td>2.4 km</td>
+                                    <td>10 - 12 phút</td>
+                                    <td class="est-cost">~ 45.000đ</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="route-step">
+                                            <span>Văn Miếu</span> <i class="ph-bold ph-arrow-right"></i> <span>Lăng Chủ Tịch</span>
+                                        </div>
+                                    </td>
+                                    <td>1.5 km</td>
+                                    <td>7 phút</td>
+                                    <td class="est-cost">~ 32.000đ</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr class="total-row">
+                                    <td colspan="3">Tổng chi phí dự kiến:</td>
+                                    <td class="total-cost">102.000đ</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Detailed Map Section -->
+                <div class="opt-card map-analysis-card">
+                    <div class="opt-card-header split">
+                        <h3>Xem bản đồ chi tiết</h3>
+                        <div class="card-header-actions">
+                            <button class="btn-icon-tiny"><i class="ph-bold ph-layers"></i></button>
+                            <button class="btn-icon-tiny"><i class="ph-bold ph-corners-out"></i></button>
+                        </div>
+                    </div>
+                    <div class="map-analysis-viewport">
+                        <div class="map-placeholder-img">
+                            <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop" alt="Hanoi Map">
+                            <div class="map-path-overlay"></div>
+                            <div class="map-marker-opt start" style="top: 40%; left: 30%;">
+                                <div class="marker-label">Điểm bắt đầu</div>
+                            </div>
+                            <div class="map-marker-opt waypoint" style="top: 60%; left: 50%;">
+                                <div class="marker-label">Điểm đến tiếp theo</div>
+                            </div>
+                            <div class="map-loading-indicator">
+                                <div class="loading-box">
+                                    <i class="ph-bold ph-circle-notch spin"></i>
+                                    <span>Bản đồ đang được tối ưu hóa...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="app-global-footer">
+        <div class="footer-container">
+            <div class="footer-top-row">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon small-icon"><i class="ph-fill ph-sparkle"></i></div>
+                        <span>AI Travel</span>
+                    </a>
+                    <p class="footer-tagline">Kiến tạo hành trình, kết nối đam mê cùng trí tuệ nhân tạo.</p>
+                </div>
+                <div class="footer-links-group">
+                    <div class="footer-col">
+                        <h4>Khám phá</h4>
+                        <a href="explore.html">Địa điểm nổi bật</a>
+                        <a href="explore.html">Món ngon bản địa</a>
+                        <a href="explore.html">Văn hóa & Lễ hội</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Cộng đồng</h4>
+                        <a href="#">Travel Blog</a>
+                        <a href="#">Diễn đàn chia sẻ</a>
+                        <a href="#">Reviewer tiêu biểu</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Hỗ trợ</h4>
+                        <a href="#">Trung tâm trợ giúp</a>
+                        <a href="#">Điều khoản sử dụng</a>
+                        <a href="#">Chính sách bảo mật</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-row">
+                <p>&copy; 2024 AI Travel Planner. Thiết kế bởi UI Designer. Bảo lưu mọi quyền.</p>
+                <div class="footer-socials">
+                    <a href="#"><i class="ph-bold ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph-bold ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph-bold ph-twitter-logo"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

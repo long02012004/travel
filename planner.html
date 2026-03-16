@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trip Planner AI | Lên kế hoạch</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Flatpickr (Date Picker) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="app.css">
+</head>
+<body class="planner-layout">
+    
+    <!-- Top Navigation (No Sidebar for Planner) -->
+    <header class="planner-header">
+        <a href="index.html" class="brand">
+            <div class="brand-icon planner-brand">
+                <i class="ph-bold ph-sparkle"></i>
+            </div>
+            <span class="brand-name planner-title">AI Travel Planner</span>
+        </a>
+
+        <nav class="nav-links desktop-nav">
+                <a href="index.html">Trang chủ</a>
+                <a href="explore.html">Khám phá</a>
+                <a href="destination.html">Địa điểm</a>
+                <a href="news.html">Tin tức</a>
+                <a href="review.html">Đánh giá</a>
+        </nav>
+
+        <div class="user-avatar-mini">
+            <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Avatar">
+        </div>
+    </header>
+
+    <main class="planner-main">
+        <div class="planner-container">
+            
+            <!-- Page Header -->
+            <div class="planner-intro">
+                <h1>Lên kế hoạch chuyến đi mơ ước</h1>
+                <p>Chỉ mất 2 phút để AI thiết kế lịch trình cá nhân hoá dành riêng cho bạn dựa trên sở thích và nhu cầu.</p>
+            </div>
+
+            <!-- Stepper -->
+            <div class="stepper">
+                <div class="step active">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">Cơ bản</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">Sở thích</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Hoàn tất</span>
+                </div>
+            </div>
+
+            <!-- Form Card -->
+            <div class="planner-card">
+                
+                <!-- Section 1: Basic Info -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="ph-fill ph-map-trifold" style="color:var(--app-primary);"></i> Bạn dự định đi đâu và khi nào?</h2>
+                    
+                    <div class="input-row">
+                        <div class="form-group half premium-field">
+                            <label for="plan-destination">ĐIỂM ĐẾN</label>
+                            <div class="input-container" style="position: relative;">
+                                <i class="ph-duotone ph-map-pin input-icon"></i>
+                                <input type="text" id="plan-destination" autocomplete="off" placeholder="Bạn muốn đi đâu?" value="Đà Nẵng">
+                                
+                                <!-- Premium Suggestions Dropdown (Planner) -->
+                                <div class="suggestions-dropdown" id="planner-suggestions">
+                                    <div class="suggestions-header">GỢI Ý</div>
+                                    <div class="suggestion-item" data-value="Hà Nội">
+                                        <i class="ph-duotone ph-buildings"></i>
+                                        <div class="suggestion-text">
+                                            <span class="city">Hà Nội</span>
+                                        </div>
+                                    </div>
+                                    <div class="suggestion-item" data-value="Đà Nẵng">
+                                        <i class="ph-duotone ph-waves"></i>
+                                        <div class="suggestion-text">
+                                            <span class="city">Đà Nẵng</span>
+                                        </div>
+                                    </div>
+                                    <div class="suggestion-item" data-value="Hòa Bình">
+                                        <i class="ph-duotone ph-mountains"></i>
+                                        <div class="suggestion-text">
+                                            <span class="city">Hòa Bình</span>
+                                        </div>
+                                    </div>
+                                    <div class="suggestion-item" data-value="Đà Lạt">
+                                        <i class="ph-duotone ph-cloud-sun"></i>
+                                        <div class="suggestion-text">
+                                            <span class="city">Đà Lạt</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group half premium-field">
+                            <label for="plan-dates">THỜI GIAN</label>
+                            <div class="input-container">
+                                <i class="ph-duotone ph-calendar-blank input-icon"></i>
+                                <input type="text" id="plan-dates" placeholder="Chọn ngày">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Preferences -->
+                <div class="form-section">
+                    <h2 class="section-title"><i class="ph-fill ph-heart" style="color:var(--app-primary);"></i> Sở thích cá nhân</h2>
+                    <p class="section-desc">Chọn tối đa 4 phong cách du lịch bạn mong muốn trải nghiệm nhất:</p>
+                    
+                    <div class="preference-grid">
+                        <label class="pref-card">
+                            <input type="checkbox" name="pref" value="food" class="pref-checkbox" checked>
+                            <div class="pref-content">
+                                <div class="pref-icon f-food"><i class="ph-fill ph-fork-knife"></i></div>
+                                <span>Ẩm thực</span>
+                            </div>
+                        </label>
+
+                        <label class="pref-card">
+                            <input type="checkbox" name="pref" value="nature" class="pref-checkbox" checked>
+                            <div class="pref-content">
+                                <div class="pref-icon f-nature"><i class="ph-fill ph-tree-evergreen"></i></div>
+                                <span>Thiên nhiên</span>
+                            </div>
+                        </label>
+
+                        <label class="pref-card">
+                            <input type="checkbox" name="pref" value="culture" class="pref-checkbox">
+                            <div class="pref-content">
+                                <div class="pref-icon f-culture"><i class="ph-fill ph-bank"></i></div>
+                                <span>Văn hóa</span>
+                            </div>
+                        </label>
+
+                        <label class="pref-card">
+                            <input type="checkbox" name="pref" value="active" class="pref-checkbox">
+                            <div class="pref-content">
+                                <div class="pref-icon f-active"><i class="ph-fill ph-music-notes"></i></div>
+                                <span>Sôi động</span>
+                            </div>
+                        </label>
+
+                        <label class="pref-card">
+                            <input type="checkbox" name="pref" value="relax" class="pref-checkbox">
+                            <div class="pref-content">
+                                <div class="pref-icon f-relax"><i class="ph-fill ph-umbrella-simple"></i></div>
+                                <span>Nghỉ dưỡng</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Section 3: Budget & Members -->
+                <div class="form-section border-top">
+                    <div class="input-row">
+                        <div class="form-group half">
+                            <label><i class="ph-fill ph-money"></i> Ngân sách dự kiến</label>
+                            <div class="select-container">
+                                <select>
+                                    <option>Trung bình (5 - 15 triệu)</option>
+                                    <option>Tiết kiệm (Dưới 5 triệu)</option>
+                                    <option>Cao cấp (Trên 15 triệu)</option>
+                                </select>
+                                <i class="ph-bold ph-caret-down select-icon"></i>
+                            </div>
+                        </div>
+                        <div class="form-group half">
+                            <label><i class="ph-fill ph-users"></i> Thành viên</label>
+                            <div class="select-container">
+                                <select id="plan-members">
+                                    <option>Gia đình / Nhóm bạn</option>
+                                    <option>Cặp đôi</option>
+                                    <option>Solo</option>
+                                </select>
+                                <i class="ph-bold ph-caret-down select-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.day-tab');
+            const timeGroups = document.querySelectorAll('.time-group');
+            const budget = document.getElementById('budgetSummary');
+            const pins = document.querySelectorAll('.map-pin');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    if (tab.classList.contains('tab-stats')) {
+                        timeGroups.forEach(g => g.style.display = 'none');
+                        budget.style.display = 'block';
+                    } else {
+                        timeGroups.forEach(g => g.style.display = 'block');
+                        budget.style.display = 'none';
+                    }
+                });
+            });
+
+            // Interactive Map Pins
+            pins.forEach(pin => {
+                pin.addEventListener('click', () => {
+                    const label = pin.getAttribute('data-label');
+                    alert('Bạn đang xem chi tiết tại: ' + label);
+                });
+            });
+        });
+    </script>
+
+                <!-- Generate CTA -->
+                <div class="generate-wrapper">
+                    <a href="#" class="btn-generate" id="generateBtn">
+                        <i class="ph-fill ph-lightning"></i>
+                        Generate AI Recommendation
+                    </a>
+                    <span class="helper-text">Mất khoảng 5-10 giây để xử lý dữ liệu thông minh</span>
+                </div>
+
+            </div>
+
+            <!-- Destination Map Snippet Bottom (Now Interactive) -->
+            <div class="map-snippet" id="planner-map" style="height: 300px; border-radius: 24px; overflow: hidden; position: relative;">
+                <div class="map-overlay" style="z-index: 1000; pointer-events: none;">
+                    <h3>Khám phá Việt Nam</h3>
+                    <p>Bản đồ tương tác đã sẵn sàng, các điểm đến sẽ được đánh dấu tại đây.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Flatpickr setup
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlDates = urlParams.get('dates');
+            
+            flatpickr("#plan-dates", {
+                mode: "range",
+                minDate: "today",
+                dateFormat: "d/m/Y",
+                defaultDate: urlDates ? urlDates.split(' to ') : null,
+                locale: "vn"
+            });
+
+            // Leaflet setup for Planner
+            const plannerMap = L.map('planner-map', {
+                zoomControl: false,
+                dragging: false,
+                scrollWheelZoom: false
+            }).setView([16.047, 108.206], 6); // Vietnam Overview
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(plannerMap);
+
+            // Custom Suggestions Logic
+            const destInput = document.getElementById('plan-destination');
+            const suggestions = document.getElementById('planner-suggestions');
+            const items = document.querySelectorAll('.suggestion-item');
+
+            if (destInput && suggestions) {
+                // Prevent dropdown close when clicking inside
+                suggestions.addEventListener('mousedown', (e) => e.preventDefault());
+
+                items.forEach(item => {
+                    item.addEventListener('click', () => {
+                        destInput.value = item.getAttribute('data-value');
+                        suggestions.style.opacity = '0';
+                        suggestions.style.visibility = 'hidden';
+                        setTimeout(() => {
+                            suggestions.style.opacity = '';
+                            suggestions.style.visibility = '';
+                            destInput.blur();
+                        }, 100);
+                    });
+                });
+
+                destInput.addEventListener('input', () => {
+                    const val = destInput.value.toLowerCase().trim();
+                    let hasMatch = false;
+                    items.forEach(item => {
+                        const city = item.getAttribute('data-value').toLowerCase();
+                        if (city.includes(val) || val === '') {
+                            item.style.display = 'flex';
+                            hasMatch = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    const header = suggestions.querySelector('.suggestions-header');
+                    if (header) header.style.display = hasMatch ? 'block' : 'none';
+                });
+            }
+        });
+    </script>
+    <script src="auth.js"></script>
+    <script src="app.js"></script>
+    <script src="planner.js"></script>
+</body>
+</html>
