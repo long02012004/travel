@@ -14,6 +14,9 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="app.css">
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 
 <body class="dashboard-layout">
@@ -102,6 +105,49 @@
 
             <!-- Page Content -->
             <div class="page-content">
+
+                <!-- Countdown Timer Widget -->
+                <div id="countdownWidget" class="countdown-card sleek-glass" style="display: none;">
+                    <div class="countdown-label">CHUYẾN ĐI TIẾP THEO SẼ BẮT ĐẦU TRONG</div>
+                    <div class="countdown-timer">
+                        <div class="time-block">
+                            <span id="days" class="time-val">00</span>
+                            <span class="time-label">NGÀY</span>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-block">
+                            <span id="hours" class="time-val">00</span>
+                            <span class="time-label">GIỜ</span>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-block">
+                            <span id="minutes" class="time-val">00</span>
+                            <span class="time-label">PHÚT</span>
+                        </div>
+                        <div class="time-separator">:</div>
+                        <div class="time-block">
+                            <span id="seconds" class="time-val">00</span>
+                            <span class="time-label">GIÂY</span>
+                        </div>
+                    </div>
+                    <div id="nextTripInfo" class="next-trip-summary">Đang tính toán hành trình...</div>
+                </div>
+
+                <!-- Mini Map Section -->
+                <div class="dashboard-map-section sleek-glass">
+                    <div class="section-header">
+                        <div class="header-info">
+                            <h3>Bản đồ hành trình</h3>
+                            <p>Khám phá lại những địa điểm bạn đã và sẽ đi qua</p>
+                        </div>
+                        <button class="btn-sleek mini" onclick="window.location.href='itinerary.html'">
+                            <i class="ph-bold ph-maximize"></i>
+                            <span>Toàn màn hình</span>
+                        </button>
+                    </div>
+                    <div id="miniMap" class="mini-map-container"></div>
+                </div>
+
 
                 <div class="dashboard-header">
                     <div class="dashboard-title">

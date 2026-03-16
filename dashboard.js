@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Simulate loading/initialization delay to show off skeletons
     setTimeout(() => {
         initializeDashboard();
+        startCountdown(); // Start the dynamic countdown
+        initMiniMap();    // Initialize the interactive map
     }, 1000);
 });
 
@@ -84,13 +86,78 @@ function initializeDashboard() {
 
     initTheme();
 
-    // 1. Initialize Mock Data if none exists
-    if (!localStorage.getItem('userTrips')) {
+    // 1. Initialize or Refresh Mock Data
+    const existingTrips = JSON.parse(localStorage.getItem('userTrips'));
+    const needsRefresh = !existingTrips || 
+                         !existingTrips.some(t => t.preparationChecklist !== undefined) ||
+                         existingTrips.length < 4;
+    
+    if (needsRefresh) {
         const mockTrips = [
-            { id: '1', title: 'Khám phá Đà Nẵng', dates: '15/10 - 20/10/2023', locations: 8, members: 4, status: 'upcoming', image: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=800&auto=format&fit=crop', timestamp: Date.now() - 100000 },
-            { id: '2', title: 'Mùa thu Hà Nội', dates: '05/11 - 08/11/2023', locations: 5, members: 2, status: 'upcoming', image: 'https://images.unsplash.com/photo-1555921015-5532091f6026?q=80&w=800&auto=format&fit=crop', timestamp: Date.now() - 200000 },
-            { id: '3', title: 'Nghỉ dưỡng Phú Quốc', dates: '22/12 - 26/12/2023', locations: 12, members: 6, status: 'done', image: 'https://images.unsplash.com/photo-1544413660-299165566b1d?q=80&w=800&auto=format&fit=crop', timestamp: Date.now() - 300000 },
-            { id: '4', title: 'Tour ẩm thực Sài Gòn', dates: '10/01 - 12/01/2024', locations: 6, members: 3, status: 'done', image: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=800&auto=format&fit=crop', timestamp: Date.now() - 400000 }
+            // Next trip (March 25, 2026)
+            { 
+                id: '1', 
+                title: 'Khám phá Đà Nẵng', 
+                dates: '25/03 - 30/03/2026', 
+                locations: 8, 
+                members: 4, 
+                status: 'upcoming', 
+                preparationChecklist: [
+                    { id: 'step1', label: 'Vé máy bay', completed: true },
+                    { id: 'step2', label: 'Khách sạn', completed: true },
+                    { id: 'step3', label: 'Lịch trình', completed: false }
+                ], 
+                image: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=800&auto=format&fit=crop', 
+                timestamp: Date.now() - 100000 
+            },
+            // Trip in 3 weeks (April 10, 2026)
+            { 
+                id: '2', 
+                title: 'Nghỉ dưỡng Hội An', 
+                dates: '10/04 - 15/04/2026', 
+                locations: 5, 
+                members: 2, 
+                status: 'upcoming', 
+                preparationChecklist: [
+                    { id: 'step1', label: 'Vé máy bay', completed: true },
+                    { id: 'step2', label: 'Khách sạn', completed: false },
+                    { id: 'step3', label: 'Lịch trình', completed: false }
+                ], 
+                image: 'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=800&auto=format&fit=crop', 
+                timestamp: Date.now() - 200000 
+            },
+            // Past trip
+            { 
+                id: '3', 
+                title: 'Mùa xuân Hà Nội', 
+                dates: '01/03 - 05/03/2026', 
+                locations: 12, 
+                members: 3, 
+                status: 'done', 
+                preparationChecklist: [
+                    { id: 'step1', label: 'Vé máy bay', completed: true },
+                    { id: 'step2', label: 'Khách sạn', completed: true },
+                    { id: 'step3', label: 'Lịch trình', completed: true }
+                ], 
+                image: 'https://images.unsplash.com/photo-1509030464402-dbad216ec7f1?q=80&w=800&auto=format&fit=crop', 
+                timestamp: Date.now() - 300000 
+            },
+            // Future trip far away
+            { 
+                id: '4', 
+                title: 'Phú Quốc Sunsets', 
+                dates: '20/06 - 25/06/2026', 
+                locations: 6, 
+                members: 2, 
+                status: 'upcoming', 
+                preparationChecklist: [
+                    { id: 'step1', label: 'Vé máy bay', completed: false },
+                    { id: 'step2', label: 'Khách sạn', completed: false },
+                    { id: 'step3', label: 'Lịch trình', completed: false }
+                ], 
+                image: 'https://images.unsplash.com/photo-1589308078059-be1415eab4c3?q=80&w=800&auto=format&fit=crop', 
+                timestamp: Date.now() - 400000 
+            }
         ];
         localStorage.setItem('userTrips', JSON.stringify(mockTrips));
     }
@@ -114,6 +181,23 @@ function initializeDashboard() {
 
         // Build HTML
         let html = '';
+
+        if (filteredTrips.length === 0) {
+            // Creative Empty State
+            html = `
+            <div class="empty-state">
+                <img src="images/empty_state.png" alt="No Trips" class="empty-illustration">
+                <h2>Bắt đầu hành trình mới?</h2>
+                <p>Thế giới có vô vàn điều kỳ diệu đang chờ bạn khám phá. Hãy bắt đầu bằng cách lên kế hoạch cho chuyến đi đầu tiên nhé!</p>
+                <a href="planner.html" class="btn-cta-large">
+                    <i class="ph-bold ph-plus"></i>
+                    Tạo lịch trình ngay
+                </a>
+            </div>`;
+            gridContainer.innerHTML = html;
+            return;
+        }
+
         filteredTrips.forEach((trip, index) => {
             const statusIcon = trip.status === 'upcoming' ? 'ph-clock' : 'ph-check-circle';
             const statusText = trip.status === 'upcoming' ? 'Sắp tới' : 'Hoàn thành';
@@ -142,6 +226,28 @@ function initializeDashboard() {
                             <i class="ph-bold ph-users"></i> ${trip.members} khách
                         </div>
                     </div>
+
+                    ${trip.status === 'upcoming' ? `
+                    <div class="trip-preparation-checklist">
+                        <div class="checklist-header">
+                            <p class="checklist-title">Chuẩn bị chuyến đi</p>
+                            <button class="add-item-btn" data-trip-id="${trip.id}" title="Thêm ghi chú mới">
+                                <i class="ph-bold ph-plus"></i>
+                            </button>
+                        </div>
+                        <div class="checklist-items">
+                            ${(trip.preparationChecklist || []).map(item => `
+                                <div class="checklist-item ${item.completed ? 'completed' : ''}" data-trip-id="${trip.id}" data-item-id="${item.id}">
+                                    <div class="checkbox-wrapper">
+                                        <i class="ph-bold ${item.completed ? 'ph-check-circle' : 'ph-circle'}"></i>
+                                    </div>
+                                    <span class="item-label">${item.label}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+
                     <div class="card-footer-actions">
                         <div class="main-actions">
                             <a href="itinerary.html" class="btn-sleek primary" title="Xem chi tiết">
@@ -172,6 +278,53 @@ function initializeDashboard() {
         </a>`;
 
         gridContainer.innerHTML = html;
+
+        // Attach Checklist Toggle Listeners
+        document.querySelectorAll('.checklist-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const tripId = item.getAttribute('data-trip-id');
+                const itemId = item.getAttribute('data-item-id');
+                
+                const tripIndex = allTrips.findIndex(t => t.id === tripId);
+                if (tripIndex !== -1) {
+                    const checklist = allTrips[tripIndex].preparationChecklist;
+                    const itemIndex = checklist.findIndex(i => i.id === itemId);
+                    if (itemIndex !== -1) {
+                        checklist[itemIndex].completed = !checklist[itemIndex].completed;
+                        localStorage.setItem('userTrips', JSON.stringify(allTrips));
+                        renderTrips(); // Re-render to show changes
+                    }
+                }
+            });
+        });
+
+        // Attach Add Checklist Item Listeners
+        document.querySelectorAll('.add-item-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tripId = btn.getAttribute('data-trip-id');
+                const newLabel = prompt('Nhập nội dung ghi chú mới:');
+                
+                if (newLabel && newLabel.trim() !== '') {
+                    const tripIndex = allTrips.findIndex(t => t.id === tripId);
+                    if (tripIndex !== -1) {
+                        const newItem = {
+                            id: 'custom-' + Date.now(),
+                            label: newLabel.trim(),
+                            completed: false
+                        };
+                        
+                        // Ensure preparationChecklist exists
+                        if (!allTrips[tripIndex].preparationChecklist) {
+                            allTrips[tripIndex].preparationChecklist = [];
+                        }
+                        
+                        allTrips[tripIndex].preparationChecklist.push(newItem);
+                        localStorage.setItem('userTrips', JSON.stringify(allTrips));
+                        renderTrips();
+                    }
+                }
+            });
+        });
 
         // Attach Delete Listeners
         document.querySelectorAll('.delete-trip-btn').forEach(btn => {
@@ -214,5 +367,111 @@ function initializeDashboard() {
 
     if (gridContainer) {
         renderTrips();
+    }
+}
+
+// --- Countdown Management ---
+let countdownInterval;
+
+// Robust date parsing: '25/03 - 30/03/2026' -> Date object
+function getStartDate(dateStr) {
+    if (!dateStr) return new Date();
+    const parts = dateStr.split('-');
+    const firstPart = parts[0].trim(); // e.g. "25/03"
+    
+    // Extract year from the whole string
+    const yearMatch = dateStr.match(/\d{4}/);
+    const year = yearMatch ? yearMatch[0] : new Date().getFullYear();
+    
+    const dayMonth = firstPart.split('/');
+    if (dayMonth.length < 2) return new Date();
+    
+    return new Date(`${dayMonth[1]}/${dayMonth[0]}/${year}`);
+}
+
+function startCountdown() {
+    const update = () => {
+        const allTrips = JSON.parse(localStorage.getItem('userTrips')) || [];
+        const upcomingTrips = allTrips
+            .filter(t => t.status === 'upcoming')
+            .sort((a, b) => getStartDate(a.dates) - getStartDate(b.dates));
+
+        const countdownWidget = document.getElementById('countdownWidget');
+        if (upcomingTrips.length === 0 || !countdownWidget) {
+            if (countdownWidget) countdownWidget.style.display = 'none';
+            return;
+        }
+
+        const nextTrip = upcomingTrips[0];
+        const targetDate = getStartDate(nextTrip.dates);
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if (diff <= 0) {
+            countdownWidget.style.display = 'none';
+            return;
+        }
+
+        countdownWidget.style.display = 'flex';
+        document.getElementById('nextTripInfo').textContent = `Đến với: ${nextTrip.title}`;
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    };
+
+    update();
+    countdownInterval = setInterval(update, 1000);
+}
+
+// --- Mini Map Management ---
+function initMiniMap() {
+    const mapContainer = document.getElementById('miniMap');
+    if (!mapContainer) return;
+
+    // Initialize map with focus on Da Nang
+    const map = L.map('miniMap', {
+        zoomControl: false,
+        attributionControl: false
+    }).setView([16.0544, 108.2022], 12); // Detailed focus on Da Nang
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    // Mock coordinates for demo
+    const locationCoords = {
+        'Khám phá Đà Nẵng': [16.047079, 108.206230],
+        'Mùa thu Hà Nội': [21.028511, 105.804817],
+        'Nghỉ dưỡng Phú Quốc': [10.289879, 103.984020],
+        'Tour ẩm thực Sài Gòn': [10.762622, 106.660172]
+    };
+
+    const allTrips = JSON.parse(localStorage.getItem('userTrips')) || [];
+    const markers = [];
+
+    allTrips.forEach(trip => {
+        const coords = locationCoords[trip.title] || [16.0, 108.0];
+        
+        const markerIcon = L.divIcon({
+            className: 'mini-map-marker-wrap',
+            html: `<div class="mini-map-marker"></div>`,
+            iconSize: [20, 20],
+            iconAnchor: [10, 10]
+        });
+
+        const marker = L.marker(coords, { icon: markerIcon }).addTo(map);
+        marker.bindPopup(`<b>${trip.title}</b><br>${trip.dates}`);
+        markers.push(marker);
+    });
+
+    if (markers.length > 0) {
+        const group = new L.featureGroup(markers);
+        // Fit bounds with more padding to keep the perspective clear
+        map.fitBounds(group.getBounds().pad(0.5));
     }
 }
