@@ -38,11 +38,11 @@
             </a>
 
             <nav class="nav-links">
-                <a href="dashboard.html">Lên kế hoạch</a>
-                <a href="review.html">Đánh giá</a>
+                <a href="index.html">Trang chủ</a>
                 <a href="explore.html">Khám phá</a>
-                <a href="destination.html">Địa điểm</a>
-                <a href="#">Tin tức</a>
+                <a href="optimization.html">Lộ trình</a>
+                <a href="news.html">Tin tức</a>
+                <a href="review.html">Đánh giá</a>
             </nav>
 
             <div class="nav-actions">
@@ -779,7 +779,7 @@
                 <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
                     <h4 class="footer-heading">Khám phá</h4>
                     <ul class="footer-links-list">
-                        <li><a href="dashboard.html">Lên kế hoạch AI</a></li>
+                        <li><a href="optimization.html">Lộ trình</a></li>
                         <li><a href="#">Địa điểm nổi bật</a></li>
                         <li><a href="#">Lịch trình mẫu</a></li>
                         <li><a href="#">Cộng đồng chia sẻ</a></li>
@@ -1040,13 +1040,21 @@
                         return;
                     }
 
-                    // Redirect to planner with URL parameters
-                    const url = new URL('planner.html', window.location.href);
-                    url.searchParams.set('dest', dest);
-                    if (dates) url.searchParams.set('dates', dates);
-                    if (guests) url.searchParams.set('guests', guests);
-                    
-                    window.location.href = url.toString();
+                    // Simulate AI processing
+                    const submitBtn = searchForm.querySelector('.btn-search-submit');
+                    const originalBtnContent = submitBtn.innerHTML;
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="ph-bold ph-circle-notch spin"></i> <span>Đang tối ưu lộ trình...</span>';
+
+                    setTimeout(() => {
+                        // Redirect to optimization with URL parameters
+                        const url = new URL('optimization.html', window.location.href);
+                        url.searchParams.set('dest', dest);
+                        if (dates) url.searchParams.set('dates', dates);
+                        if (guests) url.searchParams.set('guests', guests);
+                        
+                        window.location.href = url.toString();
+                    }, 2500);
                 });
             }
         });

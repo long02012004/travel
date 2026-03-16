@@ -274,6 +274,12 @@ ul {
     z-index: -1;
 }
 
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .hero-container {
     display: flex;
     flex-direction: column;

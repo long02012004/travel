@@ -162,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             userControls.innerHTML = `
                 <span style="font-weight: 600; color: var(--text-dark);">Hi, ${firstName}</span>
-                <a href="dashboard.html" class="btn btn-primary" style="padding: 10px 24px; text-decoration: none;">Dashboard</a>
                 <a href="#" id="indexLogoutBtn" style="color: var(--text-gray); font-size: 0.9rem; text-decoration: none; font-weight: 600;">Đăng xuất</a>
              `;
 
