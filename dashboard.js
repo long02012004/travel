@@ -102,6 +102,9 @@ function initializeDashboard() {
                 locations: 8, 
                 members: 4, 
                 status: 'upcoming', 
+                daysCount: 6,
+                activitiesCount: 15,
+                hotelsCount: 2,
                 preparationChecklist: [
                     { id: 'step1', label: 'Vé máy bay', completed: true },
                     { id: 'step2', label: 'Khách sạn', completed: true },
@@ -118,6 +121,9 @@ function initializeDashboard() {
                 locations: 5, 
                 members: 2, 
                 status: 'upcoming', 
+                daysCount: 6,
+                activitiesCount: 12,
+                hotelsCount: 2,
                 preparationChecklist: [
                     { id: 'step1', label: 'Vé máy bay', completed: true },
                     { id: 'step2', label: 'Khách sạn', completed: false },
@@ -134,6 +140,9 @@ function initializeDashboard() {
                 locations: 12, 
                 members: 3, 
                 status: 'done', 
+                daysCount: 5,
+                activitiesCount: 10,
+                hotelsCount: 2,
                 preparationChecklist: [
                     { id: 'step1', label: 'Vé máy bay', completed: true },
                     { id: 'step2', label: 'Khách sạn', completed: true },
@@ -150,6 +159,9 @@ function initializeDashboard() {
                 locations: 6, 
                 members: 2, 
                 status: 'upcoming', 
+                daysCount: 6,
+                activitiesCount: 18,
+                hotelsCount: 3,
                 preparationChecklist: [
                     { id: 'step1', label: 'Vé máy bay', completed: false },
                     { id: 'step2', label: 'Khách sạn', completed: false },
@@ -227,7 +239,22 @@ function initializeDashboard() {
                         </div>
                     </div>
 
-                    ${trip.status === 'upcoming' ? `
+                    <!-- Trip Stats Row -->
+                    <div class="trip-stats-row">
+                        <div class="stat-item">
+                            <i class="ph-fill ph-calendar-check"></i>
+                            <span>${trip.daysCount || 3} ngày</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="ph-fill ph-list-checks"></i>
+                            <span>${trip.activitiesCount || 5} hoạt động</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="ph-fill ph-bed"></i>
+                            <span>${trip.hotelsCount || 2} khách sạn</span>
+                        </div>
+                    </div>
+
                     <div class="trip-preparation-checklist">
                         <div class="checklist-header">
                             <p class="checklist-title">Chuẩn bị chuyến đi</p>
@@ -236,24 +263,31 @@ function initializeDashboard() {
                             </button>
                         </div>
                         <div class="checklist-items">
-                            ${(trip.preparationChecklist || []).map(item => `
-                                <div class="checklist-item ${item.completed ? 'completed' : ''}" data-trip-id="${trip.id}" data-item-id="${item.id}">
-                                    <div class="checkbox-wrapper">
-                                        <i class="ph-bold ${item.completed ? 'ph-check-circle' : 'ph-circle'}"></i>
+                            ${(() => {
+                                // Default items if missing
+                                const checklist = trip.preparationChecklist || [
+                                    { id: 'step1', label: 'Vé máy bay', completed: false },
+                                    { id: 'step2', label: 'Khách sạn', completed: false },
+                                    { id: 'step3', label: 'Lịch trình', completed: false }
+                                ];
+                                return checklist.map(item => `
+                                    <div class="checklist-item ${item.completed ? 'completed' : ''}" data-trip-id="${trip.id}" data-item-id="${item.id}">
+                                        <div class="checkbox-wrapper">
+                                            <i class="ph-bold ${item.completed ? 'ph-check-circle' : 'ph-circle'}"></i>
+                                        </div>
+                                        <span class="item-label">${item.label}</span>
                                     </div>
-                                    <span class="item-label">${item.label}</span>
-                                </div>
-                            `).join('')}
+                                `).join('');
+                            })()}
                         </div>
                     </div>
-                    ` : ''}
 
                     <div class="card-footer-actions">
                         <div class="main-actions">
                             <a href="itinerary.html" class="btn-sleek primary" title="Xem chi tiết">
                                 <i class="ph-bold ph-eye"></i>
                             </a>
-                            <button class="btn-sleek" title="Chỉnh sửa">
+                            <button class="btn-sleek edit-trip-btn" title="Chỉnh sửa">
                                 <i class="ph-bold ph-pencil-simple-line"></i>
                             </button>
                         </div>
@@ -287,6 +321,15 @@ function initializeDashboard() {
                 
                 const tripIndex = allTrips.findIndex(t => t.id === tripId);
                 if (tripIndex !== -1) {
+                    // Ensure preparationChecklist exists before toggling
+                    if (!allTrips[tripIndex].preparationChecklist) {
+                        allTrips[tripIndex].preparationChecklist = [
+                            { id: 'step1', label: 'Vé máy bay', completed: false },
+                            { id: 'step2', label: 'Khách sạn', completed: false },
+                            { id: 'step3', label: 'Lịch trình', completed: false }
+                        ];
+                    }
+                    
                     const checklist = allTrips[tripIndex].preparationChecklist;
                     const itemIndex = checklist.findIndex(i => i.id === itemId);
                     if (itemIndex !== -1) {
@@ -323,6 +366,14 @@ function initializeDashboard() {
                         renderTrips();
                     }
                 }
+            });
+        });
+
+        // Attach Edit Redirect Listeners
+        document.querySelectorAll('.edit-trip-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tripId = btn.closest('.trip-card').getAttribute('data-id');
+                window.location.href = `planner.html?editId=${tripId}`;
             });
         });
 

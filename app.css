@@ -583,6 +583,38 @@ body.dark-theme .meta-capsule {
     background: rgba(51, 65, 85, 0.4);
 }
 
+
+/* Trip Stats Row Styling */
+.trip-stats-row {
+    display: flex;
+    gap: 16px;
+    margin: 16px 0;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.stat-item i {
+    font-size: 1.1rem;
+    color: var(--app-primary);
+    opacity: 0.8;
+}
+
+body.dark-theme .trip-stats-row {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.03);
+}
+
 .trip-card.sleek-glass:hover .meta-capsule {
     border-color: var(--app-primary-light);
     color: var(--app-primary);
@@ -664,6 +696,13 @@ body.dark-theme .btn-sleek {
     color: #ef4444;
     border-color: #ef4444;
     background: rgba(239, 68, 68, 0.05);
+}
+
+.btn-sleek.edit-trip-btn:hover {
+    color: #eab308; /* Yellow-500 */
+    border-color: #eab308;
+    background: rgba(234, 179, 8, 0.05);
+    box-shadow: 0 8px 16px -4px rgba(234, 179, 8, 0.2);
 }
 
 
