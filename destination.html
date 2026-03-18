@@ -27,7 +27,6 @@
             </a>
 
             <nav class="nav-links desktop-nav">
-                <a href="index.html">Trang chủ</a>
                 <a href="explore.html">Khám phá</a>
                 <a href="optimization.html">Lộ trình</a>
                 <a href="news.html">Tin tức</a>
@@ -40,9 +39,23 @@
             </div>
 
             <div class="header-actions">
-                <a href="login.html" class="btn btn-primary" style="padding: 8px 16px;">Đăng nhập</a>
-                <div class="user-avatar" style="margin-left: 8px;">
-                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                <div class="user-dropdown">
+                    <div class="user-trigger">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                        <span class="user-name">Hoàng Lê</span>
+                        <i class="ph-bold ph-caret-down"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header">
+                            <span>Tài khoản</span>
+                            <div class="user-display-name">Hoàng Lê</div>
+                        </div>
+                        <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
+                        <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
+                        <a href="ai-suggestions.html"><i class="ph ph-sparkle"></i> Gợi ý từ AI</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
+                    </div>
                 </div>
             </div>
         </div>

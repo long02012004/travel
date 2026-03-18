@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị | AI Travel Planner</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css"> <!-- Base styles -->
+    <link rel="stylesheet" href="app.css"> <!-- App specific styles -->
+    <style>
+        :root {
+            --admin-bg: #f1f5f9;
+            --admin-sidebar-w: 260px;
+            --admin-accent: #3b82f6;
+            --admin-text-main: #0f172a;
+            --admin-text-muted: #64748b;
+            --admin-border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--admin-bg);
+            color: var(--admin-text-main);
+            margin: 0;
+        }
+
+        .admin-layout {
+            display: grid;
+            grid-template-columns: var(--admin-sidebar-w) 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .admin-sidebar {
+            background: white;
+            border-right: 1px solid var(--admin-border);
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            z-index: 20;
+        }
+
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--admin-text-main);
+            font-weight: 800;
+            font-size: 1.25rem;
+            margin-bottom: 48px;
+        }
+
+        .admin-logo i {
+            color: var(--admin-accent);
+            font-size: 1.5rem;
+        }
+
+        .admin-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        .admin-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--admin-text-muted);
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .admin-nav-item i {
+            font-size: 1.25rem;
+        }
+
+        .admin-nav-item:hover {
+            color: var(--admin-accent);
+            background: #eff6ff;
+        }
+
+        .admin-nav-item.active {
+            background: #eff6ff;
+            color: var(--admin-accent);
+        }
+
+        /* Main Content Styles */
+        .admin-main {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Top Bar Styles */
+        .admin-topbar {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid var(--admin-border);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 24px;
+        }
+
+        .admin-search {
+            position: relative;
+            width: 320px;
+        }
+
+        .admin-search input {
+            width: 100%;
+            padding: 10px 16px 10px 44px;
+            background: #f8fafc;
+            border: 1px solid var(--admin-border);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .admin-search input:focus {
+            background: white;
+            border-color: var(--admin-accent);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .admin-search i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--admin-text-muted);
+        }
+
+        .topbar-action {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eff6ff;
+            color: var(--admin-accent);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .admin-profile-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Content Area */
+        .admin-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .admin-page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .admin-title h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .admin-title p {
+            color: var(--admin-text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card-admin {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--admin-border);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .stat-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-info .stat-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--admin-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .stat-info .stat-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        /* Table Card */
+        .admin-table-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--admin-border);
+            margin-bottom: 24px;
+        }
+
+        .table-toolbar {
+            padding: 24px;
+            border-bottom: 1px solid var(--admin-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-tabs {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn-filter {
+            padding: 8px 16px;
+            background: #f8fafc;
+            border: 1px solid var(--admin-border);
+            border-radius: 80px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--admin-text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-filter.active {
+            background: #eff6ff;
+            color: var(--admin-accent);
+            border-color: var(--admin-accent);
+        }
+
+        .toolbar-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-icon-base {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--admin-border);
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--admin-text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        /* Table Content */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th {
+            text-align: left;
+            padding: 16px 24px;
+            background: #f8fafc;
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--admin-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .admin-table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--admin-border);
+            vertical-align: middle;
+        }
+
+        .place-info-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .place-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .place-details .name {
+            font-weight: 800;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .place-details .location {
+            font-size: 0.75rem;
+            color: var(--admin-text-muted);
+        }
+
+        .pill-badge {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pill-active { background: #dcfce7; color: #166534; }
+        .pill-pending { background: #f1f5f9; color: #475569; }
+
+        .table-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            color: var(--admin-text-muted);
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .btn-action:hover {
+            color: var(--admin-accent);
+        }
+
+        /* Row Footer (Pagination) */
+        .table-footer {
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pagination-info {
+            font-size: 0.85rem;
+            color: var(--admin-text-muted);
+            font-weight: 600;
+        }
+
+        .pagination-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .page-num {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--admin-text-muted);
+            border: 1px solid var(--admin-border);
+        }
+
+        .page-num.active {
+            background: var(--admin-accent);
+            color: white;
+            border-color: var(--admin-accent);
+        }
+
+        .btn-add-place {
+            background: var(--admin-accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <a href="index.html" class="admin-logo">
+                <i class="ph-fill ph-globe-hemisphere-west"></i>
+                <span>TravelAdmin</span>
+            </a>
+
+            <nav class="admin-nav">
+                <a href="#" class="admin-nav-item">
+                    <i class="ph ph-squares-four"></i>
+                    <span>Tổng quan</span>
+                </a>
+                <a href="#" class="admin-nav-item active">
+                    <i class="ph ph-map-pin"></i>
+                    <span>Quản lý địa điểm</span>
+                </a>
+                <a href="#" class="admin-nav-item">
+                    <i class="ph ph-users"></i>
+                    <span>Người dùng</span>
+                </a>
+                <a href="#" class="admin-nav-item">
+                    <i class="ph ph-gear"></i>
+                    <span>Cài đặt</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <main class="admin-main">
+            <!-- Top Bar -->
+            <header class="admin-topbar">
+                <div class="admin-search">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" placeholder="Tìm kiếm địa điểm...">
+                </div>
+                <div class="header-actions">
+                    <div class="topbar-action">
+                        <i class="ph ph-bell"></i>
+                        <div class="notification-badge"></div>
+                    </div>
+                    <div class="user-dropdown">
+                        <div class="user-trigger">
+                            <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Admin Profile">
+                            <span class="user-name">Hoàng Lê</span>
+                            <i class="ph-bold ph-caret-down"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-header">
+                                <span>Tài khoản Admin</span>
+                                <div class="user-display-name">Hoàng Lê</div>
+                            </div>
+                            <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
+                            <a href="admin.html"><i class="ph ph-layout"></i> Quản trị hệ thống</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Scrollable Content -->
+            <div class="admin-content">
+                <header class="admin-page-header">
+                    <div class="admin-title">
+                        <h1>Quản lý địa điểm</h1>
+                        <p>Xem, thêm, sửa và xóa các địa điểm du lịch, nhà hàng, khách sạn trong hệ thống.</p>
+                    </div>
+                    <button class="btn-add-place">
+                        <i class="ph-bold ph-plus"></i>
+                        <span>Thêm địa điểm mới</span>
+                    </button>
+                </header>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card-admin">
+                        <div class="stat-icon" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                            <i class="ph-fill ph-map-trifold"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Tổng địa điểm</span>
+                            <span class="stat-value">1,284</span>
+                        </div>
+                    </div>
+                    <div class="stat-card-admin">
+                        <div class="stat-icon" style="background: rgba(34, 197, 94, 0.1); color: #22c55e;">
+                            <i class="ph-fill ph-flag"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Điểm tham quan</span>
+                            <span class="stat-value">842</span>
+                        </div>
+                    </div>
+                    <div class="stat-card-admin">
+                        <div class="stat-icon" style="background: rgba(249, 115, 22, 0.1); color: #f97316;">
+                            <i class="ph-fill ph-fork-knife"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Nhà hàng</span>
+                            <span class="stat-value">310</span>
+                        </div>
+                    </div>
+                    <div class="stat-card-admin">
+                        <div class="stat-icon" style="background: rgba(168, 85, 247, 0.1); color: #a855f7;">
+                            <i class="ph-fill ph-bed"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-label">Khách sạn</span>
+                            <span class="stat-value">132</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Data Table Card -->
+                <div class="admin-table-card">
+                    <div class="table-toolbar">
+                        <div class="filter-tabs">
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #475569; margin-right: 8px;">Bộ lọc:</span>
+                            <button class="btn-filter active">Tất cả</button>
+                            <button class="btn-filter"><i class="ph-fill ph-flag"></i> Điểm tham quan</button>
+                            <button class="btn-filter"><i class="ph-fill ph-fork-knife"></i> Nhà hàng</button>
+                            <button class="btn-filter"><i class="ph-fill ph-bed"></i> Khách sạn</button>
+                        </div>
+                        <div class="toolbar-actions">
+                            <button class="btn-icon-base"><i class="ph ph-arrows-clockwise"></i></button>
+                            <button class="btn-icon-base"><i class="ph ph-export"></i></button>
+                        </div>
+                    </div>
+
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên địa điểm</th>
+                                <th>Loại</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="color: #64748b; font-weight: 600;">#PL001</td>
+                                <td>
+                                    <div class="place-info-cell">
+                                        <img src="https://images.unsplash.com/photo-1543349619-fa3a37330545?q=80&w=100" class="place-thumb">
+                                        <div class="place-details">
+                                            <div class="name">Tháp Eiffel</div>
+                                            <div class="location">Paris, Pháp</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="pill-badge" style="background: #e0f2fe; color: #0369a1;"><i class="ph-fill ph-flag"></i> Tham quan</span></td>
+                                <td><span class="pill-badge pill-active"><i class="ph-fill ph-circle"></i> Hoạt động</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-action"><i class="ph ph-pencil-simple"></i></button>
+                                        <button class="btn-action"><i class="ph ph-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color: #64748b; font-weight: 600;">#PL002</td>
+                                <td>
+                                    <div class="place-info-cell">
+                                        <img src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=100" class="place-thumb">
+                                        <div class="place-details">
+                                            <div class="name">Vịnh Hạ Long</div>
+                                            <div class="location">Quảng Ninh, Việt Nam</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="pill-badge" style="background: #e0f2fe; color: #0369a1;"><i class="ph-fill ph-flag"></i> Tham quan</span></td>
+                                <td><span class="pill-badge pill-active"><i class="ph-fill ph-circle"></i> Hoạt động</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-action"><i class="ph ph-pencil-simple"></i></button>
+                                        <button class="btn-action"><i class="ph ph-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color: #64748b; font-weight: 600;">#PL003</td>
+                                <td>
+                                    <div class="place-info-cell">
+                                        <img src="https://images.unsplash.com/photo-1550966841-3ee20fd0e19a?q=80&w=100" class="place-thumb">
+                                        <div class="place-details">
+                                            <div class="name">Nhà hàng L'Avenue</div>
+                                            <div class="location">Quận 1, TP.HCM</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="pill-badge" style="background: #ffedd5; color: #9a3412;"><i class="ph-fill ph-fork-knife"></i> Quán ăn</span></td>
+                                <td><span class="pill-badge pill-active"><i class="ph-fill ph-circle"></i> Hoạt động</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-action"><i class="ph ph-pencil-simple"></i></button>
+                                        <button class="btn-action"><i class="ph ph-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color: #64748b; font-weight: 600;">#PL004</td>
+                                <td>
+                                    <div class="place-info-cell">
+                                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=100" class="place-thumb">
+                                        <div class="place-details">
+                                            <div class="name">Grand Hyatt</div>
+                                            <div class="location">Hà Nội, Việt Nam</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="pill-badge" style="background: #f3e8ff; color: #6b21a8;"><i class="ph-fill ph-bed"></i> Khách sạn</span></td>
+                                <td><span class="pill-badge pill-pending"><i class="ph-fill ph-circle"></i> Đang sửa</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-action"><i class="ph ph-pencil-simple"></i></button>
+                                        <button class="btn-action"><i class="ph ph-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="color: #64748b; font-weight: 600;">#PL005</td>
+                                <td>
+                                    <div class="place-info-cell">
+                                        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=100" class="place-thumb">
+                                        <div class="place-details">
+                                            <div class="name">Pizza 4P's</div>
+                                            <div class="location">Đà Nẵng, Việt Nam</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="pill-badge" style="background: #ffedd5; color: #9a3412;"><i class="ph-fill ph-fork-knife"></i> Quán ăn</span></td>
+                                <td><span class="pill-badge pill-active"><i class="ph-fill ph-circle"></i> Hoạt động</span></td>
+                                <td>
+                                    <div class="table-actions">
+                                        <button class="btn-action"><i class="ph ph-pencil-simple"></i></button>
+                                        <button class="btn-action"><i class="ph ph-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination Footer -->
+                    <div class="table-footer">
+                        <div class="pagination-info">Hiển thị 1-5 trong 1,284 địa điểm</div>
+                        <div class="pagination-container">
+                            <a href="#" class="page-num"><i class="ph ph-caret-left"></i></a>
+                            <a href="#" class="page-num active">1</a>
+                            <a href="#" class="page-num">2</a>
+                            <a href="#" class="page-num">3</a>
+                            <span style="color: #94a3b8;">...</span>
+                            <a href="#" class="page-num">12</a>
+                            <a href="#" class="page-num"><i class="ph ph-caret-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="auth.js"></script>
+</body>
+
+</html>

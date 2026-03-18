@@ -8,12 +8,13 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="style.css"> <!-- Base styles (fonts, resets) -->
-    <link rel="stylesheet" href="app.css">   <!-- App specific styles -->
+    <link rel="stylesheet" href="app.css"> <!-- App specific styles -->
     <link rel="stylesheet" href="explore.css"> <!-- Explore specific styles -->
 </head>
 
@@ -35,23 +36,37 @@
             </a>
 
             <nav class="nav-links desktop-nav">
-                <a href="index.html">Trang chủ</a>
                 <a href="explore.html" class="active">Khám phá</a>
                 <a href="optimization.html">Lộ trình</a>
+                <a href="ai-suggestions.html">Gợi ý AI</a>
                 <a href="news.html">Tin tức</a>
                 <a href="review.html">Đánh giá</a>
             </nav>
 
             <div class="header-search">
                 <i class="ph-bold ph-magnifying-glass search-icon"></i>
-                <input type="text" placeholder="Tìm kiếm điểm đến, món ăn...">
+                <input type="text" placeholder="Tìm kiếm địa điểm...">
             </div>
 
+
             <div class="header-actions">
-                <a href="login.html" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng ký</a>
-                <a href="login.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng nhập</a>
-                <div class="user-avatar" style="margin-left: 8px;">
-                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                <div class="user-dropdown">
+                    <div class="user-trigger">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                        <span class="user-name">Hoàng Lê</span>
+                        <i class="ph-bold ph-caret-down"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header">
+                            <span>Tài khoản</span>
+                            <div class="user-display-name">Hoàng Lê</div>
+                        </div>
+                        <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
+                        <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
+                        <a href="ai-suggestions.html"><i class="ph ph-sparkle"></i> Gợi ý từ AI</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,9 +111,11 @@
                 <button class="btn-dropdown">Xếp hạng <i class="ph-bold ph-caret-down"></i></button>
                 <button class="btn-dropdown">Trạng thái <i class="ph-bold ph-caret-down"></i></button>
             </div>
-            <button class="btn-advanced-filter">
-                <i class="ph-bold ph-faders"></i> Bộ lọc nâng cao
-            </button>
+            <div class="filter-actions">
+                <button class="btn-advanced-filter">
+                    <i class="ph-bold ph-faders"></i> Bộ lọc nâng cao
+                </button>
+            </div>
         </div>
 
         <!-- Results Grid -->
@@ -106,7 +123,8 @@
             <!-- Card 1 -->
             <a href="destination.html" class="place-card" data-category="restaurant">
                 <div class="place-image">
-                    <img src="https://images.unsplash.com/photo-1544413660-299165566b1d?q=80&w=600&auto=format&fit=crop" alt="Nhà hàng Biển Xanh">
+                    <img src="https://images.unsplash.com/photo-1544413660-299165566b1d?q=80&w=600&auto=format&fit=crop"
+                        alt="Nhà hàng Biển Xanh">
                     <button class="btn-save-place"><i class="ph-fill ph-heart"></i></button>
                     <span class="badge-featured">NỔI BẬT</span>
                 </div>
@@ -126,7 +144,8 @@
             <!-- Card 2 -->
             <a href="destination.html" class="place-card" data-category="hotel">
                 <div class="place-image">
-                    <img src="https://images.unsplash.com/photo-1551882547-ff40c0d519f8?q=80&w=600&auto=format&fit=crop" alt="Khách sạn Horizon">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c0d519f8?q=80&w=600&auto=format&fit=crop"
+                        alt="Khách sạn Horizon">
                     <button class="btn-save-place"><i class="ph-fill ph-heart" style="color:#e2e8f0;"></i></button>
                 </div>
                 <div class="place-info">
@@ -145,7 +164,8 @@
             <!-- Card 3 -->
             <a href="destination.html" class="place-card" data-category="landmark">
                 <div class="place-image">
-                    <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=600&auto=format&fit=crop" alt="Cung điện Mùa Thu">
+                    <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=600&auto=format&fit=crop"
+                        alt="Cung điện Mùa Thu">
                     <button class="btn-save-place"><i class="ph-fill ph-heart" style="color:#e2e8f0;"></i></button>
                 </div>
                 <div class="place-info">
@@ -164,7 +184,8 @@
             <!-- Card 4 -->
             <a href="destination.html" class="place-card" data-category="cafe">
                 <div class="place-image">
-                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=600&auto=format&fit=crop" alt="Quán Cafe Yên Tĩnh">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=600&auto=format&fit=crop"
+                        alt="Quán Cafe Yên Tĩnh">
                     <button class="btn-save-place"><i class="ph-fill ph-heart" style="color:#e2e8f0;"></i></button>
                 </div>
                 <div class="place-info">
@@ -183,7 +204,8 @@
             <!-- Card 5 -->
             <a href="destination.html" class="place-card" data-category="hotel">
                 <div class="place-image">
-                    <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=600&auto=format&fit=crop" alt="Resort Nắng Vàng">
+                    <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=600&auto=format&fit=crop"
+                        alt="Resort Nắng Vàng">
                     <button class="btn-save-place"><i class="ph-fill ph-heart" style="color:#e2e8f0;"></i></button>
                 </div>
                 <div class="place-info">
@@ -202,7 +224,8 @@
             <!-- Card 6 -->
             <a href="destination.html" class="place-card">
                 <div class="place-image">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600&auto=format&fit=crop" alt="Bảo tàng Nghệ thuật">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=600&auto=format&fit=crop"
+                        alt="Bảo tàng Nghệ thuật">
                     <button class="btn-save-place"><i class="ph-fill ph-heart" style="color:#e2e8f0;"></i></button>
                 </div>
                 <div class="place-info">
@@ -221,7 +244,8 @@
             <!-- Card 7 -->
             <a href="destination.html" class="place-card">
                 <div class="place-image">
-                    <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?q=80&w=600&auto=format&fit=crop" alt="Chùa Linh Ứng">
+                    <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?q=80&w=600&auto=format&fit=crop"
+                        alt="Chùa Linh Ứng">
                     <button class="btn-save-place"><i class="ph-fill ph-heart" style="color:#e2e8f0;"></i></button>
                 </div>
                 <div class="place-info">
@@ -240,7 +264,8 @@
             <!-- Card 8 -->
             <a href="destination.html" class="place-card">
                 <div class="place-image">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&auto=format&fit=crop" alt="Khu Phố Cổ">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=600&auto=format&fit=crop"
+                        alt="Khu Phố Cổ">
                     <button class="btn-save-place"><i class="ph-fill ph-heart" style="color:#e2e8f0;"></i></button>
                 </div>
                 <div class="place-info">
@@ -309,7 +334,6 @@
     <script src="auth.js"></script>
     <script src="app.js"></script>
     <script src="explore.js"></script>
-    <script src="chat-widget.js"></script>
 </body>
 
 </html>

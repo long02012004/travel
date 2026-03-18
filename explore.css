@@ -11,6 +11,44 @@
     opacity: 0.35;
 }
 
+/* Header Search - Premium Restoration */
+.header-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--app-border-dark);
+    border-radius: 12px;
+    padding: 0 16px;
+    height: 42px;
+    width: 320px;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    margin: 0 20px;
+}
+
+.header-search:focus-within {
+    background: white;
+    border-color: var(--app-primary);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    width: 380px;
+}
+
+.header-search i {
+    color: var(--app-text-gray);
+    font-size: 1.1rem;
+}
+
+.header-search input {
+    border: none;
+    background: transparent;
+    padding: 8px 10px;
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--app-text-dark);
+    outline: none;
+}
+
 .explore-main {
     padding-top: 120px;
     padding-bottom: 100px;
@@ -146,6 +184,53 @@
 .btn-advanced-filter:hover {
     background: #eff6ff;
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+}
+
+.filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.filter-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #f8fafc;
+    border: 1px solid var(--app-border-dark);
+    border-radius: 12px;
+    padding: 0 16px;
+    height: 42px;
+    width: 280px;
+    transition: all 0.3s;
+}
+
+.filter-search:focus-within {
+    background: white;
+    border-color: var(--app-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    width: 320px;
+}
+
+.filter-search i {
+    color: var(--app-text-gray);
+    font-size: 1rem;
+}
+
+.filter-search input {
+    border: none;
+    background: transparent;
+    padding: 8px 10px;
+    width: 100%;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--app-text-dark);
+    outline: none;
+}
+
+.filter-search input::placeholder {
+    color: #94a3b8;
+    font-weight: 500;
 }
 
 /* Place Grid */

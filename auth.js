@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const fullname = document.getElementById('reg-fullname').value.trim();
-            const email = document.getElementById('reg-email').value.trim();
-            const password = document.getElementById('reg-password').value;
-            const confirmPassword = document.getElementById('reg-confirm').value;
+            const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
             const termsChecked = document.getElementById('terms').checked;
 
             if (!fullname || !email || !password || !confirmPassword) {
@@ -60,9 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
             users.push(newUser);
             saveUsers(users);
 
-            alert('Đăng ký thành công! Đang chuyển sang trang đăng nhập...');
-            const authContainer = document.getElementById('authContainer');
-            if(authContainer) authContainer.classList.remove('is-signup');
+            alert('Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...');
+            window.location.href = 'login.html';
         });
     }
 
@@ -72,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const email = document.getElementById('login-email').value.trim();
-            const password = document.getElementById('login-password').value;
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
 
             if (!email || !password) {
                 alert('Vui lòng nhập Email và Mật khẩu!');
@@ -100,114 +99,87 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3. Protected Pages Logic (Dashboard/Planner) ---
-    const currentPath = window.location.pathname;
-    const isProtectedPage = currentPath.includes('dashboard.html') || currentPath.includes('planner.html');
-    const isAuthPage = currentPath.includes('login.html') || currentPath.includes('register.html');
-
-    // Check current session
-    const currentUserStr = localStorage.getItem('currentUser');
-
-    if (isProtectedPage) {
-        if (!currentUserStr) {
-            // Not logged in! Redirect to login
-            alert('Vui lòng đăng nhập để truy cập trang này!');
-            window.location.href = 'login.html';
-            return;
-        }
-
-        const currentUser = JSON.parse(currentUserStr);
-
-        // Update User Profile UI where applicable
-        const userNameDisplays = document.querySelectorAll('.user-name, .user-name-display');
-        const userEmailDisplays = document.querySelectorAll('.user-email, .user-email-display');
-
-        userNameDisplays.forEach(el => el.textContent = currentUser.fullname);
-        userEmailDisplays.forEach(el => el.textContent = currentUser.email);
-
-        // Setup Logout functionality (finding any element with id='logoutBtn' or class='btn-logout')
-        const logoutBtns = document.querySelectorAll('.btn-logout, #logoutBtn');
-        logoutBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                localStorage.removeItem('currentUser');
-                alert('Đã đăng xuất thành công!');
-                window.location.href = 'login.html';
-            });
-        });
-
-    } else if (isAuthPage) {
-        // If already logged in and trying to reach login/register, redirect to dashboard
+    // --- 3. Global User UI Update ---
+    const updateUserUI = () => {
+        const currentUserStr = localStorage.getItem('currentUser');
+        const headerActions = document.querySelector('.header-actions');
+        
         if (currentUserStr) {
-            window.location.href = 'dashboard.html';
-        }
-
-        // --- Auth Page Switching ---
-        const authContainer = document.getElementById('authContainer');
-        const toRegister = document.getElementById('toRegister');
-        const toLogin = document.getElementById('toLogin');
-
-        if (toRegister && authContainer) {
-            toRegister.addEventListener('click', () => {
-                authContainer.classList.add('is-signup');
-                document.title = "Đăng ký | AI Travel Planner";
-            });
-        }
-        if (toLogin && authContainer) {
-            toLogin.addEventListener('click', () => {
-                authContainer.classList.remove('is-signup');
-                document.title = "Đăng nhập | AI Travel Planner";
-            });
-        }
-    }
-
-    // --- 4. Landing Page Logic (index.html) ---
-    const isIndexPage = currentPath.endsWith('index.html') || currentPath === '/' || currentPath.endsWith('\\');
-    if (isIndexPage && currentUserStr) {
-        const currentUser = JSON.parse(currentUserStr);
-        // Replace login button in header
-        const navLinksHtml = document.querySelector('.nav-links');
-        const loginBtnHtml = document.querySelector('.login-btn');
-        const headerContainer = document.querySelector('.nav-container');
-
-        if (headerContainer && loginBtnHtml) {
-            const userControls = document.createElement('div');
-            userControls.style.display = 'flex';
-            userControls.style.alignItems = 'center';
-            userControls.style.gap = '16px';
-
-            // Extract first name
+            const currentUser = JSON.parse(currentUserStr);
             const firstName = currentUser.fullname.split(' ').pop();
 
-            userControls.innerHTML = `
-                <span style="font-weight: 600; color: var(--text-dark);">Hi, ${firstName}</span>
-                <a href="#" id="indexLogoutBtn" style="color: var(--text-gray); font-size: 0.9rem; text-decoration: none; font-weight: 600;">Đăng xuất</a>
-             `;
+            // 1. Update all name displays
+            document.querySelectorAll('.user-name').forEach(el => el.textContent = firstName);
+            document.querySelectorAll('.user-display-name').forEach(el => el.textContent = currentUser.fullname);
+            document.querySelectorAll('.user-email').forEach(el => el.textContent = currentUser.email);
 
-            // Remove old login button
-            loginBtnHtml.remove();
-            headerContainer.appendChild(userControls);
+            // 2. Specific case for Dashboard Sidebar where we want full name
+            const sidebarName = document.querySelector('.sidebar .user-name');
+            if (sidebarName) sidebarName.textContent = currentUser.fullname;
 
-            document.getElementById('indexLogoutBtn').addEventListener('click', (e) => {
-                e.preventDefault();
-                localStorage.removeItem('currentUser');
-                window.location.reload();
-            });
+            // 3. Ensure dropdown is visible and login buttons are hidden (if they exist in the same container)
+            const userDropdown = document.querySelector('.user-dropdown');
+            if (userDropdown) userDropdown.style.display = 'inline-block';
+            
+            // Hide any landing page login buttons if we are logged in
+            const loginBtns = document.querySelectorAll('.login-btn, .cta-btn, .btn-secondary, .btn-primary');
+            // Only hide those that are specifically for login/register in the header
+            if (headerActions) {
+                 headerActions.querySelectorAll('a[href="login.html"], a[href="register.html"]').forEach(btn => btn.style.display = 'none');
+            }
+        } else {
+            // Not logged in
+            const userDropdown = document.querySelector('.user-dropdown');
+            
+            // If we are on a landing page or public page, show login buttons instead of dropdown
+            const currentPath = window.location.pathname;
+            const isProtectedPage = currentPath.includes('dashboard.html') || currentPath.includes('planner.html') || currentPath.includes('profile.html');
+
+            if (!isProtectedPage && userDropdown && headerActions) {
+                userDropdown.style.display = 'none';
+                
+                // If login buttons aren't there, we might want to add them or they might be hidden
+                headerActions.querySelectorAll('a[href="login.html"], a[href="register.html"]').forEach(btn => btn.style.display = 'flex');
+                
+                // If header-actions is empty except for the hidden dropdown, add default buttons
+                if (headerActions.children.length <= 1 && !headerActions.querySelector('a[href="login.html"]')) {
+                    headerActions.innerHTML += `
+                        <a href="login.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng nhập</a>
+                        <a href="register.html" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng ký</a>
+                    `;
+                }
+            }
         }
+    };
+
+    updateUserUI();
+
+    // --- 4. Page Protection & Redirects ---
+    const currentPath = window.location.pathname;
+    const isProtectedPage = currentPath.includes('dashboard.html') || 
+                           currentPath.includes('planner.html') || 
+                           currentPath.includes('profile.html') ||
+                           currentPath.includes('admin.html');
+    const isAuthPage = currentPath.includes('login.html') || currentPath.includes('register.html');
+    const currentUserStr = localStorage.getItem('currentUser');
+
+    if (isProtectedPage && !currentUserStr) {
+        alert('Vui lòng đăng nhập để truy cập trang này!');
+        window.location.href = 'login.html';
+        return;
     }
 
-    // --- 5. Password Visibility Toggle ---
-    const eyeIcons = document.querySelectorAll('.eye-icon');
-    eyeIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('input');
-            if (input.type === 'password') {
-                input.type = 'text';
-                this.classList.replace('ph-eye', 'ph-eye-slash');
-            } else {
-                input.type = 'password';
-                this.classList.replace('ph-eye-slash', 'ph-eye');
-            }
-        });
+    if (isAuthPage && currentUserStr) {
+        window.location.href = 'index.html';
+    }
+
+    // --- 5. Global Logout ---
+    document.addEventListener('click', (e) => {
+        if (e.target.closest('.logout-item') || e.target.closest('#logoutBtn') || e.target.closest('.btn-logout')) {
+            e.preventDefault();
+            localStorage.removeItem('currentUser');
+            alert('Đã đăng xuất thành công!');
+            window.location.href = 'index.html';
+        }
     });
 });

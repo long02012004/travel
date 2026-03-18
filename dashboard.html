@@ -68,12 +68,25 @@
             </nav>
 
             <div class="user-profile">
-                <!-- Image source matching the mockup's style roughly -->
-                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
-                    alt="Avatar" class="user-avatar">
-                <div class="user-info">
-                    <span class="user-name">Nguyễn Minh</span>
-                    <span class="user-email">nguyenminh@travel.vn</span>
+                <div class="user-dropdown" style="width: 100%;">
+                    <div class="user-trigger" style="background: transparent; border: none; padding: 0; width: 100%; justify-content: flex-start;">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="user-avatar">
+                        <div class="user-info" style="text-align: left; flex: 1;">
+                            <span class="user-name">Hoàng Lê</span>
+                            <span class="user-email">hoangle@travel.vn</span>
+                        </div>
+                        <i class="ph-bold ph-caret-up" style="margin-left: auto;"></i>
+                    </div>
+                    <div class="dropdown-menu" style="bottom: calc(100% + 12px); top: auto; width: 100%;">
+                        <div class="dropdown-header">
+                            <span>Tài khoản</span>
+                            <div class="user-display-name">Hoàng Lê</div>
+                        </div>
+                        <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
+                        <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
+                    </div>
                 </div>
             </div>
         </aside>
