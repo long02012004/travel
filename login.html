@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập & Đăng ký | AI Travel Planner</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+    <!-- Animated Background Blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <!-- Main Content -->
+    <main class="auth-main">
+        <div class="auth-container" id="authContainer">
+            <!-- Left Side / Illustration & Info -->
+            <div class="auth-left">
+                <!-- Login Info -->
+                <div class="left-content-box info-login">
+                    <h1 class="gradient-text-auth">Hành trình mơ ước <br>trong tầm tay.</h1>
+                    <p>Đăng nhập để tiếp tục khám phá thế giới với sự trợ giúp từ AI thông minh. Chúng tôi giúp bạn:</p>
+                    <ul class="auth-features">
+                        <li><i class="ph-duotone ph-magic-wand"></i> Tự động hóa lịch trình du lịch</li>
+                        <li><i class="ph-duotone ph-map-pin-line"></i> Khám phá các địa điểm ẩn mình</li>
+                        <li><i class="ph-duotone ph-currency-circle-dollar"></i> Tối ưu hóa ngân sách chuyến đi</li>
+                    </ul>
+                </div>
+                <!-- Register Info -->
+                <div class="left-content-box info-register">
+                    <h1 class="gradient-text-auth">Bắt đầu hành trình <br>tuyệt vời ngay.</h1>
+                    <p>Tham gia cộng đồng du lịch thông minh để mở khóa toàn bộ tính năng độc quyền:</p>
+                    <ul class="auth-features">
+                        <li><i class="ph-duotone ph-sparkle"></i> Lên kế hoạch chuyến đi chỉ trong giây lát</li>
+                        <li><i class="ph-duotone ph-users-three"></i> Chia sẻ và lưu trữ hành trình cá nhân</li>
+                        <li><i class="ph-duotone ph-seal-check"></i> Nhận gợi ý địa điểm chính xác từ chuyên gia AI</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Right Side / Forms -->
+            <div class="auth-right">
+                <!-- Login Form Section -->
+                <div class="form-section section-login">
+                    <div class="form-header">
+                        <h2 class="gradient-text-auth">Chào mừng trở lại</h2>
+                        <p>Vui lòng nhập thông tin để truy cập tài khoản</p>
+                    </div>
+
+                    <div class="social-buttons">
+                        <button class="btn-social btn-google">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
+                            Google
+                        </button>
+                        <button class="btn-social btn-facebook">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook">
+                            Facebook
+                        </button>
+                    </div>
+
+                    <div class="divider">Hoặc tiếp tục với email</div>
+
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="login-email">Email của bạn</label>
+                            <div class="input-container">
+                                <i class="ph-duotone ph-envelope-simple input-icon"></i>
+                                <input type="email" id="login-email" placeholder="name@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-label-row">
+                                <label for="login-password">Mật khẩu</label>
+                                <a href="#" class="forgot-link">Quên mật khẩu?</a>
+                            </div>
+                            <div class="input-container">
+                                <i class="ph-duotone ph-lock-key input-icon"></i>
+                                <input type="password" id="login-password" placeholder="Nhập mật khẩu" required>
+                                <i class="ph-duotone ph-eye eye-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Ghi nhớ đăng nhập</label>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Đăng nhập</button>
+                    </form>
+
+                    <div class="auth-footer-text">
+                        Bạn chưa có tài khoản? <a href="javascript:void(0)" id="toRegister">Đăng ký ngay</a>
+                    </div>
+                </div>
+
+                <!-- Register Form Section -->
+                <div class="form-section section-register">
+                    <div class="form-header">
+                        <h2 class="gradient-text-auth">Tạo tài khoản mới</h2>
+                        <p>Điền thông tin của bạn để gia nhập cộng đồng</p>
+                    </div>
+
+                    <div class="social-buttons">
+                        <button class="btn-social btn-google">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google">
+                            Google
+                        </button>
+                        <button class="btn-social btn-facebook">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook">
+                            Facebook
+                        </button>
+                    </div>
+
+                    <div class="divider">Hoặc tham gia bằng email</div>
+
+                    <form id="registerForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="reg-fullname">Họ và tên</label>
+                            <div class="input-container">
+                                <i class="ph-duotone ph-user input-icon"></i>
+                                <input type="text" id="reg-fullname" placeholder="Nguyễn Văn A" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-email">Email của bạn</label>
+                            <div class="input-container">
+                                <i class="ph-duotone ph-envelope-simple input-icon"></i>
+                                <input type="email" id="reg-email" placeholder="name@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-password">Mật khẩu</label>
+                            <div class="input-container">
+                                <i class="ph-duotone ph-lock-key input-icon"></i>
+                                <input type="password" id="reg-password" placeholder="Tạo mật khẩu (ít nhất 8 ký tự)" required>
+                                <i class="ph-duotone ph-eye eye-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-confirm">Xác nhận mật khẩu</label>
+                            <div class="input-container">
+                                <i class="ph-duotone ph-lock-key input-icon"></i>
+                                <input type="password" id="reg-confirm" placeholder="Nhập lại mật khẩu" required>
+                                <i class="ph-duotone ph-eye eye-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms">Tôi đồng ý với <a href="#">Điều khoản</a> và <a href="#">Chính sách</a></label>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Đăng ký hoàn tất</button>
+                    </form>
+
+                    <div class="auth-footer-text">
+                        Bạn đã có tài khoản? <a href="javascript:void(0)" id="toLogin">Đăng nhập</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="chat-widget.js"></script>
+</body>
+
+</html>

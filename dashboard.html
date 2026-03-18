@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý lịch trình | AI Travel Planner</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="app.css">
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body class="dashboard-layout">
+
+    <div class="app-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="dashboard.html" class="brand">
+                <div class="brand-icon">
+                    <i class="ph-bold ph-sparkle"></i>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">AI Travel Planner</span>
+                    <span class="brand-sub">Hệ thống quản lý</span>
+                </div>
+            </a>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <i class="ph-fill ph-house"></i>
+                    <span>Trang chủ</span>
+                </a>
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="ph-fill ph-squares-four"></i>
+                    <span>Bảng điều khiển</span>
+                </a>
+                <a href="explore.html" class="nav-item">
+                    <i class="ph-fill ph-compass"></i>
+                    <span>Khám phá</span>
+                </a>
+                <a href="destination.html" class="nav-item">
+                    <i class="ph-fill ph-bookmark-simple"></i>
+                    <span>Địa điểm</span>
+                </a>
+                <a href="review.html" class="nav-item">
+                    <i class="ph-fill ph-star"></i>
+                    <span>Đánh giá</span>
+                </a>
+                
+                <div class="nav-section-title">HỆ THỐNG</div>
+                <a href="#" class="nav-item">
+                    <i class="ph-fill ph-gear"></i>
+                    <span>Cài đặt</span>
+                </a>
+                <a href="index.html" class="nav-item btn-logout" id="logoutBtn" style="color: #ef4444; margin-top: auto;">
+                    <i class="ph-bold ph-sign-out"></i>
+                    <span>Đăng xuất</span>
+                </a>
+            </nav>
+
+            <div class="user-profile">
+                <!-- Image source matching the mockup's style roughly -->
+                <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80"
+                    alt="Avatar" class="user-avatar">
+                <div class="user-info">
+                    <span class="user-name">Nguyễn Minh</span>
+                    <span class="user-email">nguyenminh@travel.vn</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Topbar -->
+            <header class="topbar">
+                <div class="search-container">
+                    <i class="ph-bold ph-magnifying-glass search-icon"></i>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Tìm kiếm lịch trình...">
+                </div>
+
+                <div class="topbar-actions">
+                    <button class="theme-toggle-btn" id="themeToggle" title="Chuyển chế độ tối/sáng">
+                        <i class="ph-bold ph-moon"></i>
+                    </button>
+                    <button class="notification-btn">
+                        <i class="ph-fill ph-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <a href="planner.html" class="btn-primary">
+                        <i class="ph-bold ph-plus"></i>
+                        Tạo lịch trình mới
+                    </a>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div class="page-content">
+
+                <!-- Top Row: Clock & Map Split -->
+                <div class="dashboard-top-row">
+                    <!-- AI Dashboard Station (Clock & Next Trip) -->
+                    <div id="dashboardClockWidget" class="status-clock-station sleek-glass">
+                        <div class="station-left">
+                            <div class="greeting-box">
+                                <i id="greetingIcon" class="ph-fill ph-sun"></i>
+                                <span id="greetingText">Chào buổi sáng,</span>
+                                <span class="user-name-display">Người dùng</span>
+                            </div>
+                            <div class="real-time-clock">
+                                <span id="clockHours">00</span>
+                                <span class="clock-sep">:</span>
+                                <span id="clockMinutes">00</span>
+                                <span class="clock-sep-blink">:</span>
+                                <span id="clockSeconds">00</span>
+                            </div>
+                            <div id="currentDate" class="station-date">Thứ Tư, 18 Tháng 3, 2026</div>
+                        </div>
+                        
+                        <div class="station-right">
+                            <div class="trip-countdown-min">
+                                <div class="countdown-label-mini">CHUYẾN ĐI TIẾP THEO</div>
+                                <div id="nextTripName" class="next-trip-title">Khám phá Đà Nẵng</div>
+                                <div class="countdown-status-row">
+                                    <div class="mini-time-unit">
+                                        <span id="miniDays">00</span><small>D</small>
+                                    </div>
+                                    <div class="mini-time-unit">
+                                        <span id="miniHours">00</span><small>H</small>
+                                    </div>
+                                    <div class="mini-time-unit">
+                                        <span id="miniMinutes">00</span><small>M</small>
+                                    </div>
+                                    <div class="mini-time-unit">
+                                        <span id="miniSeconds">00</span><small>S</small>
+                                    </div>
+                                </div>
+                                <div class="progress-container-mini">
+                                    <div id="tripProgressBar" class="progress-fill-mini" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mini Map Section -->
+                    <div class="dashboard-map-section sleek-glass">
+                        <div class="section-header">
+                            <div class="header-info">
+                                <h3>Bản đồ hành trình</h3>
+                                <p>Khám phá lại những địa điểm bạn đã và sẽ đi qua</p>
+                            </div>
+                            <button class="btn-sleek mini" onclick="window.location.href='itinerary.html'">
+                                <i class="ph-bold ph-maximize"></i>
+                                <span>Toàn màn hình</span>
+                            </button>
+                        </div>
+                        <div id="miniMap" class="mini-map-container"></div>
+                    </div>
+                </div>
+
+
+                <div class="dashboard-header">
+                    <div class="dashboard-title">
+                        <h1>Quản lý lịch trình</h1>
+                        <p>Tổ chức và theo dõi các kế hoạch du lịch của bạn một cách chuyên nghiệp.</p>
+                    </div>
+
+                    <div class="trip-filters">
+                        <button class="filter-btn active">Tất cả</button>
+                        <button class="filter-btn">Sắp tới</button>
+                        <button class="filter-btn">Đã xong</button>
+                    </div>
+                </div>
+
+                <div class="trip-grid" id="tripGrid">
+                    <!-- Dynamic Trips will be populated by dashboard.js here -->
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="chat-widget.js"></script>
+</body>
+
+</html>

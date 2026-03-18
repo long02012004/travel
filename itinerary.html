@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Lịch trình | AI Travel Planner</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="itinerary.css">
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body class="dashboard-layout">
+
+    <!-- Top Navbar -->
+    <header class="app-header">
+        <div class="header-container full-width-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon small-icon"><i class="ph-fill ph-sparkle"></i></div>
+                <span>AI Travel Planner</span>
+            </a>
+
+            <div class="header-search-box">
+                <i class="ph-bold ph-magnifying-glass search-icon"></i>
+                <input type="text" placeholder="Tìm địa điểm, khách sạn...">
+            </div>
+
+            <nav class="nav-links desktop-nav">
+                <a href="index.html">Trang chủ</a>
+                <a href="explore.html">Khám phá</a>
+                <a href="destination.html">Địa điểm</a>
+                <a href="news.html">Tin tức</a>
+                <a href="review.html">Đánh giá</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn-icon"><i class="ph-fill ph-bell"></i></button>
+                <div class="user-avatar-mini">
+                    <img src="https://i.pravatar.cc/150?u=paris-trip" alt="User">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="split-view-container">
+        <!-- Sidebar: Itinerary Details -->
+        <aside class="itinerary-sidebar">
+            <div class="iti-sidebar-header">
+                <div class="status-badge">ĐANG XEM</div>
+                <div class="iti-title-row">
+                    <h1 class="iti-main-title">Hành trình Paris 7 Ngày</h1>
+                    <button class="btn-edit-inline"><i class="ph-bold ph-pencil-simple"></i> Chỉnh sửa</button>
+                </div>
+                <div class="iti-date-range">12 Th10 - 18 Th10, 2024</div>
+                
+                <div class="view-toggle-row">
+                    <button class="toggle-btn active"><i class="ph-fill ph-map-trifold"></i> Bản đồ</button>
+                    <button class="toggle-btn" onclick="window.location.href='dashboard.html'"><i class="ph-fill ph-calendar-blank"></i> Lịch trình</button>
+                </div>
+            </div>
+
+            <div class="iti-days-tabs">
+                <div class="day-tab active">Ngày 1</div>
+                <div class="day-tab">Ngày 2</div>
+                <div class="day-tab">Ngày 3</div>
+                <div class="day-tab">Ngày 4</div>
+            </div>
+
+            <div class="iti-content-scrollable">
+                <!-- Group: Buổi sáng -->
+                <div class="time-group">
+                    <h3 class="group-title">BUỔI SÁNG</h3>
+                    
+                    <div class="iti-item">
+                        <div class="item-number">1</div>
+                        <div class="item-card">
+                            <div class="item-img">
+                                <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?q=80&w=200&auto=format&fit=crop" alt="Tháp Eiffel">
+                            </div>
+                            <div class="item-info">
+                                <h3>Tháp Eiffel</h3>
+                                <div class="item-meta"><i class="ph-bold ph-clock"></i> 09:00 - 11:30</div>
+                                <span class="badge-success">Đã đặt chỗ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="transport-info">
+                        <i class="ph-bold ph-person-walking"></i> Đi bộ 12 phút (850m)
+                    </div>
+
+                    <div class="iti-item">
+                        <div class="item-number">2</div>
+                        <div class="item-card">
+                            <div class="item-img">
+                                <img src="https://images.unsplash.com/photo-1596401057633-ce6aeb98c363?q=80&w=200&auto=format&fit=crop" alt="Công viên">
+                            </div>
+                            <div class="item-info">
+                                <h3>Công viên Champ de Mars</h3>
+                                <div class="item-meta"><i class="ph-bold ph-clock"></i> 11:45 - 12:30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group: Buổi chiều -->
+                <div class="time-group">
+                    <h3 class="group-title">BUỔI CHIỀU</h3>
+                    
+                    <div class="transport-info">
+                        <i class="ph-bold ph-taxi"></i> Uber/Taxi 15 phút (3.2km)
+                    </div>
+
+                    <div class="iti-item">
+                        <div class="item-number">3</div>
+                        <div class="item-card">
+                            <div class="item-img">
+                                <img src="https://images.unsplash.com/photo-1543348750-466b55f32f16?q=80&w=200&auto=format&fit=crop" alt="Louvre">
+                            </div>
+                            <div class="item-info">
+                                <h3>Bảo tàng Louvre</h3>
+                                <div class="item-meta"><i class="ph-bold ph-clock"></i> 13:00 - 16:30</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Statistics Section (New) -->
+                <div class="iti-budget-summary" id="budgetSummary" style="display: none; padding: 20px; background: #f8fafc; border-radius: 16px; border: 1px solid var(--app-border-dark); margin-bottom: 24px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                        <h4 style="font-weight: 800; color: var(--app-text-dark); font-size: 0.9rem;">Dự toán chi phí</h4>
+                        <div class="budget-total" style="font-size: 1rem; font-weight: 800; color: var(--app-primary);">~ 4.5tr</div>
+                    </div>
+                    
+                    <div class="budget-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                        <div class="budget-item" style="padding: 12px; background: white; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+                            <div style="font-size: 0.7rem; color: var(--app-text-gray); font-weight: 600;">DI CHUYỂN</div>
+                            <div style="font-weight: 700; color: var(--app-text-dark); margin-top: 2px; font-size: 0.85rem;">850k</div>
+                        </div>
+                        <div class="budget-item" style="padding: 12px; background: white; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05);">
+                            <div style="font-size: 0.7rem; color: var(--app-text-gray); font-weight: 600;">ĂN UỐNG</div>
+                            <div style="font-weight: 700; color: var(--app-text-dark); margin-top: 2px; font-size: 0.85rem;">1.2tr</div>
+                        </div>
+                    </div>
+
+                    <div class="budget-chart-strip" style="height: 8px; background: #e2e8f0; border-radius: 4px; margin-top: 16px; overflow: hidden; display: flex;">
+                        <div style="width: 30%; background: #3b82f6;"></div>
+                        <div style="width: 70%; background: #10b981;"></div>
+                    </div>
+                </div>
+
+                <button class="btn-add-spot"><i class="ph-bold ph-plus-circle"></i> Thêm địa điểm mới</button>
+            </div>
+        </aside>
+
+        <!-- Main Content: Full Map View -->
+        <main class="map-view-container">
+            <div id="map" style="width: 100%; height: 100%; z-index: 1;"></div>
+            
+            <!-- Map Layer Overlays (Keep original UI) -->
+            <div class="map-overlays-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;">
+                <!-- Map Controls -->
+                <div class="map-ctrl-stack" style="pointer-events: auto;">
+                    <div class="ctrl-group">
+                        <button id="map-zoom-in"><i class="ph-bold ph-plus"></i></button>
+                        <button id="map-zoom-out"><i class="ph-bold ph-minus"></i></button>
+                    </div>
+                    <button class="ctrl-btn"><i class="ph-bold ph-crosshair"></i></button>
+                </div>
+
+                <!-- Bottom Search Overlay -->
+                <div class="map-bottom-search" style="pointer-events: auto;">
+                    <div class="search-wrap">
+                        <div class="search-icons">
+                            <i class="ph-fill ph-bed" style="color: #3b82f6;"></i>
+                            <i class="ph-fill ph-fork-knife" style="color: #f59e0b;"></i>
+                            <i class="ph-fill ph-camera" style="color: #a855f7;"></i>
+                        </div>
+                        <div class="search-text-col">
+                            <h4>Khám phá quanh đây</h4>
+                            <p>Tìm kiếm khách sạn, nhà hàng gần lộ trình của bạn</p>
+                        </div>
+                        <button class="btn-find-now">Tìm kiếm ngay</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Leaflet Map Initialization
+            const map = L.map('map', {
+                zoomControl: false // Manual controls handled via UI
+            }).setView([16.047079, 108.206230], 13); // Default to Da Nang
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // Custom Markers Styling (Premium Cyan)
+            const routePoints = [
+                [16.0610, 108.2250], // Dragon Bridge
+                [16.0710, 108.2230], // Han Market
+                [16.0750, 108.2100]  // Da Nang Cathedral
+            ];
+
+            const markers = [];
+            routePoints.forEach((point, index) => {
+                const markerIcon = L.divIcon({
+                    className: 'custom-div-icon',
+                    html: `<div style="background-color: #00ffffbc; width: 36px; height: 36px; border: 4px solid white; border-radius: 50%; box-shadow: 0 8px 16px rgba(0,255,255,0.3); display: flex; align-items: center; justify-content: center; color: #0f172a; font-weight: 800; font-size: 15px; position: relative;">
+                            ${index + 1}
+                            <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid white;"></div>
+                           </div>`,
+                    iconSize: [36, 44],
+                    iconAnchor: [18, 44]
+                });
+                const marker = L.marker(point, { icon: markerIcon }).addTo(map);
+                markers.push(marker);
+            });
+
+            // Connect stops with Premium Polyline
+            const polyline = L.polyline(routePoints, {
+                color: '#00ffffbc',
+                weight: 6,
+                opacity: 1,
+                dashArray: '1, 12', // Dotted line effect
+                lineCap: 'round',
+                lineJoin: 'round'
+            }).addTo(map);
+
+            // Add a solid secondary line for depth
+            L.polyline(routePoints, {
+                color: '#00ced1',
+                weight: 2,
+                opacity: 0.4
+            }).addTo(map);
+
+            // Fit map to markers
+            const group = new L.featureGroup(markers);
+            map.fitBounds(group.getBounds().pad(0.1));
+
+            // Custom Controls Logic
+            document.getElementById('map-zoom-in')?.addEventListener('click', () => map.zoomIn());
+            document.getElementById('map-zoom-out')?.addEventListener('click', () => map.zoomOut());
+
+            // Tab logic
+            const tabs = document.querySelectorAll('.day-tab');
+            const timeGroups = document.querySelectorAll('.time-group');
+            const budget = document.getElementById('budgetSummary');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    if (tab.classList.contains('tab-stats')) {
+                        timeGroups.forEach(g => g.style.display = 'none');
+                        budget.style.display = 'block';
+                    } else {
+                        timeGroups.forEach(g => g.style.display = 'block');
+                        budget.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="chat-widget.js"></script>
+</body>
+</html>
