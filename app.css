@@ -1038,75 +1038,229 @@ body.dark-theme .skeleton::after {
     pointer-events: none;
     border: 1px solid var(--app-border);
 }
-
-/* Countdown Widget Styling */
-.countdown-card {
-    margin-bottom: 32px;
-    padding: 32px 40px;
+/* ================/* ============================================================
+   AI Dashboard Station (Ultra-Premium Version)
+============================================================ */
+/* ============================================================
+   AI Dashboard Station (Sleek Minimalist Version)
+============================================================ */
+.status-clock-station {
+    margin-bottom: 24px;
+    padding: 20px 32px;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    background: #0f172a; /* Deep Black/Slate background for high contrast */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-    animation: fadeInDown 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+    background: rgba(15, 23, 42, 0.6); /* Semi-transparent slate */
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
+    transition: all 0.4s ease;
 }
 
-/* Subtle glow effect for the black frame */
-.countdown-card::after {
+/* Much more subtle Mesh Background */
+.status-clock-station::before,
+.status-clock-station::after {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0, 255, 255, 0.03) 0%, transparent 70%);
+    width: 150px;
+    height: 150px;
+    filter: blur(50px);
+    border-radius: 50%;
+    z-index: 0;
+    opacity: 0.15; /* Very low opacity */
     pointer-events: none;
 }
 
-body.dark-theme .countdown-card {
-    background: rgba(15, 23, 42, 0.8);
-    border-color: rgba(255, 255, 255, 0.05);
+.status-clock-station::before {
+    top: -50px;
+    left: 20%;
+    background: radial-gradient(circle, var(--app-primary) 0%, transparent 70%);
 }
 
-.countdown-label {
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: var(--app-primary);
-    letter-spacing: 3px;
-    margin-bottom: 20px;
-    opacity: 0.8;
+.status-clock-station::after {
+    bottom: -50px;
+    right: 20%;
+    background: radial-gradient(circle, #818cf8 0%, transparent 70%);
 }
 
-.countdown-timer {
+.station-left {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 16px;
+    gap: 24px;
+    flex: 1;
 }
 
-.time-block {
+.greeting-box {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    min-width: 70px;
+    gap: 2px;
+    min-width: 180px;
 }
 
-.time-val {
-    font-size: 3.5rem;
-    font-weight: 900;
+#greetingIcon {
+    font-size: 1.25rem;
+    color: #fbbf24;
+    margin-bottom: 2px;
+}
+
+#greetingText {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.user-name-display {
+    font-size: 1rem;
+    font-weight: 700;
     color: #ffffff;
-    background: linear-gradient(135deg, #ffffff 60%, var(--app-primary) 100%);
-    -webkit-background-clip: text;
-    background-clip: text; /* Fixed lint warning */
-    -webkit-text-fill-color: transparent;
+}
+
+.real-time-clock {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.8rem; /* Compact size */
+    font-weight: 800;
+    color: #ffffff;
     line-height: 1;
-    font-variant-numeric: tabular-nums;
-    filter: drop-shadow(0 4px 12px rgba(0, 255, 255, 0.2));
+    letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+}
+
+.clock-sep-blink {
+    opacity: 0.8;
+    margin: 0 4px;
+    color: var(--app-primary);
+    animation: simpleBlink 1s ease-in-out infinite;
+}
+
+@keyframes simpleBlink {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.1; }
+}
+
+.station-date {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.3);
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+/* Right Side - Compact Trip Info */
+.station-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-left: 32px;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.trip-countdown-min {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 200px;
+}
+
+.next-trip-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--app-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 180px;
+}
+
+.countdown-status-row {
+    display: flex;
+    gap: 8px;
+}
+
+.mini-time-unit {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    background: none;
+    padding: 0;
+    border: none;
+    min-width: unset;
+}
+
+.mini-time-unit span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    animation: none; /* Removed split flap for minimalism */
+}
+
+.mini-time-unit small {
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.progress-container-mini {
+    width: 100%;
+    height: 4px; /* Thinner bar */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+}
+
+.progress-fill-mini {
+    background: var(--app-primary);
+    box-shadow: none;
+}
+
+@media (max-width: 1200px) {
+    .station-date { display: none; }
+}
+
+@media (max-width: 992px) {
+    .status-clock-station {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        padding: 20px;
+    }
+    
+    .station-left {
+        gap: 16px;
+    }
+
+    .station-right {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 16px;
+    }
+    
+    .real-time-clock { font-size: 2.2rem; }
+}
+
+@media (max-width: 1100px) {
+    .status-clock-station {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px;
+        gap: 40px;
+    }
+    
+    .station-right {
+        min-width: 100%;
+        padding: 25px;
+    }
+
+    .real-time-clock {
+        font-size: 4rem;
+    }
 }
 
 body.dark-theme .time-val {
@@ -3278,3 +3432,34 @@ body.dark-theme .empty-state h2 {
     .footer-opt-bottom { flex-direction: column; gap: 20px; text-align: center; }
 }
 
+
+/* --- Dashboard Layout Refinement (60/40 Split) --- */
+.dashboard-top-row {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+    align-items: stretch;
+}
+
+.dashboard-top-row .status-clock-station {
+    flex: 6;
+    margin-bottom: 0 !important;
+}
+
+.dashboard-top-row .dashboard-map-section {
+    flex: 4;
+    margin-bottom: 0 !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
+}
+
+@media (max-width: 1200px) {
+    .dashboard-top-row {
+        flex-direction: column;
+    }
+    .dashboard-top-row .status-clock-station,
+    .dashboard-top-row .dashboard-map-section {
+        flex: none;
+        width: 100%;
+    }
+}

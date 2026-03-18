@@ -14,7 +14,7 @@
     --auth-input-bg: rgba(255, 255, 255, 0.95);
     --auth-gradient: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%);
     --shadow-premium: 0 50px 100px -20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(236, 72, 153, 0.1);
-    --glow-pink: 0 0 20px rgba(236, 72, 153, 0.3);
+    --glow-pink: 0 10px 25px -5px rgba(236, 72, 153, 0.3), 0 0 10px rgba(236, 72, 153, 0.1);
 }
 
 /* Background with Image and Overlay - Golden Bridge */
@@ -455,6 +455,7 @@ body {
     border-color: var(--auth-primary);
     box-shadow: var(--glow-pink);
     background-color: #fff;
+    transform: translateY(-2px);
 }
 
 .input-container input::placeholder {
