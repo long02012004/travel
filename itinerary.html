@@ -44,8 +44,23 @@
 
             <div class="header-actions">
                 <button class="btn-icon"><i class="ph-fill ph-bell"></i></button>
-                <div class="user-avatar-mini">
-                    <img src="https://i.pravatar.cc/150?u=paris-trip" alt="User">
+                <div class="user-dropdown">
+                    <div class="user-trigger">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                        <span class="user-name">Người dùng</span>
+                        <i class="ph-bold ph-caret-down"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header">
+                            <span>Tài khoản</span>
+                            <div class="user-display-name">Người dùng</div>
+                        </div>
+                        <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
+                        <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
+                        <a href="ai-suggestions.html"><i class="ph ph-sparkle"></i> Gợi ý từ AI</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,7 +149,7 @@
                     </div>
                 </div>
 
-                <!-- Price Statistics Section (New) -->
+                <!-- Price Statistics Section -->
                 <div class="iti-budget-summary" id="budgetSummary" style="display: none; padding: 20px; background: #f8fafc; border-radius: 16px; border: 1px solid var(--app-border-dark); margin-bottom: 24px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
                         <h4 style="font-weight: 800; color: var(--app-text-dark); font-size: 0.9rem;">Dự toán chi phí</h4>
@@ -166,7 +181,7 @@
         <main class="map-view-container">
             <div id="map" style="width: 100%; height: 100%; z-index: 1;"></div>
             
-            <!-- Map Layer Overlays (Keep original UI) -->
+            <!-- Map Layer Overlays -->
             <div class="map-overlays-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2;">
                 <!-- Map Controls -->
                 <div class="map-ctrl-stack" style="pointer-events: auto;">
@@ -200,18 +215,17 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Leaflet Map Initialization
             const map = L.map('map', {
-                zoomControl: false // Manual controls handled via UI
-            }).setView([16.047079, 108.206230], 13); // Default to Da Nang
+                zoomControl: false
+            }).setView([16.047079, 108.206230], 13);
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
 
-            // Custom Markers Styling (Premium Cyan)
             const routePoints = [
-                [16.0610, 108.2250], // Dragon Bridge
-                [16.0710, 108.2230], // Han Market
-                [16.0750, 108.2100]  // Da Nang Cathedral
+                [16.0610, 108.2250],
+                [16.0710, 108.2230],
+                [16.0750, 108.2100]
             ];
 
             const markers = [];
@@ -219,8 +233,8 @@
                 const markerIcon = L.divIcon({
                     className: 'custom-div-icon',
                     html: `<div style="background-color: #00ffffbc; width: 36px; height: 36px; border: 4px solid white; border-radius: 50%; box-shadow: 0 8px 16px rgba(0,255,255,0.3); display: flex; align-items: center; justify-content: center; color: #0f172a; font-weight: 800; font-size: 15px; position: relative;">
-                            ${index + 1}
-                            <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid white;"></div>
+                                ${index + 1}
+                                <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid white;"></div>
                            </div>`,
                     iconSize: [36, 44],
                     iconAnchor: [18, 44]
@@ -229,32 +243,27 @@
                 markers.push(marker);
             });
 
-            // Connect stops with Premium Polyline
-            const polyline = L.polyline(routePoints, {
+            L.polyline(routePoints, {
                 color: '#00ffffbc',
                 weight: 6,
                 opacity: 1,
-                dashArray: '1, 12', // Dotted line effect
+                dashArray: '1, 12',
                 lineCap: 'round',
                 lineJoin: 'round'
             }).addTo(map);
 
-            // Add a solid secondary line for depth
             L.polyline(routePoints, {
                 color: '#00ced1',
                 weight: 2,
                 opacity: 0.4
             }).addTo(map);
 
-            // Fit map to markers
             const group = new L.featureGroup(markers);
             map.fitBounds(group.getBounds().pad(0.1));
 
-            // Custom Controls Logic
             document.getElementById('map-zoom-in')?.addEventListener('click', () => map.zoomIn());
             document.getElementById('map-zoom-out')?.addEventListener('click', () => map.zoomOut());
 
-            // Tab logic
             const tabs = document.querySelectorAll('.day-tab');
             const timeGroups = document.querySelectorAll('.time-group');
             const budget = document.getElementById('budgetSummary');
@@ -275,6 +284,7 @@
             });
         });
     </script>
+    <script src="auth.js"></script>
     <script src="chat-widget.js"></script>
 </body>
 </html>

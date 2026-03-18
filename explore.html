@@ -38,20 +38,34 @@
                 <a href="index.html">Trang chủ</a>
                 <a href="explore.html" class="active">Khám phá</a>
                 <a href="optimization.html">Lộ trình</a>
+                <a href="ai-suggestions.html">Gợi ý AI</a>
                 <a href="news.html">Tin tức</a>
                 <a href="review.html">Đánh giá</a>
             </nav>
 
             <div class="header-search">
                 <i class="ph-bold ph-magnifying-glass search-icon"></i>
-                <input type="text" placeholder="Tìm kiếm điểm đến, món ăn...">
+                <input type="text" placeholder="Tìm kiếm địa điểm...">
             </div>
 
             <div class="header-actions">
-                <a href="login.html" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng ký</a>
-                <a href="login.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng nhập</a>
-                <div class="user-avatar" style="margin-left: 8px;">
-                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                <div class="user-dropdown">
+                    <div class="user-trigger">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                        <span class="user-name">Người dùng</span>
+                        <i class="ph-bold ph-caret-down"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header">
+                            <span>Tài khoản</span>
+                            <div class="user-display-name">Người dùng</div>
+                        </div>
+                        <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
+                        <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
+                        <a href="ai-suggestions.html"><i class="ph ph-sparkle"></i> Gợi ý từ AI</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,9 +110,11 @@
                 <button class="btn-dropdown">Xếp hạng <i class="ph-bold ph-caret-down"></i></button>
                 <button class="btn-dropdown">Trạng thái <i class="ph-bold ph-caret-down"></i></button>
             </div>
-            <button class="btn-advanced-filter">
-                <i class="ph-bold ph-faders"></i> Bộ lọc nâng cao
-            </button>
+            <div class="filter-actions">
+                <button class="btn-advanced-filter">
+                    <i class="ph-bold ph-faders"></i> Bộ lọc nâng cao
+                </button>
+            </div>
         </div>
 
         <!-- Results Grid -->
@@ -113,13 +129,9 @@
                 <div class="place-info">
                     <div class="place-header-row">
                         <h3 class="place-name">Nhà hàng Biển Xanh</h3>
-                        <div class="place-rating">
-                            <i class="ph-fill ph-star"></i> 4.8
-                        </div>
+                        <div class="place-rating"><i class="ph-fill ph-star"></i> 4.8</div>
                     </div>
-                    <div class="place-meta">
-                        <i class="ph-fill ph-map-pin"></i> 1.2km &bull; Hải sản tươi sống
-                    </div>
+                    <div class="place-meta"><i class="ph-fill ph-map-pin"></i> 1.2km &bull; Hải sản tươi sống</div>
                 </div>
             </a>
 
@@ -132,13 +144,9 @@
                 <div class="place-info">
                     <div class="place-header-row">
                         <h3 class="place-name">Khách sạn Horizon</h3>
-                        <div class="place-rating">
-                            <i class="ph-fill ph-star"></i> 4.5
-                        </div>
+                        <div class="place-rating"><i class="ph-fill ph-star"></i> 4.5</div>
                     </div>
-                    <div class="place-meta">
-                        <i class="ph-fill ph-map-pin"></i> 2.5km &bull; View biển tuyệt đẹp
-                    </div>
+                    <div class="place-meta"><i class="ph-fill ph-map-pin"></i> 2.5km &bull; View biển tuyệt đẹp</div>
                 </div>
             </a>
 
@@ -151,13 +159,9 @@
                 <div class="place-info">
                     <div class="place-header-row">
                         <h3 class="place-name">Cung điện Mùa Thu</h3>
-                        <div class="place-rating">
-                            <i class="ph-fill ph-star"></i> 4.9
-                        </div>
+                        <div class="place-rating"><i class="ph-fill ph-star"></i> 4.9</div>
                     </div>
-                    <div class="place-meta">
-                        <i class="ph-fill ph-map-pin"></i> 0.5km &bull; Kiến trúc cổ điển
-                    </div>
+                    <div class="place-meta"><i class="ph-fill ph-map-pin"></i> 0.5km &bull; Kiến trúc cổ điển</div>
                 </div>
             </a>
 
@@ -170,13 +174,9 @@
                 <div class="place-info">
                     <div class="place-header-row">
                         <h3 class="place-name">Quán Cafe Yên Tĩnh</h3>
-                        <div class="place-rating">
-                            <i class="ph-fill ph-star"></i> 4.2
-                        </div>
+                        <div class="place-rating"><i class="ph-fill ph-star"></i> 4.2</div>
                     </div>
-                    <div class="place-meta">
-                        <i class="ph-fill ph-map-pin"></i> 0.8km &bull; Cà phê rang xay
-                    </div>
+                    <div class="place-meta"><i class="ph-fill ph-map-pin"></i> 0.8km &bull; Cà phê rang xay</div>
                 </div>
             </a>
 
@@ -189,13 +189,9 @@
                 <div class="place-info">
                     <div class="place-header-row">
                         <h3 class="place-name">Resort Nắng Vàng</h3>
-                        <div class="place-rating">
-                            <i class="ph-fill ph-star"></i> 4.7
-                        </div>
+                        <div class="place-rating"><i class="ph-fill ph-star"></i> 4.7</div>
                     </div>
-                    <div class="place-meta">
-                        <i class="ph-fill ph-map-pin"></i> 5.0km &bull; Nghỉ dưỡng cao cấp
-                    </div>
+                    <div class="place-meta"><i class="ph-fill ph-map-pin"></i> 5.0km &bull; Nghỉ dưỡng cao cấp</div>
                 </div>
             </a>
 
@@ -208,13 +204,9 @@
                 <div class="place-info">
                     <div class="place-header-row">
                         <h3 class="place-name">Bảo tàng Nghệ thuật</h3>
-                        <div class="place-rating">
-                            <i class="ph-fill ph-star"></i> 4.6
-                        </div>
+                        <div class="place-rating"><i class="ph-fill ph-star"></i> 4.6</div>
                     </div>
-                    <div class="place-meta">
-                        <i class="ph-fill ph-map-pin"></i> 3.2km &bull; Triển lãm hiện đại
-                    </div>
+                    <div class="place-meta"><i class="ph-fill ph-map-pin"></i> 3.2km &bull; Triển lãm hiện đại</div>
                 </div>
             </a>
 
@@ -227,13 +219,9 @@
                 <div class="place-info">
                     <div class="place-header-row">
                         <h3 class="place-name">Chùa Linh Ứng</h3>
-                        <div class="place-rating">
-                            <i class="ph-fill ph-star"></i> 4.9
-                        </div>
+                        <div class="place-rating"><i class="ph-fill ph-star"></i> 4.9</div>
                     </div>
-                    <div class="place-meta">
-                        <i class="ph-fill ph-map-pin"></i> 4.1km &bull; Di tích tâm linh
-                    </div>
+                    <div class="place-meta"><i class="ph-fill ph-map-pin"></i> 4.1km &bull; Di tích tâm linh</div>
                 </div>
             </a>
 
@@ -246,13 +234,9 @@
                 <div class="place-info">
                     <div class="place-header-row">
                         <h3 class="place-name">Khu Phố Cổ</h3>
-                        <div class="place-rating">
-                            <i class="ph-fill ph-star"></i> 4.4
-                        </div>
+                        <div class="place-rating"><i class="ph-fill ph-star"></i> 4.4</div>
                     </div>
-                    <div class="place-meta">
-                        <i class="ph-fill ph-map-pin"></i> 0.2km &bull; Ẩm thực đường phố
-                    </div>
+                    <div class="place-meta"><i class="ph-fill ph-map-pin"></i> 0.2km &bull; Ẩm thực đường phố</div>
                 </div>
             </a>
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,11 +15,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css"> <!-- Base styles (fonts, resets) -->
     <link rel="stylesheet" href="app.css">
 </head>
+
 <body class="planner-layout">
-    
-    <!-- Top Navigation (No Sidebar for Planner) -->
+
     <!-- Top Navigation (Shared App Header) -->
     <header class="app-header explore-header">
         <div class="header-container full-width-header">
@@ -32,14 +34,30 @@
             <nav class="nav-links desktop-nav">
                 <a href="index.html">Trang chủ</a>
                 <a href="explore.html">Khám phá</a>
-                <a href="optimization.html" class="active">Lộ trình</a>
+                <a href="optimization.html">Lộ trình</a>
+                <a href="ai-suggestions.html">Gợi ý AI</a>
                 <a href="news.html">Tin tức</a>
                 <a href="review.html">Đánh giá</a>
             </nav>
 
             <div class="header-actions">
-                <div class="user-avatar-mini">
-                    <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Avatar">
+                <div class="user-dropdown">
+                    <div class="user-trigger">
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
+                        <span class="user-name">Người dùng</span>
+                        <i class="ph-bold ph-caret-down"></i>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-header">
+                            <span>Tài khoản</span>
+                            <div class="user-display-name">Người dùng</div>
+                        </div>
+                        <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
+                        <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
+                        <a href="ai-suggestions.html"><i class="ph ph-sparkle"></i> Gợi ý từ AI</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,7 +65,7 @@
 
     <main class="planner-main">
         <div class="planner-container">
-            
+
             <!-- Page Header -->
             <div class="planner-intro">
                 <h1>Lên kế hoạch chuyến đi mơ ước</h1>
@@ -74,44 +92,36 @@
 
             <!-- Form Card -->
             <div class="planner-card">
-                
+
                 <!-- Section 1: Basic Info -->
                 <div class="form-section">
                     <h2 class="section-title"><i class="ph-fill ph-map-trifold" style="color:var(--app-primary);"></i> Bạn dự định đi đâu và khi nào?</h2>
-                    
+
                     <div class="input-row">
                         <div class="form-group half premium-field">
                             <label for="plan-destination">ĐIỂM ĐẾN</label>
                             <div class="input-container" style="position: relative;">
                                 <i class="ph-duotone ph-map-pin input-icon"></i>
                                 <input type="text" id="plan-destination" autocomplete="off" placeholder="Bạn muốn đi đâu?" value="Đà Nẵng">
-                                
+
                                 <!-- Premium Suggestions Dropdown (Planner) -->
                                 <div class="suggestions-dropdown" id="planner-suggestions">
                                     <div class="suggestions-header">GỢI Ý</div>
                                     <div class="suggestion-item" data-value="Hà Nội">
                                         <i class="ph-duotone ph-buildings"></i>
-                                        <div class="suggestion-text">
-                                            <span class="city">Hà Nội</span>
-                                        </div>
+                                        <div class="suggestion-text"><span class="city">Hà Nội</span></div>
                                     </div>
                                     <div class="suggestion-item" data-value="Đà Nẵng">
                                         <i class="ph-duotone ph-waves"></i>
-                                        <div class="suggestion-text">
-                                            <span class="city">Đà Nẵng</span>
-                                        </div>
+                                        <div class="suggestion-text"><span class="city">Đà Nẵng</span></div>
                                     </div>
                                     <div class="suggestion-item" data-value="Hòa Bình">
                                         <i class="ph-duotone ph-mountains"></i>
-                                        <div class="suggestion-text">
-                                            <span class="city">Hòa Bình</span>
-                                        </div>
+                                        <div class="suggestion-text"><span class="city">Hòa Bình</span></div>
                                     </div>
                                     <div class="suggestion-item" data-value="Đà Lạt">
                                         <i class="ph-duotone ph-cloud-sun"></i>
-                                        <div class="suggestion-text">
-                                            <span class="city">Đà Lạt</span>
-                                        </div>
+                                        <div class="suggestion-text"><span class="city">Đà Lạt</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +140,7 @@
                 <div class="form-section">
                     <h2 class="section-title"><i class="ph-fill ph-heart" style="color:var(--app-primary);"></i> Sở thích cá nhân</h2>
                     <p class="section-desc">Chọn tối đa 4 phong cách du lịch bạn mong muốn trải nghiệm nhất:</p>
-                    
+
                     <div class="preference-grid">
                         <label class="pref-card">
                             <input type="checkbox" name="pref" value="food" class="pref-checkbox" checked>
@@ -202,42 +212,41 @@
                     </div>
                 </div>
                 <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabs = document.querySelectorAll('.day-tab');
-            const timeGroups = document.querySelectorAll('.time-group');
-            const budget = document.getElementById('budgetSummary');
-            const pins = document.querySelectorAll('.map-pin');
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const tabs = document.querySelectorAll('.day-tab');
+                        const timeGroups = document.querySelectorAll('.time-group');
+                        const budget = document.getElementById('budgetSummary');
+                        const pins = document.querySelectorAll('.map-pin');
 
-            tabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
+                        tabs.forEach(tab => {
+                            tab.addEventListener('click', () => {
+                                tabs.forEach(t => t.classList.remove('active'));
+                                tab.classList.add('active');
 
-                    if (tab.classList.contains('tab-stats')) {
-                        timeGroups.forEach(g => g.style.display = 'none');
-                        budget.style.display = 'block';
-                    } else {
-                        timeGroups.forEach(g => g.style.display = 'block');
-                        budget.style.display = 'none';
-                    }
-                });
-            });
+                                if (tab.classList.contains('tab-stats')) {
+                                    timeGroups.forEach(g => g.style.display = 'none');
+                                    budget.style.display = 'block';
+                                } else {
+                                    timeGroups.forEach(g => g.style.display = 'block');
+                                    budget.style.display = 'none';
+                                }
+                            });
+                        });
 
-            // Interactive Map Pins
-            pins.forEach(pin => {
-                pin.addEventListener('click', () => {
-                    const label = pin.getAttribute('data-label');
-                    alert('Bạn đang xem chi tiết tại: ' + label);
-                });
-            });
-        });
-    </script>
+                        pins.forEach(pin => {
+                            pin.addEventListener('click', () => {
+                                const label = pin.getAttribute('data-label');
+                                alert('Bạn đang xem chi tiết tại: ' + label);
+                            });
+                        });
+                    });
+                </script>
 
                 <!-- Generate CTA -->
                 <div class="generate-wrapper">
-                    <a href="#" class="btn-generate" id="generateBtn">
+                    <a href="optimization.html" class="btn-generate" id="generateBtn">
                         <i class="ph-fill ph-lightning"></i>
-                        Generate AI Recommendation
+                        Tối ưu hóa lộ trình AI
                     </a>
                     <span class="helper-text">Mất khoảng 5-10 giây để xử lý dữ liệu thông minh</span>
                 </div>
@@ -246,13 +255,7 @@
 
             <!-- Destination Map Snippet Bottom (Google Maps) -->
             <div class="map-snippet" style="height: 400px; border-radius: 24px; overflow: hidden; position: relative; border: 1px solid var(--app-border-dark);">
-                <iframe 
-                    id="google-map"
-                    width="100%" 
-                    height="100%" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
+                <iframe id="google-map" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
                     src="https://www.google.com/maps?q=Vietnam&output=embed">
                 </iframe>
@@ -286,7 +289,7 @@
                     membersSelect.value = 'Gia đình / Nhóm bạn';
                 }
             }
-            
+
             flatpickr("#plan-dates", {
                 mode: "range",
                 minDate: "today",
@@ -299,7 +302,6 @@
             const mapIframe = document.getElementById('google-map');
             const updateMap = (query) => {
                 if (mapIframe && query) {
-                    // Refined query for precise pinning
                     const encodedQuery = encodeURIComponent(query + ", Việt Nam");
                     mapIframe.src = `https://www.google.com/maps?q=${encodedQuery}&output=embed&z=14`;
                 }
@@ -314,14 +316,13 @@
             const items = document.querySelectorAll('.suggestion-item');
 
             if (destInput && suggestions) {
-                // Prevent dropdown close when clicking inside
                 suggestions.addEventListener('mousedown', (e) => e.preventDefault());
 
                 items.forEach(item => {
                     item.addEventListener('click', () => {
                         const val = item.getAttribute('data-value');
                         destInput.value = val;
-                        updateMap(val); // Update map on selection
+                        updateMap(val);
                         suggestions.style.opacity = '0';
                         suggestions.style.visibility = 'hidden';
                         setTimeout(() => {
@@ -334,7 +335,7 @@
 
                 destInput.addEventListener('input', () => {
                     const val = destInput.value.toLowerCase().trim();
-                    updateMap(val); // Real-time map preview
+                    updateMap(val);
                     let hasMatch = false;
                     items.forEach(item => {
                         const city = item.getAttribute('data-value').toLowerCase();
@@ -356,4 +357,5 @@
     <script src="planner.js"></script>
     <script src="chat-widget.js"></script>
 </body>
+
 </html>
