@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const fullname = document.getElementById('fullname').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
+            const fullname = document.getElementById('reg-fullname').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm').value;
             const termsChecked = document.getElementById('terms').checked;
 
             if (!fullname || !email || !password || !confirmPassword) {
@@ -60,8 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
             users.push(newUser);
             saveUsers(users);
 
-            alert('Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...');
-            window.location.href = 'login.html';
+            alert('Đăng ký thành công! Đang chuyển sang trang đăng nhập...');
+            const authContainer = document.getElementById('authContainer');
+            if(authContainer) authContainer.classList.remove('is-signup');
         });
     }
 
@@ -71,8 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value;
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
 
             if (!email || !password) {
                 alert('Vui lòng nhập Email và Mật khẩu!');
@@ -140,6 +141,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentUserStr) {
             window.location.href = 'dashboard.html';
         }
+
+        // --- Auth Page Switching ---
+        const authContainer = document.getElementById('authContainer');
+        const toRegister = document.getElementById('toRegister');
+        const toLogin = document.getElementById('toLogin');
+
+        if (toRegister && authContainer) {
+            toRegister.addEventListener('click', () => {
+                authContainer.classList.add('is-signup');
+                document.title = "Đăng ký | AI Travel Planner";
+            });
+        }
+        if (toLogin && authContainer) {
+            toLogin.addEventListener('click', () => {
+                authContainer.classList.remove('is-signup');
+                document.title = "Đăng nhập | AI Travel Planner";
+            });
+        }
     }
 
     // --- 4. Landing Page Logic (index.html) ---
@@ -176,4 +195,19 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // --- 5. Password Visibility Toggle ---
+    const eyeIcons = document.querySelectorAll('.eye-icon');
+    eyeIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const input = this.parentElement.querySelector('input');
+            if (input.type === 'password') {
+                input.type = 'text';
+                this.classList.replace('ph-eye', 'ph-eye-slash');
+            } else {
+                input.type = 'password';
+                this.classList.replace('ph-eye-slash', 'ph-eye');
+            }
+        });
+    });
 });
