@@ -24,11 +24,11 @@
             padding: 2px 8px;
             transition: all 0.3s;
         }
-        
+
         .map-wrapper {
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border: 1px solid var(--app-border-dark);
         }
 
@@ -58,8 +58,13 @@
         }
 
         @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -77,36 +82,26 @@
             </a>
 
             <nav class="nav-links desktop-nav">
+                <a href="index.html">Trang chủ</a>
                 <a href="explore.html">Khám phá</a>
                 <a href="optimization.html" class="active">Lộ trình</a>
-                <a href="ai-suggestions.html">Gợi ý AI</a>
                 <a href="news.html">Tin tức</a>
                 <a href="review.html">Đánh giá</a>
+                <a href="#">Cài đặt</a>
             </nav>
 
+            <div class="header-search">
+                <i class="ph-bold ph-magnifying-glass search-icon"></i>
+                <input type="text" placeholder="Tìm kiếm địa điểm...">
+            </div>
 
             <div class="header-actions">
                 <button class="notification-btn" style="margin-right: 12px; position: relative;">
                     <i class="ph-fill ph-bell" style="font-size: 1.4rem; color: var(--app-text-gray);"></i>
                     <span class="notification-dot"></span>
                 </button>
-                <div class="user-dropdown">
-                    <div class="user-trigger">
-                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
-                        <span class="user-name">Hoàng Lê</span>
-                        <i class="ph-bold ph-caret-down"></i>
-                    </div>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-header">
-                            <span>Tài khoản</span>
-                            <div class="user-display-name">Hoàng Lê</div>
-                        </div>
-                        <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
-                        <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
-                        <a href="ai-suggestions.html"><i class="ph ph-sparkle"></i> Gợi ý từ AI</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
-                    </div>
+                <div class="user-avatar">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
                 </div>
             </div>
         </div>
@@ -129,13 +124,11 @@
                 </div>
                 <div class="opt-actions">
                     <button class="btn-opt-primary">
-                        <i class="ph-bold ph-lightning"></i> Tối ưu lộ trình
+                        <i class="ph-bold ph-lightning"></i> Optimize Route
                     </button>
-                    <a href="profile.html" style="text-decoration: none;">
-                        <button class="btn-opt-success">
-                            <i class="ph-bold ph-floppy-disk"></i> Lưu lịch trình
-                        </button>
-                    </a>
+                    <button class="btn-opt-success">
+                        <i class="ph-bold ph-floppy-disk"></i> Save Itinerary
+                    </button>
                 </div>
             </div>
         </div>
@@ -152,7 +145,7 @@
                     </div>
 
                     <div class="places-list">
-                        <div class="selected-place-item" data-location="Phố Cổ, Hà Nội">
+                        <div class="selected-place-item">
                             <div class="place-thumb-mini">
                                 <img src="https://images.unsplash.com/photo-1544413660-299165566b1d?q=80&w=200&auto=format&fit=crop"
                                     alt="Pho Co">
@@ -164,7 +157,7 @@
                             </div>
                         </div>
 
-                        <div class="selected-place-item" data-location="Nhà Thờ Lớn, Hà Nội">
+                        <div class="selected-place-item">
                             <div class="place-thumb-mini">
                                 <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=200&auto=format&fit=crop"
                                     alt="Nha Tho Lon">
@@ -229,7 +222,9 @@
                                 <tr>
                                     <td>
                                         <div class="route-step">
-                                            <span data-location="Phố Cổ, Hà Nội">Phố Cổ</span> <i class="ph-bold ph-arrow-right"></i> <span data-location="Nhà Thờ Lớn, Hà Nội">Nhà Thờ
+                                            <span data-location="Phố Cổ, Hà Nội">Phố Cổ</span> <i
+                                                class="ph-bold ph-arrow-right"></i> <span
+                                                data-location="Nhà Thờ Lớn, Hà Nội">Nhà Thờ
                                                 Lớn</span>
                                         </div>
                                     </td>
@@ -240,7 +235,9 @@
                                 <tr>
                                     <td>
                                         <div class="route-step">
-                                            <span data-location="Nhà Thờ Lớn, Hà Nội">Nhà Thờ Lớn</span> <i class="ph-bold ph-arrow-right"></i> <span data-location="Văn Miếu, Hà Nội">Văn
+                                            <span data-location="Nhà Thờ Lớn, Hà Nội">Nhà Thờ Lớn</span> <i
+                                                class="ph-bold ph-arrow-right"></i> <span
+                                                data-location="Văn Miếu, Hà Nội">Văn
                                                 Miếu</span>
                                         </div>
                                     </td>
@@ -251,7 +248,9 @@
                                 <tr>
                                     <td>
                                         <div class="route-step">
-                                            <span data-location="Văn Miếu, Hà Nội">Văn Miếu</span> <i class="ph-bold ph-arrow-right"></i> <span data-location="Lăng Chủ Tịch, Hà Nội">Lăng Chủ
+                                            <span data-location="Văn Miếu, Hà Nội">Văn Miếu</span> <i
+                                                class="ph-bold ph-arrow-right"></i> <span
+                                                data-location="Lăng Chủ Tịch, Hà Nội">Lăng Chủ
                                                 Tịch</span>
                                         </div>
                                     </td>
@@ -280,15 +279,20 @@
                         </div>
                     </div>
                     <div class="map-analysis-viewport">
-                        <div class="map-wrapper" style="height: 100%; position: relative;">
-                            <iframe id="google-map" width="100%" height="450" style="border:0;" allowfullscreen=""
-                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                                src="https://www.google.com/maps?q=Hanoi&output=embed">
-                            </iframe>
-                            <div class="map-loading-indicator" style="display: none;">
+                        <div class="map-placeholder-img">
+                            <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop"
+                                alt="Hanoi Map">
+                            <div class="map-path-overlay"></div>
+                            <div class="map-marker-opt start" style="top: 40%; left: 30%;">
+                                <div class="marker-label">Điểm bắt đầu</div>
+                            </div>
+                            <div class="map-marker-opt waypoint" style="top: 60%; left: 50%;">
+                                <div class="marker-label">Điểm đến tiếp theo</div>
+                            </div>
+                            <div class="map-loading-indicator">
                                 <div class="loading-box">
                                     <i class="ph-bold ph-circle-notch spin"></i>
-                                    <span>Bản đồ đang cập nhật...</span>
+                                    <span>Bản đồ đang được tối ưu hóa...</span>
                                 </div>
                             </div>
                         </div>
@@ -355,7 +359,7 @@
                     if (location && mapIframe) {
                         // Hiện loading
                         if (loadingIndicator) loadingIndicator.style.display = 'flex';
-                        
+
                         // Cập nhật iframe src
                         const newSrc = `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`;
                         mapIframe.src = newSrc;
