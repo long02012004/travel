@@ -106,46 +106,65 @@
             <!-- Page Content -->
             <div class="page-content">
 
-                <!-- Countdown Timer Widget -->
-                <div id="countdownWidget" class="countdown-card sleek-glass" style="display: none;">
-                    <div class="countdown-label">CHUYẾN ĐI TIẾP THEO SẼ BẮT ĐẦU TRONG</div>
-                    <div class="countdown-timer">
-                        <div class="time-block">
-                            <span id="days" class="time-val">00</span>
-                            <span class="time-label">NGÀY</span>
+                <!-- Top Row: Clock & Map Split -->
+                <div class="dashboard-top-row">
+                    <!-- AI Dashboard Station (Clock & Next Trip) -->
+                    <div id="dashboardClockWidget" class="status-clock-station sleek-glass">
+                        <div class="station-left">
+                            <div class="greeting-box">
+                                <i id="greetingIcon" class="ph-fill ph-sun"></i>
+                                <span id="greetingText">Chào buổi sáng,</span>
+                                <span class="user-name-display">Người dùng</span>
+                            </div>
+                            <div class="real-time-clock">
+                                <span id="clockHours">00</span>
+                                <span class="clock-sep">:</span>
+                                <span id="clockMinutes">00</span>
+                                <span class="clock-sep-blink">:</span>
+                                <span id="clockSeconds">00</span>
+                            </div>
+                            <div id="currentDate" class="station-date">Thứ Tư, 18 Tháng 3, 2026</div>
                         </div>
-                        <div class="time-separator">:</div>
-                        <div class="time-block">
-                            <span id="hours" class="time-val">00</span>
-                            <span class="time-label">GIỜ</span>
-                        </div>
-                        <div class="time-separator">:</div>
-                        <div class="time-block">
-                            <span id="minutes" class="time-val">00</span>
-                            <span class="time-label">PHÚT</span>
-                        </div>
-                        <div class="time-separator">:</div>
-                        <div class="time-block">
-                            <span id="seconds" class="time-val">00</span>
-                            <span class="time-label">GIÂY</span>
+                        
+                        <div class="station-right">
+                            <div class="trip-countdown-min">
+                                <div class="countdown-label-mini">CHUYẾN ĐI TIẾP THEO</div>
+                                <div id="nextTripName" class="next-trip-title">Khám phá Đà Nẵng</div>
+                                <div class="countdown-status-row">
+                                    <div class="mini-time-unit">
+                                        <span id="miniDays">00</span><small>D</small>
+                                    </div>
+                                    <div class="mini-time-unit">
+                                        <span id="miniHours">00</span><small>H</small>
+                                    </div>
+                                    <div class="mini-time-unit">
+                                        <span id="miniMinutes">00</span><small>M</small>
+                                    </div>
+                                    <div class="mini-time-unit">
+                                        <span id="miniSeconds">00</span><small>S</small>
+                                    </div>
+                                </div>
+                                <div class="progress-container-mini">
+                                    <div id="tripProgressBar" class="progress-fill-mini" style="width: 0%"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div id="nextTripInfo" class="next-trip-summary">Đang tính toán hành trình...</div>
-                </div>
 
-                <!-- Mini Map Section -->
-                <div class="dashboard-map-section sleek-glass">
-                    <div class="section-header">
-                        <div class="header-info">
-                            <h3>Bản đồ hành trình</h3>
-                            <p>Khám phá lại những địa điểm bạn đã và sẽ đi qua</p>
+                    <!-- Mini Map Section -->
+                    <div class="dashboard-map-section sleek-glass">
+                        <div class="section-header">
+                            <div class="header-info">
+                                <h3>Bản đồ hành trình</h3>
+                                <p>Khám phá lại những địa điểm bạn đã và sẽ đi qua</p>
+                            </div>
+                            <button class="btn-sleek mini" onclick="window.location.href='itinerary.html'">
+                                <i class="ph-bold ph-maximize"></i>
+                                <span>Toàn màn hình</span>
+                            </button>
                         </div>
-                        <button class="btn-sleek mini" onclick="window.location.href='itinerary.html'">
-                            <i class="ph-bold ph-maximize"></i>
-                            <span>Toàn màn hình</span>
-                        </button>
+                        <div id="miniMap" class="mini-map-container"></div>
                     </div>
-                    <div id="miniMap" class="mini-map-container"></div>
                 </div>
 
 

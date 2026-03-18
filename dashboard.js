@@ -7,8 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Simulate loading/initialization delay to show off skeletons
     setTimeout(() => {
         initializeDashboard();
-        startCountdown(); // Start the dynamic countdown
-        initMiniMap();    // Initialize the interactive map
+        startClock();      // Start real-time digital clock
+        startCountdown();  // Start trip countdown with progress bar
+        initMiniMap();     // Initialize the interactive map
     }, 1000);
 });
 
@@ -437,7 +438,82 @@ function getStartDate(dateStr) {
     const dayMonth = firstPart.split('/');
     if (dayMonth.length < 2) return new Date();
     
-    return new Date(`${dayMonth[1]}/${dayMonth[0]}/${year}`);
+    // Create date as DD/MM/YYYY
+    const d = parseInt(dayMonth[0]);
+    const m = parseInt(dayMonth[1]) - 1; // JS months are 0-11
+    return new Date(year, m, d);
+}
+
+// --- Real-time Clock Station ---
+function startClock() {
+    const station = document.getElementById('dashboardClockWidget');
+    if (station) {
+        // Subtle Parallax Effect
+        station.addEventListener('mousemove', (e) => {
+            const rect = station.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            const moveX = (x - centerX) / 40;
+            const moveY = (y - centerY) / 20;
+            
+            station.style.transform = `translateY(-5px) perspective(1000px) rotateX(${-moveY}deg) rotateY(${moveX}deg)`;
+        });
+        
+        station.addEventListener('mouseleave', () => {
+            station.style.transform = `translateY(0) rotateX(0) rotateY(0)`;
+        });
+    }
+
+    const update = () => {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getHours() >= 0 ? now.getMinutes() : 0).padStart(2, '0'); // Safety
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        // Update Clock
+        const hEl = document.getElementById('clockHours');
+        const mEl = document.getElementById('clockMinutes');
+        const sEl = document.getElementById('clockSeconds');
+        
+        if (hEl) hEl.textContent = hours;
+        if (mEl) mEl.textContent = minutes;
+        if (sEl) sEl.textContent = seconds;
+
+        // Update Greeting & Icon
+        const hour = now.getHours();
+        const gText = document.getElementById('greetingText');
+        const gIcon = document.getElementById('greetingIcon');
+        
+        if (gText && gIcon) {
+            if (hour >= 5 && hour < 12) {
+                gText.textContent = 'Chào buổi sáng,';
+                gIcon.className = 'ph-fill ph-sun';
+                gIcon.style.color = '#fbbf24';
+            } else if (hour >= 12 && hour < 18) {
+                gText.textContent = 'Chào buổi chiều,';
+                gIcon.className = 'ph-fill ph-cloud-sun';
+                gIcon.style.color = '#f97316';
+            } else {
+                gText.textContent = 'Chào buổi tối,';
+                gIcon.className = 'ph-fill ph-moon-stars';
+                gIcon.style.color = '#818cf8';
+            }
+        }
+
+        // Update Date String
+        const dateEl = document.getElementById('currentDate');
+        if (dateEl) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateEl.textContent = now.toLocaleDateString('vi-VN', options);
+        }
+    };
+    
+    update();
+    setInterval(update, 1000);
 }
 
 function startCountdown() {
@@ -447,34 +523,52 @@ function startCountdown() {
             .filter(t => t.status === 'upcoming')
             .sort((a, b) => getStartDate(a.dates) - getStartDate(b.dates));
 
-        const countdownWidget = document.getElementById('countdownWidget');
-        if (upcomingTrips.length === 0 || !countdownWidget) {
-            if (countdownWidget) countdownWidget.style.display = 'none';
+        const clockWidget = document.getElementById('dashboardClockWidget');
+        if (!clockWidget) return;
+
+        // Clock is always visible now
+        clockWidget.style.display = 'flex';
+
+        const tripSection = clockWidget.querySelector('.station-right');
+        if (upcomingTrips.length === 0) {
+            if (tripSection) tripSection.style.display = 'none';
             return;
         }
+
+        if (tripSection) tripSection.style.display = 'block';
 
         const nextTrip = upcomingTrips[0];
         const targetDate = getStartDate(nextTrip.dates);
         const now = new Date();
         const diff = targetDate - now;
 
+        document.getElementById('nextTripName').textContent = nextTrip.title;
+
         if (diff <= 0) {
-            countdownWidget.style.display = 'none';
+            // Trip has started
+            document.getElementById('miniDays').textContent = '00';
+            document.getElementById('miniHours').textContent = '00';
+            document.getElementById('miniMinutes').textContent = '00';
+            document.getElementById('miniSeconds').textContent = '00';
+            document.getElementById('tripProgressBar').style.width = '100%';
             return;
         }
 
-        countdownWidget.style.display = 'flex';
-        document.getElementById('nextTripInfo').textContent = `Đến với: ${nextTrip.title}`;
-        
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById('days').textContent = String(days).padStart(2, '0');
-        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        document.getElementById('miniDays').textContent = String(days).padStart(2, '0');
+        document.getElementById('miniHours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('miniMinutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('miniSeconds').textContent = String(seconds).padStart(2, '0');
+
+        // Progress bar simulation: 
+        // We'll say the trip preparation starts 30 days before
+        const totalDuration = 30 * 24 * 60 * 60 * 1000;
+        const progress = Math.max(0, Math.min(100, (1 - (diff / totalDuration)) * 100));
+        document.getElementById('tripProgressBar').style.width = `${progress}%`;
     };
 
     update();
