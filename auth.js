@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =============================================
     const updateUserUI = () => {
         const currentUserStr = localStorage.getItem('currentUser');
-        const headerActions = document.querySelector('.header-actions');
+        const authContainer = document.querySelector('.nav-actions, .header-actions');
 
         if (currentUserStr) {
             const currentUser = JSON.parse(currentUserStr);
@@ -160,8 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const userDropdown = document.querySelector('.user-dropdown');
             if (userDropdown) userDropdown.style.display = 'inline-block';
 
-            if (headerActions) {
-                headerActions.querySelectorAll('a[href="login.html"], a[href="register.html"]').forEach(btn => btn.style.display = 'none');
+            if (authContainer) {
+                authContainer.querySelectorAll('a[href="login.html"], a[href*="login.html?mode=register"]').forEach(btn => btn.style.display = 'none');
             }
         } else {
             // Not logged in
@@ -172,16 +172,17 @@ document.addEventListener('DOMContentLoaded', () => {
                                     currentPath.includes('profile.html') ||
                                     currentPath.includes('admin.html');
 
-            if (!isProtectedPage && userDropdown && headerActions) {
-                userDropdown.style.display = 'none';
+            if (!isProtectedPage && authContainer) {
+                if (userDropdown) userDropdown.style.display = 'none';
+                
                 // Show login/register buttons if they exist
-                headerActions.querySelectorAll('a[href="login.html"], a[href="register.html"]').forEach(btn => btn.style.display = 'flex');
+                authContainer.querySelectorAll('a[href="login.html"], a[href*="login.html?mode=register"]').forEach(btn => btn.style.display = 'flex');
 
-                // If header-actions has no login button yet, add them
-                if (!headerActions.querySelector('a[href="login.html"]')) {
-                    headerActions.innerHTML += `
+                // If auth container has no login button yet, add them (only if we are NOT on auth page)
+                if (!isAuthPage && !authContainer.querySelector('a[href="login.html"]')) {
+                    authContainer.innerHTML += `
                         <a href="login.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng nhập</a>
-                        <a href="register.html" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng ký</a>
+                        <a href="login.html?mode=register" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">Đăng ký</a>
                     `;
                 }
             }
@@ -198,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             currentPath.includes('planner.html') ||
                             currentPath.includes('profile.html') ||
                             currentPath.includes('admin.html');
-    const isAuthPage = currentPath.includes('login.html') || currentPath.includes('register.html');
+    const isAuthPage = currentPath.includes('login.html');
     const currentUserStr = localStorage.getItem('currentUser');
 
     if (isProtectedPage && !currentUserStr) {
@@ -210,6 +211,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isAuthPage && currentUserStr) {
         window.location.href = 'index.html';
         return;
+    }
+
+    // Handle initial mode (login or register)
+    if (isAuthPage && !currentUserStr) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode');
+        const authContainer = document.getElementById('authContainer');
+
+        if (mode === 'register' && authContainer) {
+            authContainer.classList.add('is-signup');
+            document.title = 'Đăng ký | AI Travel Planner';
+        }
     }
 
     // =============================================

@@ -8,10 +8,15 @@
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     let welcomeMessage = 'Xin chào! Tôi là trợ lý ảo của Travel Planner. Tôi có thể giúp gì cho chuyến đi của bạn?';
     
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+    
     if (currentPage === 'login.html') {
-        welcomeMessage = 'Chào mừng bạn quay lại! Bạn cần hỗ trợ gì với việc đăng nhập không?';
-    } else if (currentPage === 'register.html') {
-        welcomeMessage = 'Rất vui được gặp bạn! Tôi có thể giúp gì cho bạn trong việc tạo tài khoản mới?';
+        if (mode === 'register') {
+            welcomeMessage = 'Rất vui được gặp bạn! Tôi có thể giúp gì cho bạn trong việc tạo tài khoản mới?';
+        } else {
+            welcomeMessage = 'Chào mừng bạn quay lại! Bạn cần hỗ trợ gì với việc đăng nhập không?';
+        }
     }
 
     const chatHTML = `

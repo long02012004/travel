@@ -1,300 +1,979 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chi tiết địa điểm | AI Travel Planner</title>
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <!-- Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="app.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="app.css" />
+  </head>
 
-<body class="bg-gray-50">
-
+  <body class="bg-gray-50">
     <!-- Top Navbar -->
     <header class="app-header explore-header">
-        <div class="header-container full-width-header">
-            <a href="index.html" class="logo">
-                <div class="logo-icon small-icon"><i class="ph-fill ph-sparkle"></i></div>
-                <span>AI Travel Planner</span>
-            </a>
+      <div class="header-container full-width-header">
+        <a href="index.html" class="logo">
+          <div class="logo-icon small-icon">
+            <i class="ph-fill ph-sparkle"></i>
+          </div>
+          <span>AI Travel Planner</span>
+        </a>
 
-            <nav class="nav-links desktop-nav">
-                <a href="index.html">Trang chủ</a>
-                <a href="explore.html">Khám phá</a>
-                <a href="optimization.html">Lộ trình</a>
-                <a href="ai-suggestions.html">Gợi ý AI</a>
-                <a href="news.html">Tin tức</a>
-                <a href="review.html">Đánh giá</a>
-            </nav>
+        <nav class="nav-links desktop-nav">
+          <a href="index.html">Trang chủ</a>
+          <a href="explore.html">Khám phá</a>
+          <a href="optimization.html">Lộ trình</a>
+          <a href="ai-suggestions.html">Gợi ý AI</a>
+          <a href="news.html">Tin tức</a>
+          <a href="review.html">Đánh giá</a>
+        </nav>
 
-            <div class="header-search">
-                <i class="ph-bold ph-magnifying-glass search-icon"></i>
-                <input type="text" placeholder="Tìm kiếm điểm đến...">
+        <div class="header-actions">
+          <div class="user-dropdown">
+            <div class="user-trigger">
+              <img
+                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                alt="User Avatar"
+              />
+              <span class="user-name">Người dùng</span>
+              <i class="ph-bold ph-caret-down"></i>
             </div>
-
-            <div class="header-actions">
-                <div class="user-dropdown">
-                    <div class="user-trigger">
-                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
-                        <span class="user-name">Người dùng</span>
-                        <i class="ph-bold ph-caret-down"></i>
-                    </div>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-header">
-                            <span>Tài khoản</span>
-                            <div class="user-display-name">Người dùng</div>
-                        </div>
-                        <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
-                        <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
-                        <a href="ai-suggestions.html"><i class="ph ph-sparkle"></i> Gợi ý từ AI</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
-                    </div>
-                </div>
+            <div class="dropdown-menu">
+              <div class="dropdown-header">
+                <span>Tài khoản</span>
+                <div class="user-display-name">Người dùng</div>
+              </div>
+              <a href="profile.html"
+                ><i class="ph ph-user-circle"></i> Trang cá nhân</a
+              >
+              <a href="planner.html"
+                ><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a
+              >
+              <a href="ai-suggestions.html"
+                ><i class="ph ph-sparkle"></i> Gợi ý từ AI</a
+              >
+              <div class="dropdown-divider"></div>
+              <a href="index.html" class="logout-item"
+                ><i class="ph ph-sign-out"></i> Đăng xuất</a
+              >
             </div>
+          </div>
         </div>
+      </div>
     </header>
 
     <main class="dest-main container">
-        
-        <!-- Hero Image Section -->
-        <div class="dest-hero">
-            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1200&auto=format&fit=crop" alt="Vịnh Hạ Long" class="hero-bg-img">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="location-tag">
-                    <i class="ph-fill ph-map-pin"></i> QUẢNG NINH, VIỆT NAM
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <i class="ph-bold ph-caret-right"></i>
+        <a href="explore.html">Khám phá</a>
+        <i class="ph-bold ph-caret-right"></i>
+        <span>Vịnh Hạ Long</span>
+      </nav>
+
+      <!-- Hero Image Section -->
+      <div class="dest-hero">
+        <img
+          src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1200&auto=format&fit=crop"
+          alt="Vịnh Hạ Long"
+          class="hero-bg-img"
+        />
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <div class="location-tag">
+            <i class="ph-fill ph-map-pin"></i> QUẢNG NINH, VIỆT NAM
+          </div>
+          <h1 class="hero-title">Vịnh Hạ Long</h1>
+          <div class="hero-meta">
+            <div class="hero-rating">
+              <div class="stars">
+                <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
+                ><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i
+                ><i class="ph-fill ph-star-half"></i>
+              </div>
+              <span>4.8 (2,341 đánh giá)</span>
+            </div>
+            <div class="hero-category">
+              <i class="ph-fill ph-mountains"></i> Di sản thiên nhiên thế giới
+            </div>
+          </div>
+        </div>
+        <!-- Interactive buttons inside hero -->
+        <div class="hero-actions">
+          <button class="btn-icon-circle" title="Chia sẻ">
+            <i class="ph-bold ph-share-network"></i>
+          </button>
+          <button class="btn-icon-circle favorite-btn" title="Yêu thích">
+            <i class="ph-fill ph-heart"></i>
+          </button>
+          <button class="btn-icon-circle" title="Lưu">
+            <i class="ph-bold ph-bookmark-simple"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Stats Row -->
+      <div class="quick-stats">
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="ph-fill ph-star" style="color: #f59e0b"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">Đánh giá</span>
+            <span class="stat-value"><strong>4.8</strong> / 5.0</span>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="ph-fill ph-map-pin" style="color: var(--app-primary)"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">Từ Hà Nội</span>
+            <span class="stat-value"><strong>165 km</strong></span>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="ph-fill ph-money" style="color: #10b981"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">Mức giá dự kiến</span>
+            <span class="stat-value"><strong>1.5tr - 5tr VNĐ</strong></span>
+          </div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-icon">
+            <i class="ph-fill ph-clock" style="color: #8b5cf6"></i>
+          </div>
+          <div class="stat-info">
+            <span class="stat-label">Thời gian tham quan</span>
+            <span class="stat-value"><strong>2-3 ngày</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Tabs -->
+      <div class="dest-tabs">
+        <button class="tab-btn active" data-tab="overview">Tổng quan</button>
+        <button class="tab-btn" data-tab="services">Dịch vụ</button>
+        <button class="tab-btn" data-tab="reviews">Đánh giá</button>
+        <button class="tab-btn" data-tab="tips">Mẹo du lịch</button>
+      </div>
+
+      <!-- Two Column Layout -->
+      <div class="dest-content-grid">
+        <!-- Left Column -->
+        <div class="dest-left">
+          <!-- Overview Tab Content -->
+          <div class="tab-content active" id="overview">
+            <!-- About -->
+            <section class="dest-section">
+              <h2 class="dest-section-title">Giới thiệu</h2>
+              <div class="dest-description">
+                <p>
+                  Vịnh Hạ Long là di sản thiên nhiên thế giới được UNESCO công
+                  nhận, nổi tiếng với hàng nghìn hòn đảo đá vôi kỳ vĩ và làn
+                  nước xanh lục bảo. Đây là điểm đến không thể bỏ qua cho những
+                  ai yêu thích khám phá thiên nhiên và trải nghiệm du thuyền
+                  sang trọng.
+                </p>
+                <p>
+                  Nơi đây không chỉ có cảnh quan sơn thủy hữu tình mà còn chứa
+                  đựng những giá trị văn hóa, lịch sử lâu đời. Du khách có thể
+                  tham gia các hoạt động như chèo thuyền kayak, tham quan hang
+                  động (Hang Sửng Sốt, Động Thiên Cung), hay đơn giản là ngắm
+                  hoàng hôn trên boong tàu.
+                </p>
+              </div>
+            </section>
+
+            <!-- Photo Gallery -->
+            <section class="dest-section">
+              <h2 class="dest-section-title">Hình ảnh</h2>
+              <div class="photo-gallery">
+                <div class="gallery-main">
+                  <img
+                    src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=800&auto=format&fit=crop"
+                    alt="Vịnh Hạ Long"
+                  />
                 </div>
-                <h1 class="hero-title">Vịnh Hạ Long</h1>
-            </div>
-            <!-- Interactive buttons inside hero -->
-            <div class="hero-actions">
-                <button class="btn-icon-circle"><i class="ph-bold ph-share-network"></i></button>
-                <button class="btn-icon-circle"><i class="ph-fill ph-heart"></i></button>
-            </div>
+                <div class="gallery-thumbs">
+                  <img
+                    src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=200&auto=format&fit=crop"
+                    alt="Thumb 1"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=200&auto=format&fit=crop"
+                    alt="Thumb 2"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=200&auto=format&fit=crop"
+                    alt="Thumb 3"
+                  />
+                  <img
+                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=200&auto=format&fit=crop"
+                    alt="Thumb 4"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <!-- Best Time to Visit -->
+            <section class="dest-section">
+              <h2 class="dest-section-title">Thời điểm tốt nhất để đi</h2>
+              <div class="best-time-grid">
+                <div class="time-card recommended">
+                  <div class="time-header">
+                    <h4>Tháng 2 - Tháng 4</h4>
+                    <span class="badge">Khuyên đi</span>
+                  </div>
+                  <p>
+                    Thời tiết mát mẻ, ít mưa, cảnh quan tuyệt đẹp với sương mù
+                    nhẹ.
+                  </p>
+                  <div class="time-weather">
+                    <i class="ph-fill ph-sun"></i> 20-25°C
+                  </div>
+                </div>
+                <div class="time-card">
+                  <div class="time-header">
+                    <h4>Tháng 5 - Tháng 8</h4>
+                  </div>
+                  <p>Mùa mưa, nhiệt độ cao, nhưng biển xanh và ít du khách.</p>
+                  <div class="time-weather">
+                    <i class="ph-fill ph-cloud-rain"></i> 25-32°C
+                  </div>
+                </div>
+                <div class="time-card">
+                  <div class="time-header">
+                    <h4>Tháng 9 - Tháng 12</h4>
+                  </div>
+                  <p>Mùa thu đông, thời tiết mát, nhưng có thể có bão.</p>
+                  <div class="time-weather">
+                    <i class="ph-fill ph-wind"></i> 18-24°C
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Services Tab Content -->
+          <div class="tab-content" id="services">
+            <section class="dest-section">
+              <div class="section-header-flex">
+                <h2 class="dest-section-title">Dịch vụ lân cận</h2>
+                <a href="#" class="link-view-all">Xem tất cả</a>
+              </div>
+
+              <div class="services-grid">
+                <!-- Service Card 1 -->
+                <div class="service-card">
+                  <div class="service-img">
+                    <img
+                      src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=400&auto=format&fit=crop"
+                      alt="Vinpearl Resort"
+                    />
+                    <span class="service-badge">Khách sạn</span>
+                  </div>
+                  <div class="service-info">
+                    <div class="serv-header">
+                      <h4>Vinpearl Resort & Spa</h4>
+                      <span class="serv-rating"
+                        ><i class="ph-fill ph-star"></i> 4.9</span
+                      >
+                    </div>
+                    <p class="serv-address">
+                      Đảo Rều, Phường Bãi Cháy, Hạ Long
+                    </p>
+                    <div class="serv-footer">
+                      <span class="serv-price"
+                        >~ 2.500.000đ<small>/đêm</small></span
+                      >
+                      <button class="btn-sm">Đặt ngay</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="service-card">
+                  <div class="service-img">
+                    <img
+                      src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=400&auto=format&fit=crop"
+                      alt="Nhà hàng Hồng Hạnh"
+                    />
+                    <span class="service-badge">Nhà hàng</span>
+                  </div>
+                  <div class="service-info">
+                    <div class="serv-header">
+                      <h4>Nhà hàng Hồng Hạnh 3</h4>
+                      <span class="serv-rating"
+                        ><i class="ph-fill ph-star"></i> 4.7</span
+                      >
+                    </div>
+                    <p class="serv-address">Đường bao biển Cột 5, Hạ Long</p>
+                    <div class="serv-footer">
+                      <span class="serv-price"
+                        >~ 500.000đ<small>/người</small></span
+                      >
+                      <button class="btn-sm btn-outline">Xem thực đơn</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="service-card">
+                  <div class="service-img">
+                    <img
+                      src="https://images.unsplash.com/photo-1540541338287-41700207dee6?q=80&w=400&auto=format&fit=crop"
+                      alt="Tour du thuyền"
+                    />
+                    <span class="service-badge">Tour</span>
+                  </div>
+                  <div class="service-info">
+                    <div class="serv-header">
+                      <h4>Tour Du Thuyền 2 Ngày</h4>
+                      <span class="serv-rating"
+                        ><i class="ph-fill ph-star"></i> 4.8</span
+                      >
+                    </div>
+                    <p class="serv-address">Bến tàu Tuần Châu, Hạ Long</p>
+                    <div class="serv-footer">
+                      <span class="serv-price"
+                        >~ 3.500.000đ<small>/người</small></span
+                      >
+                      <button class="btn-sm">Đặt tour</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Reviews Tab Content -->
+          <div class="tab-content" id="reviews">
+            <section class="dest-section">
+              <div class="section-header-flex">
+                <h2 class="dest-section-title">Đánh giá từ cộng đồng</h2>
+                <button class="btn-outline-sm">Viết đánh giá</button>
+              </div>
+
+              <div class="reviews-summary">
+                <div class="summary-rating">
+                  <div class="big-rating">4.8</div>
+                  <div class="rating-details">
+                    <div class="stars">
+                      <i class="ph-fill ph-star"></i
+                      ><i class="ph-fill ph-star"></i
+                      ><i class="ph-fill ph-star"></i
+                      ><i class="ph-fill ph-star"></i
+                      ><i class="ph-fill ph-star-half"></i>
+                    </div>
+                    <span>2,341 đánh giá</span>
+                  </div>
+                </div>
+                <div class="rating-breakdown">
+                  <div class="rating-bar">
+                    <span>5 sao</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 75%"></div>
+                    </div>
+                    <span>75%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span>4 sao</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 20%"></div>
+                    </div>
+                    <span>20%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span>3 sao</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 4%"></div>
+                    </div>
+                    <span>4%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span>2 sao</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 1%"></div>
+                    </div>
+                    <span>1%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span>1 sao</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 0%"></div>
+                    </div>
+                    <span>0%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="reviews-list">
+                <!-- Review 1 -->
+                <div class="review-item">
+                  <div class="reviewer-header">
+                    <img
+                      src="https://i.pravatar.cc/150?img=32"
+                      alt="Hà"
+                      class="reviewer-avatar"
+                    />
+                    <div class="reviewer-meta">
+                      <h4>Nguyễn Thu Hà</h4>
+                      <div class="review-meta-row">
+                        <div class="review-stars">
+                          <i class="ph-fill ph-star"></i
+                          ><i class="ph-fill ph-star"></i
+                          ><i class="ph-fill ph-star"></i
+                          ><i class="ph-fill ph-star"></i
+                          ><i class="ph-fill ph-star"></i>
+                        </div>
+                        <span class="review-time">2 ngày trước</span>
+                        <span class="review-type">Du lịch cùng gia đình</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="review-text">
+                    Chuyến đi tuyệt vời! Cảnh đẹp mê hồn, đặc biệt là lúc hoàng
+                    hôn. Dịch vụ du thuyền 5 sao rất đáng tiền, nhân viên nhiệt
+                    tình và đồ ăn hải sản cực kỳ tươi ngon. Chắc chắn sẽ quay
+                    lại.
+                  </p>
+                  <div class="review-photos">
+                    <img
+                      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=150&auto=format&fit=crop"
+                      alt="Review photo"
+                    />
+                    <img
+                      src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=150&auto=format&fit=crop"
+                      alt="Review photo"
+                    />
+                  </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-item">
+                  <div class="reviewer-header">
+                    <img
+                      src="https://i.pravatar.cc/150?img=11"
+                      alt="Quân"
+                      class="reviewer-avatar"
+                    />
+                    <div class="reviewer-meta">
+                      <h4>Trần Minh Quân</h4>
+                      <div class="review-meta-row">
+                        <div class="review-stars">
+                          <i class="ph-fill ph-star"></i
+                          ><i class="ph-fill ph-star"></i
+                          ><i class="ph-fill ph-star"></i
+                          ><i class="ph-fill ph-star"></i
+                          ><i class="ph-fill ph-star-half"></i>
+                        </div>
+                        <span class="review-time">1 tuần trước</span>
+                        <span class="review-type">Du lịch một mình</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="review-text">
+                    Vịnh rất đẹp nhưng vào mùa cao điểm hơi đông đúc ở các điểm
+                    tham quan hang động. Khuyên các bạn nên đi vào ngày thường
+                    để trải nghiệm tốt hơn.
+                  </p>
+                </div>
+              </div>
+
+              <button class="btn-full-width-outline">
+                Xem thêm 124 đánh giá
+              </button>
+            </section>
+          </div>
+
+          <!-- Tips Tab Content -->
+          <div class="tab-content" id="tips">
+            <section class="dest-section">
+              <h2 class="dest-section-title">Mẹo du lịch</h2>
+
+              <div class="tips-grid">
+                <div class="tip-card">
+                  <div class="tip-icon">
+                    <i class="ph-fill ph-camera"></i>
+                  </div>
+                  <h4>Máy ảnh & Ống kính</h4>
+                  <p>
+                    Mang theo máy ảnh chuyên nghiệp hoặc điện thoại có camera
+                    tốt để ghi lại những khoảnh khắc tuyệt đẹp.
+                  </p>
+                </div>
+                <div class="tip-card">
+                  <div class="tip-icon">
+                    <i class="ph-fill ph-sun"></i>
+                  </div>
+                  <h4>Kem chống nắng</h4>
+                  <p>
+                    Dù là mùa nào, hãy luôn thoa kem chống nắng và mang mũ, kính
+                    râm khi ra ngoài.
+                  </p>
+                </div>
+                <div class="tip-card">
+                  <div class="tip-icon">
+                    <i class="ph-fill ph-wallet"></i>
+                  </div>
+                  <h4>Tiền mặt</h4>
+                  <p>
+                    Chuẩn bị tiền mặt VND vì nhiều nơi không chấp nhận thẻ hoặc
+                    có phí rút tiền cao.
+                  </p>
+                </div>
+                <div class="tip-card">
+                  <div class="tip-icon">
+                    <i class="ph-fill ph-first-aid-kit"></i>
+                  </div>
+                  <h4>Bộ sơ cứu</h4>
+                  <p>
+                    Mang theo thuốc đau đầu, thuốc say tàu, băng dán và các loại
+                    thuốc cơ bản.
+                  </p>
+                </div>
+                <div class="tip-card">
+                  <div class="tip-icon">
+                    <i class="ph-fill ph-clock"></i>
+                  </div>
+                  <h4>Thời gian</h4>
+                  <p>
+                    Dành ít nhất 2 ngày để khám phá vịnh một cách thoải mái,
+                    không vội vàng.
+                  </p>
+                </div>
+                <div class="tip-card">
+                  <div class="tip-icon">
+                    <i class="ph-fill ph-users"></i>
+                  </div>
+                  <h4>Hướng dẫn viên</h4>
+                  <p>
+                    Thuê hướng dẫn viên địa phương để có những thông tin chi
+                    tiết và chính xác nhất.
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
 
-        <!-- Quick Stats Row -->
-        <div class="quick-stats">
-            <div class="stat-box">
-                <div class="stat-icon"><i class="ph-fill ph-star" style="color: #f59e0b;"></i></div>
-                <div class="stat-info">
-                    <span class="stat-label">Đánh giá</span>
-                    <span class="stat-value"><strong>4.8</strong> / 5.0</span>
+        <!-- Right Column (Sticky Sidebar) -->
+        <div class="dest-right">
+          <div class="sticky-sidebar">
+            <!-- Map Card -->
+            <div class="sidebar-card map-card-widget">
+              <div class="widget-map-img">
+                <!-- Custom CSS Map Pin -->
+                <div class="giant-pin">
+                  <i class="ph-fill ph-map-pin"></i>
                 </div>
+              </div>
+              <div class="widget-content">
+                <h4>Vị trí & Thời tiết</h4>
+                <ul class="widget-list">
+                  <li>
+                    <i
+                      class="ph-fill ph-cloud"
+                      style="color: var(--app-primary)"
+                    ></i>
+                    Hiện tại: 28°C, Trời nắng đẹp
+                  </li>
+                  <li>
+                    <i
+                      class="ph-fill ph-car"
+                      style="color: var(--app-primary)"
+                    ></i>
+                    2h 30m di chuyển từ Hà Nội
+                  </li>
+                  <li>
+                    <i
+                      class="ph-fill ph-compass"
+                      style="color: var(--app-primary)"
+                    ></i>
+                    Tọa độ: 20.9101° N, 107.1839° E
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="stat-box">
-                <div class="stat-icon"><i class="ph-fill ph-map-pin" style="color: var(--app-primary);"></i></div>
-                <div class="stat-info">
-                    <span class="stat-label">Từ Hà Nội</span>
-                    <span class="stat-value"><strong>165 km</strong></span>
-                </div>
+
+            <!-- Action Card (Blue) -->
+            <div class="sidebar-card action-card-widget">
+              <div class="action-header">
+                <i class="ph-fill ph-sparkle"></i>
+                <h4>Tạo lịch trình với AI</h4>
+              </div>
+              <p>
+                AI sẽ giúp bạn tạo lịch trình chi tiết 2 ngày 1 đêm tại Hạ Long
+                chỉ trong vài giây.
+              </p>
+              <button
+                class="btn-add-to-trip"
+                onclick="
+                  alert('Đã thêm Vịnh Hạ Long vào lịch trình của bạn!');
+                  window.location.href = 'planner.html';
+                "
+              >
+                <i class="ph-bold ph-plus-circle"></i> Thêm vào lịch trình
+              </button>
+              <div class="action-footer">
+                <span><i class="ph-bold ph-clock"></i> Tiết kiệm 20%</span>
+                <span><i class="ph-bold ph-lightning"></i> Tạo nhanh</span>
+              </div>
             </div>
-            <div class="stat-box">
-                <div class="stat-icon"><i class="ph-fill ph-money" style="color: #10b981;"></i></div>
-                <div class="stat-info">
-                    <span class="stat-label">Mức giá dự kiến</span>
-                    <span class="stat-value"><strong>1.5tr - 5tr VNĐ</strong></span>
-                </div>
+
+            <!-- Quick Info Card -->
+            <div class="sidebar-card info-card-widget">
+              <h4>Thông tin nhanh</h4>
+              <ul class="info-list">
+                <li><strong>Giờ mở cửa:</strong> 24/7</li>
+                <li><strong>Phí vào cửa:</strong> 40.000đ/người</li>
+                <li><strong>Di chuyển:</strong> Xe bus, tàu thủy</li>
+                <li><strong>Ngôn ngữ:</strong> Tiếng Việt, Tiếng Anh</li>
+              </ul>
             </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Two Column Layout -->
-        <div class="dest-content-grid">
-            
-            <!-- Left Column -->
-            <div class="dest-left">
-                <!-- About -->
-                <section class="dest-section">
-                    <h2 class="dest-section-title">Giới thiệu</h2>
-                    <div class="dest-description">
-                        <p>Vịnh Hạ Long là di sản thiên nhiên thế giới được UNESCO công nhận, nổi tiếng với hàng nghìn hòn đảo đá vôi kỳ vĩ và làn nước xanh lục bảo. Đây là điểm đến không thể bỏ qua cho những ai yêu thích khám phá thiên nhiên và trải nghiệm du thuyền sang trọng.</p>
-                        <p>Nơi đây không chỉ có cảnh quan sơn thủy hữu tình mà còn chứa đựng những giá trị văn hóa, lịch sử lâu đời. Du khách có thể tham gia các hoạt động như chèo thuyền kayak, tham quan hang động (Hang Sửng Sốt, Động Thiên Cung), hay đơn giản là ngắm hoàng hôn trên boong tàu.</p>
-                    </div>
-                </section>
-
-                <!-- Nearby Services -->
-                <section class="dest-section">
-                    <div class="section-header-flex">
-                        <h2 class="dest-section-title">Dịch vụ lân cận</h2>
-                        <a href="#" class="link-view-all">Xem tất cả</a>
-                    </div>
-                    
-                    <div class="horizontal-scroll-container">
-                        <!-- Service Card 1 -->
-                        <div class="service-card">
-                            <div class="service-img">
-                                <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=400&auto=format&fit=crop" alt="Vinpearl Resort">
-                            </div>
-                            <div class="service-info">
-                                <div class="serv-header">
-                                    <h4>Vinpearl Resort & Spa</h4>
-                                    <span class="serv-rating"><i class="ph-fill ph-star"></i> 4.9</span>
-                                </div>
-                                <p class="serv-address">Đảo Rều, Phường Bãi Cháy, Hạ Long</p>
-                                <div class="serv-footer">
-                                    <span class="serv-price">~ 2.500.000đ<small>/đêm</small></span>
-                                    <button class="btn-sm">Đặt ngay</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Service Card 2 -->
-                        <div class="service-card">
-                            <div class="service-img">
-                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=400&auto=format&fit=crop" alt="Nhà hàng Hồng Hạnh">
-                            </div>
-                            <div class="service-info">
-                                <div class="serv-header">
-                                    <h4>Nhà hàng Hồng Hạnh 3</h4>
-                                    <span class="serv-rating"><i class="ph-fill ph-star"></i> 4.7</span>
-                                </div>
-                                <p class="serv-address">Đường bao biển Cột 5, Hạ Long</p>
-                                <div class="serv-footer">
-                                    <span class="serv-price">~ 500.000đ<small>/người</small></span>
-                                    <button class="btn-sm btn-outline">Xem thực đơn</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Reviews -->
-                <section class="dest-section">
-                    <h2 class="dest-section-title">Đánh giá từ cộng đồng</h2>
-                    
-                    <div class="reviews-list">
-                        <!-- Review 1 -->
-                        <div class="review-item">
-                            <div class="reviewer-header">
-                                <img src="https://i.pravatar.cc/150?img=32" alt="Hà" class="reviewer-avatar">
-                                <div class="reviewer-meta">
-                                    <h4>Nguyễn Thu Hà</h4>
-                                    <div class="review-stars">
-                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
-                                        <span class="review-time">2 ngày trước</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="review-text">Chuyến đi tuyệt vời! Cảnh đẹp mê hồn, đặc biệt là lúc hoàng hôn. Dịch vụ du thuyền 5 sao rất đáng tiền, nhân viên nhiệt tình và đồ ăn hải sản cực kỳ tươi ngon. Chắc chắn sẽ quay lại.</p>
-                        </div>
-
-                        <!-- Review 2 -->
-                        <div class="review-item">
-                            <div class="reviewer-header">
-                                <img src="https://i.pravatar.cc/150?img=11" alt="Quân" class="reviewer-avatar">
-                                <div class="reviewer-meta">
-                                    <h4>Trần Minh Quân</h4>
-                                    <div class="review-stars">
-                                        <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star-half"></i>
-                                        <span class="review-time">1 tuần trước</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="review-text">Vịnh rất đẹp nhưng vào mùa cao điểm hơi đông đúc ở các điểm tham quan hang động. Khuyên các bạn nên đi vào ngày thường để trải nghiệm tốt hơn.</p>
-                        </div>
-                    </div>
-
-                    <button class="btn-full-width-outline" onclick="window.location.href='review.html'">
-                        <i class="ph-bold ph-pencil-simple"></i> Viết đánh giá của bạn
-                    </button>
-                    <button class="btn-full-width-outline" style="margin-top: 12px; border: none;">Xem thêm 124 đánh giá</button>
-                </section>
+      <!-- Related Destinations -->
+      <section class="related-destinations">
+        <h2 class="section-title">Địa điểm liên quan</h2>
+        <div class="related-grid">
+          <div class="related-card">
+            <img
+              src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=300&auto=format&fit=crop"
+              alt="Hội An"
+            />
+            <div class="related-info">
+              <h4>Hội An</h4>
+              <p>Phố cổ đẹp như tranh vẽ</p>
+              <div class="related-rating">
+                <i class="ph-fill ph-star"></i> 4.7
+              </div>
             </div>
-
-            <!-- Right Column (Sticky Sidebar) -->
-            <div class="dest-right">
-                <div class="sticky-sidebar">
-                    
-                    <!-- Map Card -->
-                    <div class="sidebar-card map-card-widget">
-                        <div class="widget-map-img">
-                            <!-- Custom CSS Map Pin -->
-                            <div class="giant-pin">
-                                <i class="ph-fill ph-map-pin"></i>
-                            </div>
-                        </div>
-                        <div class="widget-content">
-                            <h4>Vị trí & Thời tiết</h4>
-                            <ul class="widget-list">
-                                <li><i class="ph-fill ph-cloud" style="color:var(--app-primary)"></i> Hiện tại: 28°C, Trời nắng đẹp</li>
-                                <li><i class="ph-fill ph-car" style="color:var(--app-primary)"></i> 2h 30m di chuyển từ Hà Nội</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Action Card (Blue) -->
-                    <div class="sidebar-card action-card-widget">
-                        <p>AI sẽ giúp bạn tạo lịch trình chi tiết 2 ngày 1 đêm tại Hạ Long chỉ trong vài giây.</p>
-                        <button class="btn-add-to-trip" onclick="alert('Đã thêm Vịnh Hạ Long vào lịch trình của bạn!'); window.location.href='itinerary.html'">
-                            <i class="ph-bold ph-plus-circle"></i> Thêm vào lịch trình
-                        </button>
-                        <div class="action-footer">
-                            <span><i class="ph-bold ph-clock"></i> Tiết kiệm 20%</span>
-                            <span><i class="ph-bold ph-lightning"></i> Tạo nhanh</span>
-                        </div>
-                    </div>
-
-                </div>
+          </div>
+          <div class="related-card">
+            <img
+              src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?q=80&w=300&auto=format&fit=crop"
+              alt="Sapa"
+            />
+            <div class="related-info">
+              <h4>Sapa</h4>
+              <p>Thị trấn sương mù huyền bí</p>
+              <div class="related-rating">
+                <i class="ph-fill ph-star"></i> 4.5
+              </div>
             </div>
+          </div>
+          <div class="related-card">
+            <img
+              src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=300&auto=format&fit=crop"
+              alt="Phú Quốc"
+            />
+            <div class="related-info">
+              <h4>Phú Quốc</h4>
+              <p>Đảo ngọc với bãi biển tuyệt đẹp</p>
+              <div class="related-rating">
+                <i class="ph-fill ph-star"></i> 4.6
+              </div>
+            </div>
+          </div>
         </div>
-
+      </section>
     </main>
 
     <footer class="app-global-footer">
-        <div class="footer-container">
-            <div class="footer-top-row" style="margin-top: 0;">
-                <div class="footer-brand">
-                    <a href="index.html" class="logo">
-                        <div class="logo-icon small-icon"><i class="ph-fill ph-sparkle"></i></div>
-                        <span>AI Travel</span>
-                    </a>
-                    <p class="footer-tagline">Kiến tạo hành trình, kết nối đam mê cùng trí tuệ nhân tạo.</p>
-                </div>
-                <div class="footer-links-group">
-                    <div class="footer-col">
-                        <h4>Khám phá</h4>
-                        <a href="explore.html">Địa điểm nổi bật</a>
-                        <a href="explore.html">Món ngon bản địa</a>
-                        <a href="explore.html">Văn hóa & Lễ hội</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Cộng đồng</h4>
-                        <a href="#">Travel Blog</a>
-                        <a href="#">Diễn đàn chia sẻ</a>
-                        <a href="#">Reviewer tiêu biểu</a>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Hỗ trợ</h4>
-                        <a href="#">Trung tâm trợ giúp</a>
-                        <a href="#">Điều khoản sử dụng</a>
-                        <a href="#">Chính sách bảo mật</a>
-                    </div>
-                </div>
+      <div class="footer-container">
+        <div class="footer-top-row" style="margin-top: 0">
+          <div class="footer-brand">
+            <a href="index.html" class="logo">
+              <div class="logo-icon small-icon">
+                <i class="ph-fill ph-sparkle"></i>
+              </div>
+              <span>AI Travel Planner</span>
+            </a>
+            <p class="footer-tagline">
+              Kiến tạo hành trình, kết nối đam mê cùng trí tuệ nhân tạo.
+            </p>
+          </div>
+          <div class="footer-links-group">
+            <div class="footer-col">
+              <h4>Khám phá</h4>
+              <a href="explore.html">Địa điểm nổi bật</a>
+              <a href="explore.html">Món ngon bản địa</a>
+              <a href="explore.html">Văn hóa & Lễ hội</a>
             </div>
-            <div class="footer-bottom-row">
-                <p>&copy; 2024 AI Travel Planner. Thiết kế bởi UI Designer. Bảo lưu mọi quyền.</p>
-                <div class="footer-socials">
-                    <a href="#"><i class="ph-bold ph-facebook-logo"></i></a>
-                    <a href="#"><i class="ph-bold ph-instagram-logo"></i></a>
-                    <a href="#"><i class="ph-bold ph-twitter-logo"></i></a>
-                </div>
+            <div class="footer-col">
+              <h4>Cộng đồng</h4>
+              <a href="#">Travel Blog</a>
+              <a href="#">Diễn đàn chia sẻ</a>
+              <a href="#">Reviewer tiêu biểu</a>
             </div>
+            <div class="footer-col">
+              <h4>Hỗ trợ</h4>
+              <a href="#">Trung tâm trợ giúp</a>
+              <a href="#">Điều khoản sử dụng</a>
+              <a href="#">Chính sách bảo mật</a>
+            </div>
+          </div>
         </div>
+        <div class="footer-bottom-row">
+          <p>
+            &copy; 2024 AI Travel Planner. Thiết kế bởi UI Designer. Bảo lưu mọi
+            quyền.
+          </p>
+          <div class="footer-socials">
+            <a href="#"><i class="ph-bold ph-facebook-logo"></i></a>
+            <a href="#"><i class="ph-bold ph-instagram-logo"></i></a>
+            <a href="#"><i class="ph-bold ph-twitter-logo"></i></a>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <!-- Scripts -->
     <script src="auth.js"></script>
     <script src="app.js"></script>
     <script src="chat-widget.js"></script>
-</body>
+    <script>
+      // Tab functionality
+      document.addEventListener("DOMContentLoaded", () => {
+        const tabBtns = document.querySelectorAll(".tab-btn");
+        const tabContents = document.querySelectorAll(".tab-content");
 
+        tabBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            // Remove active class from all buttons
+            tabBtns.forEach((b) => b.classList.remove("active"));
+            // Add active class to clicked button
+            btn.classList.add("active");
+
+            // Hide all tab contents
+            tabContents.forEach((content) =>
+              content.classList.remove("active"),
+            );
+
+            // Show the corresponding tab content
+            const tabId = btn.getAttribute("data-tab");
+            const activeContent = document.getElementById(tabId);
+            if (activeContent) {
+              activeContent.classList.add("active");
+            }
+          });
+        });
+
+        // Photo gallery functionality
+        const galleryThumbs = document.querySelectorAll(".gallery-thumbs img");
+        const galleryMain = document.querySelector(".gallery-main img");
+
+        galleryThumbs.forEach((thumb) => {
+          thumb.addEventListener("click", () => {
+            galleryMain.src = thumb.src;
+            galleryMain.alt = thumb.alt;
+          });
+        });
+
+        // Favorite button toggle
+        const favoriteBtn = document.querySelector(".favorite-btn");
+        if (favoriteBtn) {
+          favoriteBtn.addEventListener("click", () => {
+            favoriteBtn.classList.toggle("active");
+            const icon = favoriteBtn.querySelector("i");
+            if (favoriteBtn.classList.contains("active")) {
+              icon.className = "ph-fill ph-heart";
+              icon.style.color = "#ef4444";
+            } else {
+              icon.className = "ph-bold ph-heart";
+              icon.style.color = "";
+            }
+          });
+        }
+
+        // Dynamic content based on URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const placeName = urlParams.get("place");
+
+        if (placeName) {
+          updateDestinationContent(placeName);
+        }
+      });
+
+      // Destination data
+      const destinations = {
+        "Phố cổ Hội An": {
+          title: "Phố cổ Hội An",
+          location: "QUẢNG NAM, VIỆT NAM",
+          heroImage:
+            "https://images.unsplash.com/photo-1555921015-5532091f6026?auto=format&fit=crop&q=80&w=1200",
+          rating: "4.8",
+          reviews: "1.2k",
+          distance: "850 km",
+          price: "1.2tr - 3tr VNĐ",
+          time: "2-3 ngày",
+          category: "Di sản văn hóa thế giới",
+          categoryIcon: "ph-bank",
+          description:
+            "Hội An nổi tiếng với vẻ đẹp lãng mạn, cổ kính, yên bình với những ngôi nhà cổ, phố đèn lồng và dòng sông Hoài thơ mộng. Đây là điểm đến không thể bỏ qua cho những ai yêu thích văn hóa và lịch sử Việt Nam.",
+          gallery: [
+            "https://images.unsplash.com/photo-1555921015-5532091f6026?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1544413660-299165566b1d?auto=format&fit=crop&q=80&w=200",
+            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&q=80&w=200",
+            "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&q=80&w=200",
+          ],
+        },
+        "Vịnh Hạ Long": {
+          title: "Vịnh Hạ Long",
+          location: "QUẢNG NINH, VIỆT NAM",
+          heroImage:
+            "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=1200&auto=format&fit=crop",
+          rating: "4.8",
+          reviews: "2.3k",
+          distance: "165 km",
+          price: "1.5tr - 5tr VNĐ",
+          time: "2-3 ngày",
+          category: "Di sản thiên nhiên thế giới",
+          categoryIcon: "ph-mountains",
+          description:
+            "Vịnh Hạ Long là di sản thiên nhiên thế giới được UNESCO công nhận, nổi tiếng với hàng nghìn hòn đảo đá vôi kỳ vĩ và làn nước xanh lục bảo. Đây là điểm đến không thể bỏ qua cho những ai yêu thích khám phá thiên nhiên và trải nghiệm du thuyền sang trọng.",
+          gallery: [
+            "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=200&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=200&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=200&auto=format&fit=crop",
+          ],
+        },
+        "Thành phố Đà Lạt": {
+          title: "Thành phố Đà Lạt",
+          location: "LÂM ĐỒNG, VIỆT NAM",
+          heroImage:
+            "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=1200&auto=format&fit=crop",
+          rating: "4.7",
+          reviews: "2.8k",
+          distance: "300 km",
+          price: "800k - 2.5tr VNĐ",
+          time: "2-4 ngày",
+          category: "Thành phố hoa",
+          categoryIcon: "ph-flower",
+          description:
+            "Thành phố ngàn hoa với khí hậu mát mẻ quanh năm, những đồi thông reo và nhiều cảnh điểm lãng mạn. Đà Lạt là điểm đến lý tưởng cho những chuyến du lịch lãng mạn và nghỉ dưỡng.",
+          gallery: [
+            "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=200&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=200&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=200&auto=format&fit=crop",
+          ],
+        },
+        "Sapa mờ sương": {
+          title: "Sapa mờ sương",
+          location: "LÀO CAI, VIỆT NAM",
+          heroImage:
+            "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=1200&auto=format&fit=crop",
+          rating: "4.9",
+          reviews: "2.1k",
+          distance: "380 km",
+          price: "1tr - 3tr VNĐ",
+          time: "2-3 ngày",
+          category: "Vùng núi Tây Bắc",
+          categoryIcon: "ph-mountains",
+          description:
+            "Chiêm ngưỡng ruộng bậc thang hùng vĩ, chinh phục đỉnh Fansipan và trải nghiệm văn hóa bản địa độc đáo. Sapa là điểm đến lý tưởng cho những ai yêu thích khám phá và trekking.",
+          gallery: [
+            "https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=200&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=200&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=200&auto=format&fit=crop",
+          ],
+        },
+        "Đảo ngọc Phú Quốc": {
+          title: "Đảo ngọc Phú Quốc",
+          location: "KIÊN GIANG, VIỆT NAM",
+          heroImage:
+            "https://images.unsplash.com/photo-1580983546765-b772dbda9408?q=80&w=1200&auto=format&fit=crop",
+          rating: "4.8",
+          reviews: "4k",
+          distance: "500 km",
+          price: "2tr - 8tr VNĐ",
+          time: "3-5 ngày",
+          category: "Đảo nghỉ dưỡng",
+          categoryIcon: "ph-waves",
+          description:
+            "Thiên đường biển đảo với bờ cát trắng mịn, nước trong xanh và những khu nghỉ dưỡng đẳng cấp thế giới. Phú Quốc là điểm đến hoàn hảo cho du lịch biển và nghỉ dưỡng cao cấp.",
+          gallery: [
+            "https://images.unsplash.com/photo-1580983546765-b772dbda9408?q=80&w=800&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1528605105345-5344ea20e269?q=80&w=200&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=200&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=200&auto=format&fit=crop",
+          ],
+        },
+      };
+
+      function updateDestinationContent(placeName) {
+        const data = destinations[placeName];
+        if (!data) return;
+
+        // Update title
+        document.title = data.title + " | AI Travel Planner";
+
+        // Update breadcrumb
+        document.querySelector(".breadcrumb span").textContent = data.title;
+
+        // Update hero section
+        document.querySelector(".hero-bg-img").src = data.heroImage;
+        document.querySelector(".hero-bg-img").alt = data.title;
+        document.querySelector(".location-tag").innerHTML =
+          `<i class="ph-fill ph-map-pin"></i> ${data.location}`;
+        document.querySelector(".hero-title").textContent = data.title;
+
+        // Update rating
+        document.querySelector(".hero-rating span").textContent =
+          `${data.rating} (${data.reviews} đánh giá)`;
+
+        // Update category
+        document.querySelector(".hero-category").innerHTML =
+          `<i class="ph-fill ${data.categoryIcon}"></i> ${data.category}`;
+
+        // Update quick stats
+        const statBoxes = document.querySelectorAll(".stat-box");
+        statBoxes[0].querySelector(".stat-value strong").textContent =
+          data.rating;
+        statBoxes[1].querySelector(".stat-value strong").textContent =
+          data.distance;
+        statBoxes[2].querySelector(".stat-value strong").textContent =
+          data.price;
+        statBoxes[3].querySelector(".stat-value strong").textContent =
+          data.time;
+
+        // Update description
+        document.querySelector(".dest-description p:first-child").textContent =
+          data.description;
+
+        // Update gallery
+        const galleryMain = document.querySelector(".gallery-main img");
+        galleryMain.src = data.gallery[0];
+        galleryMain.alt = data.title;
+
+        const galleryThumbs = document.querySelectorAll(".gallery-thumbs img");
+        galleryThumbs.forEach((thumb, index) => {
+          if (data.gallery[index + 1]) {
+            thumb.src = data.gallery[index + 1];
+            thumb.alt = `Thumb ${index + 1}`;
+          }
+        });
+      }
+    </script>
+  </body>
 </html>
