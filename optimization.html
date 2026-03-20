@@ -18,52 +18,10 @@
     <!-- Base styles -->
     <link rel="stylesheet" href="app.css" />
     <!-- App specific styles -->
-    <style>
-      .active-location {
-        color: var(--app-primary) !important;
-        font-weight: 800 !important;
-        background: rgba(0, 255, 255, 0.05);
-        border-radius: 8px;
-        padding: 2px 8px;
-        transition: all 0.3s;
-      }
-      .map-wrapper {
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border: 1px solid var(--app-border-dark);
-      }
-      .map-loading-indicator {
-        position: absolute;
-        inset: 0;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(4px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
-      }
-      .loading-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
-        color: var(--app-primary);
-        font-weight: 700;
-      }
-      .spin {
-        animation: spin 1s linear infinite;
-        font-size: 2rem;
-      }
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="optimization.css" />
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   </head>
 
   <body class="bg-gray-50">
@@ -87,6 +45,9 @@
         </nav>
 
         <div class="header-actions">
+          <button class="theme-toggle-btn" id="themeToggle" title="Chuyển chế độ tối/sáng">
+            <i class="ph-bold ph-moon"></i>
+          </button>
           <button
             class="notification-btn"
             style="margin-right: 12px; position: relative"
@@ -170,7 +131,7 @@
             </div>
 
             <div class="places-list">
-              <div class="selected-place-item" data-location="Phố Cổ, Hà Nội">
+              <div class="selected-place-item" data-lat="21.0333" data-lng="105.8500" style="cursor: pointer;">
                 <div class="place-thumb-mini">
                   <img
                     src="https://images.unsplash.com/photo-1544413660-299165566b1d?q=80&w=200&auto=format&fit=crop"
@@ -184,7 +145,7 @@
                 </div>
               </div>
 
-              <div class="selected-place-item">
+              <div class="selected-place-item" data-lat="21.0287" data-lng="105.8490" style="cursor: pointer;">
                 <div class="place-thumb-mini">
                   <img
                     src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?q=80&w=200&auto=format&fit=crop"
@@ -209,10 +170,14 @@
               <div class="stat-icon-circle blue">
                 <i class="ph-fill ph-map-pin-line"></i>
               </div>
-              <div class="stat-val-group">
-                <span class="stat-label-mini">TỔNG QUÃNG ĐƯỜNG</span>
-                <span class="stat-value-mini">12.5 km</span>
+              <div class="opt-stat-card">
+                <span class="stat-label">Thời gian dự kiến</span>
+                <span class="stat-value">1h 45m</span>
               </div>
+              <button class="btn-opt-preview" id="startPreview">
+                  <i class="ph-fill ph-play-circle"></i>
+                  Xem trước hành trình
+              </button>
             </div>
             <div class="opt-stat-card time">
               <div class="stat-icon-circle green">
@@ -251,11 +216,9 @@
                   <tr>
                     <td>
                       <div class="route-step">
-                        <span data-location="Phố Cổ, Hà Nội">Phố Cổ</span>
+                        <span data-lat="21.0333" data-lng="105.8500" style="cursor: pointer;">Phố Cổ</span>
                         <i class="ph-bold ph-arrow-right"></i>
-                        <span data-location="Nhà Thờ Lớn, Hà Nội"
-                          >Nhà Thờ Lớn</span
-                        >
+                        <span data-lat="21.0287" data-lng="105.8490" style="cursor: pointer;">Nhà Thờ Lớn</span>
                       </div>
                     </td>
                     <td>0.8 km</td>
@@ -265,11 +228,9 @@
                   <tr>
                     <td>
                       <div class="route-step">
-                        <span data-location="Nhà Thờ Lớn, Hà Nội"
-                          >Nhà Thờ Lớn</span
-                        >
+                        <span data-lat="21.0287" data-lng="105.8490" style="cursor: pointer;">Nhà Thờ Lớn</span>
                         <i class="ph-bold ph-arrow-right"></i>
-                        <span data-location="Văn Miếu, Hà Nội">Văn Miếu</span>
+                        <span data-lat="21.0293" data-lng="105.8355" style="cursor: pointer;">Văn Miếu</span>
                       </div>
                     </td>
                     <td>2.4 km</td>
@@ -279,11 +240,9 @@
                   <tr>
                     <td>
                       <div class="route-step">
-                        <span data-location="Văn Miếu, Hà Nội">Văn Miếu</span>
+                        <span data-lat="21.0293" data-lng="105.8355" style="cursor: pointer;">Văn Miếu</span>
                         <i class="ph-bold ph-arrow-right"></i>
-                        <span data-location="Lăng Chủ Tịch, Hà Nội"
-                          >Lăng Chủ Tịch</span
-                        >
+                        <span data-lat="21.0368" data-lng="105.8346" style="cursor: pointer;">Lăng Chủ Tịch</span>
                       </div>
                     </td>
                     <td>1.5 km</td>
@@ -315,26 +274,11 @@
               </div>
             </div>
             <div class="map-analysis-viewport">
-              <div class="map-placeholder-img">
-                <img
-                  src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop"
-                  alt="Hanoi Map"
-                />
-                <div class="map-path-overlay"></div>
-                <div class="map-marker-opt start" style="top: 40%; left: 30%">
-                  <div class="marker-label">Điểm bắt đầu</div>
-                </div>
-                <div
-                  class="map-marker-opt waypoint"
-                  style="top: 60%; left: 50%"
-                >
-                  <div class="marker-label">Điểm đến tiếp theo</div>
-                </div>
-                <div class="map-loading-indicator">
-                  <div class="loading-box">
-                    <i class="ph-bold ph-circle-notch spin"></i>
-                    <span>Bản đồ đang được tối ưu hóa...</span>
-                  </div>
+              <div id="mapOpt"></div>
+              <div class="map-loading-indicator">
+                <div class="loading-box">
+                  <i class="ph-bold ph-circle-notch spin"></i>
+                  <span>Bản đồ đang được tối ưu hóa...</span>
                 </div>
               </div>
             </div>
@@ -342,6 +286,44 @@
         </div>
       </div>
     </main>
+
+    <!-- Add Place Modal -->
+    <div id="addPlaceModal" class="opt-modal-overlay">
+      <div class="opt-modal-content">
+        <div class="opt-modal-header">
+          <h2>Thêm địa điểm mới</h2>
+          <button id="closeModal" class="btn-close-modal"><i class="ph-bold ph-x"></i></button>
+        </div>
+        <form id="addPlaceForm" class="opt-modal-body">
+          <div class="opt-form-group">
+            <label>Tên địa điểm / Địa chỉ</label>
+            <div class="opt-search-input-wrap">
+                <input type="text" id="newPlaceName" placeholder="Ví dụ: Hồ Tây, Chùa Trấn Quốc..." autocomplete="off" required>
+                <div id="smartSuggestions" class="opt-smart-suggestions">
+                    <!-- Suggestions will appear here -->
+                </div>
+            </div>
+          </div>
+          <div class="opt-form-group">
+            <label>Ghi chú (Tùy chọn)</label>
+            <input type="text" id="newPlaceAddr" placeholder="Ghi chú cho chặng dừng này">
+          </div>
+          <div class="opt-form-group">
+              <label>Loại địa điểm</label>
+              <select id="newPlaceType">
+                  <option value="culture">Văn hóa</option>
+                  <option value="architecture">Kiến trúc</option>
+                  <option value="food">Ẩm thực</option>
+                  <option value="nature">Thiên nhiên</option>
+              </select>
+          </div>
+          <div class="opt-modal-footer">
+            <button type="button" class="btn-opt-ghost" id="cancelModal">Hủy</button>
+            <button type="submit" class="btn-opt-primary">Thêm chặng dừng</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <footer class="app-global-footer">
       <div class="footer-container">
@@ -396,32 +378,355 @@
     <script src="app.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const mapIframe = document.getElementById("google-map");
-        const locationElements = document.querySelectorAll("[data-location]");
-        const loadingIndicator = document.querySelector(
-          ".map-loading-indicator",
-        );
+        const loadingIndicator = document.querySelector(".map-loading-indicator");
+        
+        // Hide loading after 1.5s to simulate optimization
+        setTimeout(() => {
+            if (loadingIndicator) loadingIndicator.style.opacity = '0';
+            setTimeout(() => {
+                if (loadingIndicator) loadingIndicator.style.display = 'none';
+            }, 500);
+        }, 1500);
 
-        locationElements.forEach((el) => {
-          el.style.cursor = "pointer";
-          el.addEventListener("click", () => {
-            const location = el.getAttribute("data-location");
-            if (location && mapIframe) {
-              if (loadingIndicator) loadingIndicator.style.display = "flex";
-              const newSrc = `https://www.google.com/maps?q=${encodeURIComponent(location)}&output=embed`;
-              mapIframe.src = newSrc;
-              setTimeout(() => {
-                if (loadingIndicator) loadingIndicator.style.display = "none";
-              }, 1000);
-              locationElements.forEach((item) =>
-                item.classList.remove("active-location"),
-              );
-              el.classList.add("active-location");
+        // Map setup
+        const hanoiCoords = [21.0285, 105.8542];
+        const map = L.map('mapOpt', {
+            zoomControl: false,
+            attributionControl: false
+        }).setView(hanoiCoords, 14);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            subdomains: 'abcd',
+            maxZoom: 20
+        }).addTo(map);
+
+        // Route points (Hanoi example)
+        const points = [
+            { name: "Phố Cổ", coords: [21.0333, 105.8500], type: "start" },
+            { name: "Nhà Thờ Lớn", coords: [21.0287, 105.8490], type: "waypoint" },
+            { name: "Văn Miếu", coords: [21.0293, 105.8355], type: "waypoint" },
+            { name: "Lăng Chủ Tịch", coords: [21.0368, 105.8346], type: "end" }
+        ];
+
+        const markers = [];
+        points.forEach((pt, index) => {
+            const icon = L.divIcon({
+                className: 'opt-marker-wrap',
+                html: `<div class="opt-marker ${pt.type}">
+                         <span class="marker-idx">${index + 1}</span>
+                       </div>`,
+                iconSize: [30, 30],
+                iconAnchor: [15, 30]
+            });
+
+            const marker = L.marker(pt.coords, { icon: icon }).addTo(map);
+            marker.bindPopup(`<b>${pt.name}</b>`);
+            markers.push(pt.coords);
+        });
+
+        // Draw path
+        const polyline = L.polyline(markers, {
+            color: '#0ea5e9',
+            weight: 4,
+            opacity: 0.8,
+            dashArray: '10, 10',
+            lineJoin: 'round'
+        }).addTo(map);
+
+        if (markers.length > 0) {
+            map.fitBounds(L.latLngBounds(markers).pad(0.3));
+        }
+
+        // Add Click-to-Pan Interactivity
+        const interactableItems = document.querySelectorAll("[data-lat][data-lng]");
+        interactableItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const lat = parseFloat(item.getAttribute('data-lat'));
+                const lng = parseFloat(item.getAttribute('data-lng'));
+                
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    // Highlight active item
+                    interactableItems.forEach(i => i.classList.remove('active-location-highlight'));
+                    item.classList.add('active-location-highlight');
+                    
+                    // Pan map with smooth zoom
+                    map.flyTo([lat, lng], 16, {
+                        duration: 1.5,
+                        easeLinearity: 0.25
+                    });
+                }
+            });
+        });
+
+        // Modal Logic
+        const addBtn = document.querySelector(".btn-add-place-dashed");
+        const modal = document.getElementById("addPlaceModal");
+        const closeBtn = document.getElementById("closeModal");
+        const cancelBtn = document.getElementById("cancelModal");
+        const form = document.getElementById("addPlaceForm");
+
+        addBtn.addEventListener('click', () => {
+            modal.style.display = 'flex';
+        });
+
+        const hideModal = () => {
+            modal.style.display = 'none';
+        };
+
+        closeBtn.addEventListener('click', hideModal);
+        cancelBtn.addEventListener('click', hideModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) hideModal();
+        });
+
+        // Smart Search Suggestions
+        const searchInput = document.getElementById("newPlaceName");
+        const suggestionsBox = document.getElementById("smartSuggestions");
+        
+        const mockSuggestions = [
+            { name: "Hồ Tây", addr: "Tây Hồ, Hà Nội", lat: 21.0583, lng: 105.8133, type: "nature" },
+            { name: "Chùa Trấn Quốc", addr: "Thanh Niên, Yên Phụ", lat: 21.0478, lng: 105.8368, type: "culture" },
+            { name: "Cầu Long Biên", addr: "Phúc Xá, Long Biên", lat: 21.0397, lng: 105.8561, type: "architecture" },
+            { name: "Nhà Hát Lớn", addr: "Tràng Tiền, Hoàn Kiếm", lat: 21.0261, lng: 105.8575, type: "architecture" }
+        ];
+
+        searchInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            if (val.length < 2) {
+                suggestionsBox.style.display = 'none';
+                return;
             }
-          });
+
+            const filtered = mockSuggestions.filter(s => s.name.toLowerCase().includes(val));
+            if (filtered.length > 0) {
+                suggestionsBox.innerHTML = filtered.map(s => `
+                    <div class="suggestion-line" data-lat="${s.lat}" data-lng="${s.lng}" data-name="${s.name}" data-type="${s.type}">
+                        <i class="ph-bold ph-map-pin"></i>
+                        <div class="s-info">
+                            <div class="s-name">${s.name}</div>
+                            <div class="s-addr">${s.addr}</div>
+                        </div>
+                    </div>
+                `).join('');
+                suggestionsBox.style.display = 'block';
+            } else {
+                suggestionsBox.style.display = 'none';
+            }
+        });
+
+        suggestionsBox.addEventListener('click', (e) => {
+            const line = e.target.closest('.suggestion-line');
+            if (line) {
+                searchInput.value = line.getAttribute('data-name');
+                searchInput.setAttribute('data-selected-lat', line.getAttribute('data-lat'));
+                searchInput.setAttribute('data-selected-lng', line.getAttribute('data-lng'));
+                searchInput.setAttribute('data-selected-type', line.getAttribute('data-type'));
+                suggestionsBox.style.display = 'none';
+            }
+        });
+
+        // Quick Add logic moved/removed
+
+        function addLocationToRoute(name, lat, lng, type) {
+            // Show "Optimizing" effect on the card
+            const activeCard = Array.from(quickAddCards).find(c => c.getAttribute('data-name') === name);
+            if (activeCard) activeCard.classList.add('optimizing-pulse');
+
+            setTimeout(() => {
+                const icon = L.divIcon({
+                    className: 'opt-marker-wrap',
+                    html: `<div class="opt-marker waypoint">
+                             <span class="marker-idx">${points.length + 1}</span>
+                           </div>`,
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30]
+                });
+
+                L.marker([lat, lng], { icon: icon }).addTo(map).bindPopup(`<b>${name}</b>`);
+                
+                points.push({ name, coords: [lat, lng], type: "waypoint" });
+                const allCoords = points.map(p => p.coords);
+                
+                map.eachLayer(layer => {
+                    if (layer instanceof L.Polyline) map.removeLayer(layer);
+                });
+                
+                if (activeCard) activeCard.classList.remove('optimizing-pulse');
+
+                L.polyline(allCoords, {
+                    color: '#0ea5e9',
+                    weight: 4,
+                    opacity: 0.8,
+                    dashArray: '10, 10',
+                    lineJoin: 'round'
+                }).addTo(map);
+
+                map.fitBounds(L.latLngBounds(allCoords).pad(0.3));
+                map.flyTo([lat, lng], 15, { duration: 1.2 });
+
+                refreshLists(name, lat, lng, type);
+            }, 800);
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = searchInput.value;
+            const type = document.getElementById("newPlaceType").value;
+            
+            let lat = parseFloat(searchInput.getAttribute('data-selected-lat'));
+            let lng = parseFloat(searchInput.getAttribute('data-selected-lng'));
+
+            // If no suggestion selected, use random
+            if (isNaN(lat)) {
+                lat = 21.02 + (Math.random() * 0.04);
+                lng = 105.82 + (Math.random() * 0.04);
+            }
+
+            // Show "Optimizing" state
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = `<i class="ph-bold ph-circle-notch spin"></i> Đang tối ưu...`;
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                // Add to map
+                const icon = L.divIcon({
+                    className: 'opt-marker-wrap',
+                    html: `<div class="opt-marker waypoint">
+                             <span class="marker-idx">${points.length + 1}</span>
+                           </div>`,
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30]
+                });
+
+                L.marker([lat, lng], { icon: icon }).addTo(map).bindPopup(`<b>${name}</b>`);
+                
+                // Re-draw path
+                points.push({ name, coords: [lat, lng], type: "waypoint" });
+                const allCoords = points.map(p => p.coords);
+                
+                map.eachLayer(layer => {
+                    if (layer instanceof L.Polyline) map.removeLayer(layer);
+                });
+                
+                L.polyline(allCoords, {
+                    color: '#0ea5e9',
+                    weight: 4,
+                    opacity: 0.8,
+                    dashArray: '10, 10',
+                    lineJoin: 'round'
+                }).addTo(map);
+
+                map.fitBounds(L.latLngBounds(allCoords).pad(0.3));
+
+                // Update UI lists/tables
+                refreshLists(name, lat, lng, type);
+
+                alert(`Dựa trên vị trí hiện tại, AI đã tối ưu hóa lộ trình mới bao gồm "${name}"!`);
+                
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                hideModal();
+                form.reset();
+                searchInput.removeAttribute('data-selected-lat');
+                searchInput.removeAttribute('data-selected-lng');
+            }, 1200);
+        });
+
+        function refreshLists(name, lat, lng, type) {
+            // Update Sidebar List
+            const list = document.querySelector(".places-list");
+            const newItem = document.createElement("div");
+            newItem.className = "selected-place-item";
+            newItem.setAttribute("data-lat", lat);
+            newItem.setAttribute("data-lng", lng);
+            newItem.style.cursor = "pointer";
+            newItem.innerHTML = `
+                <div class="place-thumb-mini">
+                    <img src="https://images.unsplash.com/photo-1599946347371-68eb71b16afc?q=80&w=200&auto=format&fit=crop" alt="${name}">
+                </div>
+                <div class="place-details-mini">
+                    <span class="place-name-mini">${name}</span>
+                    <span class="place-addr-mini">Vừa thêm - Đã tối ưu</span>
+                    <span class="tag-mini ${type}">${type === 'culture' ? 'VĂN HÓA' : type === 'architecture' ? 'KIẾN TRÚC' : type === 'food' ? 'ẨM THỰ' : 'THIÊN NHIÊN'}</span>
+                </div>
+            `;
+            list.insertBefore(newItem, list.firstChild);
+
+            newItem.addEventListener('click', () => {
+                document.querySelectorAll('.active-location-highlight').forEach(i => i.classList.remove('active-location-highlight'));
+                newItem.classList.add('active-location-highlight');
+                map.flyTo([lat, lng], 16, { duration: 1.2 });
+            });
+
+            // Update Table
+            const tbody = document.querySelector(".analysis-table tbody");
+            const newRow = document.createElement("tr");
+            const prevPoint = points[points.length - 2];
+            const dist = (0.5 + Math.random() * 2).toFixed(1);
+            const time = Math.floor(5 + Math.random() * 15);
+            const cost = Math.floor(10 + Math.random() * 50) * 1000;
+
+            newRow.innerHTML = `
+                <td>
+                    <div class="route-step">
+                        <span data-lat="${prevPoint.coords[0]}" data-lng="${prevPoint.coords[1]}" style="cursor: pointer;">${prevPoint.name}</span>
+                        <i class="ph-bold ph-arrow-right"></i>
+                        <span data-lat="${lat}" data-lng="${lng}" style="cursor: pointer;">${name}</span>
+                    </div>
+                </td>
+                <td>${dist} km</td>
+                <td>${time} phút</td>
+                <td class="est-cost">${cost.toLocaleString('vi-VN')}đ</td>
+            `;
+            tbody.appendChild(newRow);
+        }
+
+        // Journey Preview Slideshow
+        const previewBtn = document.getElementById("startPreview");
+        let isPreviewing = false;
+
+        previewBtn.addEventListener('click', async () => {
+            if (isPreviewing) return;
+            isPreviewing = true;
+            previewBtn.classList.add('active');
+            previewBtn.innerHTML = `<i class="ph-bold ph-stop-circle"></i> Đang trình chiếu...`;
+
+            for (let i = 0; i < points.length; i++) {
+                if (!isPreviewing) break;
+
+                const p = points[i];
+                // Highlight item in sidebar
+                const items = document.querySelectorAll('.selected-place-item');
+                items.forEach(item => {
+                    if (item.getAttribute('data-name') === p.name || (i === 0 && item.textContent.includes(p.name))) {
+                        items.forEach(it => it.classList.remove('active-location-highlight'));
+                        item.classList.add('active-location-highlight');
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                });
+
+                // Pan Map
+                map.flyTo(p.coords, 16, {
+                    duration: 2,
+                    easeLinearity: 0.25
+                });
+
+                // Wait for pan + pause
+                await new Promise(r => setTimeout(r, 2500));
+            }
+
+            isPreviewing = false;
+            previewBtn.classList.remove('active');
+            previewBtn.innerHTML = `<i class="ph-fill ph-play-circle"></i> Xem trước hành trình`;
+            
+            // Fit all bounds at the end
+            const allCoords = points.map(p => p.coords);
+            map.fitBounds(L.latLngBounds(allCoords).pad(0.3));
         });
       });
     </script>
+    <script src="theme.js"></script>
     <script src="chat-widget.js"></script>
   </body>
 </html>

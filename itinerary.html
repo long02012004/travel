@@ -51,6 +51,9 @@
         </nav>
 
         <div class="header-actions">
+          <button class="theme-toggle-btn" id="themeToggle" title="Chuyển chế độ tối/sáng">
+            <i class="ph-bold ph-moon"></i>
+          </button>
           <button class="btn-icon"><i class="ph-fill ph-bell"></i></button>
           <div class="user-dropdown">
             <div class="user-trigger">
@@ -218,9 +221,14 @@
             </div>
           </div>
 
-          <button class="btn-add-spot">
-            <i class="ph-bold ph-plus-circle"></i> Thêm địa điểm mới
-          </button>
+          <div class="header-actions">
+            <button class="btn-iti-preview" id="startItineraryPreview">
+              <i class="ph-fill ph-play-circle"></i> Xem trước
+            </button>
+            <button class="btn-add-spot" id="addSpotBtn">
+              <i class="ph-bold ph-plus"></i> Thêm địa điểm
+            </button>
+          </div>
         </div>
       </aside>
 
@@ -482,11 +490,11 @@
         // Add markers
         routePoints.forEach((point, index) => {
           const markerIcon = L.divIcon({
-            className: "custom-div-icon",
-            html: `<div style="background-color: #00ffffbc; width: 36px; height: 36px; border: 4px solid white; border-radius: 50%; box-shadow: 0 8px 16px rgba(0,255,255,0.3); display: flex; align-items: center; justify-content: center; color: #0f172a; font-weight: 800; font-size: 15px; position: relative;">
-                                ${index + 1}
-                                <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 8px solid white;"></div>
-                           </div>`,
+            className: "iti-map-marker-wrap",
+            html: `<div class="iti-map-marker">
+                     <span class="idx">${index + 1}</span>
+                     <i class="ph-fill ph-map-pin"></i>
+                   </div>`,
             iconSize: [36, 44],
             iconAnchor: [18, 44],
           });
@@ -499,18 +507,19 @@
 
         // Add polylines
         routePolyline = L.polyline(routePoints, {
-          color: "#00ffffbc",
+          color: "#0ea5e9",
           weight: 6,
-          opacity: 1,
+          opacity: 0.8,
           dashArray: "1, 12",
           lineCap: "round",
           lineJoin: "round",
         }).addTo(map);
 
         routePolylineOutline = L.polyline(routePoints, {
-          color: "#00ced1",
-          weight: 2,
-          opacity: 0.4,
+          color: "#0ea5e9",
+          weight: 12,
+          opacity: 0.1,
+          lineCap: "round",
         }).addTo(map);
 
         // Fit map bounds
@@ -747,8 +756,10 @@
           zoomControl: false,
         }).setView([16.047079, 108.20623], 11);
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "© OpenStreetMap contributors",
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+          attribution: "© CartoDB",
+          subdomains: 'abcd',
+          maxZoom: 20
         }).addTo(map);
 
         // Initialize route
@@ -780,6 +791,80 @@
             }
           });
         });
+
+        // Add click-to-pan for itinerary items
+        const itiContainer = document.querySelector(".iti-content-scrollable");
+        if (itiContainer) {
+          itiContainer.addEventListener('click', (e) => {
+            const itemCard = e.target.closest('.item-card');
+            if (itemCard) {
+              const itiItem = itemCard.closest('.iti-item');
+              const numEl = itiItem.querySelector('.item-number');
+              if (numEl) {
+                const idx = parseInt(numEl.textContent) - 1;
+                
+                if (!isNaN(idx) && routePoints[idx]) {
+                  // Highlight active item
+                  document.querySelectorAll('.item-card').forEach(c => c.classList.remove('active-iti-highlight'));
+                  itemCard.classList.add('active-iti-highlight');
+                  
+                  // Fly to marker
+                  map.flyTo(routePoints[idx], 15, {
+                      duration: 1.2
+                  });
+                  
+                  // Open popup
+                  if (markers[idx]) markers[idx].openPopup();
+                }
+              }
+            }
+          });
+        }
+
+        // Itinerary Preview Slideshow
+        const previewBtn = document.getElementById("startItineraryPreview");
+        let isPreviewing = false;
+
+        if (previewBtn) {
+            previewBtn.addEventListener('click', async () => {
+                if (isPreviewing) return;
+                isPreviewing = true;
+                previewBtn.classList.add('active');
+                previewBtn.innerHTML = `<i class="ph-bold ph-stop-circle"></i> Dừng`;
+
+                for (let i = 0; i < routePoints.length; i++) {
+                    if (!isPreviewing) break;
+
+                    // Highlight item in sidebar
+                    const itemCards = document.querySelectorAll('.item-card');
+                    itemCards.forEach((card, idx) => {
+                        if (idx === i) {
+                            itemCards.forEach(c => c.classList.remove('active-iti-highlight'));
+                            card.classList.add('active-iti-highlight');
+                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    });
+
+                    // Pan Map
+                    map.flyTo(routePoints[i], 16, {
+                        duration: 1.5
+                    });
+
+                    // Open Marker Popup
+                    if (markers[i]) markers[i].openPopup();
+
+                    await new Promise(r => setTimeout(r, 2500));
+                }
+
+                isPreviewing = false;
+                previewBtn.classList.remove('active');
+                previewBtn.innerHTML = `<i class="ph-fill ph-play-circle"></i> Xem trước`;
+                
+                // Reset view
+                const bounds = L.latLngBounds(routePoints);
+                map.fitBounds(bounds.pad(0.2));
+            });
+        }
 
         // Enhanced Search Functionality
         const searchInput = document.getElementById("mapSearchInput");
@@ -1072,5 +1157,7 @@
     </script>
     <script src="auth.js" defer></script>
     <script src="chat-widget.js" defer></script>
+    <script src="theme.js"></script>
+      <script src="theme.js"></script>
   </body>
 </html>

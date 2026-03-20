@@ -64,28 +64,7 @@ function initializeDashboard() {
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
 
-    // A. Theme Management
-    const initTheme = () => {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            if (themeIcon) themeIcon.className = 'ph-bold ph-sun';
-        }
-    };
-
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-theme');
-            const isDark = document.body.classList.contains('dark-theme');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            
-            if (themeIcon) {
-                themeIcon.className = isDark ? 'ph-bold ph-sun' : 'ph-bold ph-moon';
-            }
-        });
-    }
-
-    initTheme();
+    // Theme is now handled by theme.js universally
 
     // 1. Initialize or Refresh Mock Data
     const existingTrips = JSON.parse(localStorage.getItem('userTrips'));
@@ -100,6 +79,7 @@ function initializeDashboard() {
                 id: '1', 
                 title: 'Khám phá Đà Nẵng', 
                 dates: '25/03 - 30/03/2026', 
+                lat: 16.0471, lng: 108.2062,
                 locations: 8, 
                 members: 4, 
                 status: 'upcoming', 
@@ -119,6 +99,7 @@ function initializeDashboard() {
                 id: '2', 
                 title: 'Nghỉ dưỡng Hội An', 
                 dates: '10/04 - 15/04/2026', 
+                lat: 15.8801, lng: 108.3380,
                 locations: 5, 
                 members: 2, 
                 status: 'upcoming', 
@@ -138,6 +119,7 @@ function initializeDashboard() {
                 id: '3', 
                 title: 'Mùa xuân Hà Nội', 
                 dates: '01/03 - 05/03/2026', 
+                lat: 21.0285, lng: 105.8542,
                 locations: 12, 
                 members: 3, 
                 status: 'done', 
@@ -157,6 +139,7 @@ function initializeDashboard() {
                 id: '4', 
                 title: 'Phú Quốc Sunsets', 
                 dates: '20/06 - 25/06/2026', 
+                lat: 10.2899, lng: 103.9840,
                 locations: 6, 
                 members: 2, 
                 status: 'upcoming', 
@@ -580,43 +563,56 @@ function initMiniMap() {
     const mapContainer = document.getElementById('miniMap');
     if (!mapContainer) return;
 
-    // Initialize map with focus on Da Nang
+    // Use a more beautiful tile layer (CartoDB Positron is very clean)
     const map = L.map('miniMap', {
         zoomControl: false,
         attributionControl: false
-    }).setView([16.0544, 108.2022], 12); // Detailed focus on Da Nang
+    }).setView([16.0471, 108.2062], 12);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-
-    // Mock coordinates for demo
-    const locationCoords = {
-        'Khám phá Đà Nẵng': [16.047079, 108.206230],
-        'Mùa thu Hà Nội': [21.028511, 105.804817],
-        'Nghỉ dưỡng Phú Quốc': [10.289879, 103.984020],
-        'Tour ẩm thực Sài Gòn': [10.762622, 106.660172]
-    };
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
+        maxZoom: 20
+    }).addTo(map);
 
     const allTrips = JSON.parse(localStorage.getItem('userTrips')) || [];
     const markers = [];
 
     allTrips.forEach(trip => {
-        const coords = locationCoords[trip.title] || [16.0, 108.0];
+        // Use coordinates from trip object if they exist, otherwise fallback
+        const lat = trip.lat || 16.0;
+        const lng = trip.lng || 108.0;
         
         const markerIcon = L.divIcon({
             className: 'mini-map-marker-wrap',
-            html: `<div class="mini-map-marker"></div>`,
-            iconSize: [20, 20],
-            iconAnchor: [10, 10]
+            html: `<div class="mini-map-marker active">
+                     <i class="ph-fill ph-map-pin"></i>
+                   </div>`,
+            iconSize: [30, 30],
+            iconAnchor: [15, 30]
         });
 
-        const marker = L.marker(coords, { icon: markerIcon }).addTo(map);
-        marker.bindPopup(`<b>${trip.title}</b><br>${trip.dates}`);
+        const marker = L.marker([lat, lng], { icon: markerIcon }).addTo(map);
+        
+        const popupContent = `
+            <div class="map-popup">
+                <div class="popup-img" style="background-image: url('${trip.image}')"></div>
+                <div class="popup-info">
+                    <h5>${trip.title}</h5>
+                    <p><i class="ph ph-calendar"></i> ${trip.dates}</p>
+                    <div class="popup-status ${trip.status}">${trip.status === 'upcoming' ? 'Sắp tới' : 'Đã xong'}</div>
+                </div>
+            </div>
+        `;
+        
+        marker.bindPopup(popupContent, {
+            maxWidth: 220,
+            className: 'custom-glass-popup'
+        });
         markers.push(marker);
     });
 
     if (markers.length > 0) {
         const group = new L.featureGroup(markers);
-        // Fit bounds with more padding to keep the perspective clear
-        map.fitBounds(group.getBounds().pad(0.5));
+        map.fitBounds(group.getBounds().pad(0.3));
     }
 }

@@ -3,37 +3,34 @@
 ==================== */
 
 :root {
-  --app-bg: #f0f2f5;
+  /* Default: Bình minh (Sunrise) Palette */
+  --app-bg: #fffbf5;
   --app-sidebar-bg: rgba(255, 255, 255, 0.7);
   --app-card-bg: #ffffff;
-  --app-primary: #00ffffbc; /* Màu Cyan nguyên bản */
-  --app-primary-light: #4fffff;
-  --app-primary-hover: #00e5e5;
-  --app-secondary: #6366f1; /* Indigo accents */
-  --app-text-dark: #0f172a;
+  --app-primary: #f97316; /* Sunrise Orange */
+  --app-primary-light: #fdba74;
+  --app-primary-hover: #ea580c;
+  --app-secondary: #0ea5e9; /* Sky blue accent */
+  --app-text-dark: #334155;
   --app-text-gray: #64748b;
-  --app-border: rgba(241, 245, 249, 0.5);
-  --app-border-dark: rgba(226, 232, 240, 0.8);
+  --app-border: rgba(249, 115, 22, 0.1);
+  --app-border-dark: rgba(249, 115, 22, 0.2);
 
-  /* Glassmorphism Tokens */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.3);
-  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-  --glass-blur: 12px;
+  /* Glassmorphism Tokens (Sunrise) */
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --glass-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.08);
+  --glass-blur: 16px;
 
-  /* Animations */
+  /* Blob Colors (Sunrise) */
+  --blob-1: rgba(253, 186, 116, 0.4);
+  --blob-2: rgba(56, 189, 248, 0.3);
+  --blob-3: rgba(254, 215, 170, 0.4);
+
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
+  --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --sidebar-width: 260px;
   --topbar-height: 72px;
-
-  /* Countdown Specific */
-  --countdown-gradient: linear-gradient(
-    135deg,
-    var(--app-primary) 0%,
-    var(--app-secondary) 100%
-  );
 }
 
 .glass-effect {
@@ -52,39 +49,72 @@
 
 body {
   font-family: "Plus Jakarta Sans", sans-serif;
-  background: radial-gradient(circle at top left, #f0f2f5 0%, #e5e7eb 100%);
+  background: radial-gradient(circle at top left, var(--app-bg) 0%, #fff7ed 100%);
   color: var(--app-text-dark);
   line-height: 1.5;
   margin: 0;
   overflow-x: hidden;
   min-height: 100vh;
-  transition:
-    background 0.4s ease,
-    color 0.4s ease;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dark Theme Variables */
-body.dark-theme {
-  --app-bg: #0f172a;
-  --app-sidebar-bg: rgba(15, 23, 42, 0.8);
-  --app-card-bg: #1e293b;
-  --app-primary: #38bdf8;
-  --app-primary-light: #7dd3fc;
-  --app-primary-hover: #0ea5e9;
-  --app-secondary: #818cf8;
-  --app-text-dark: #f8fafc;
-  --app-text-gray: #94a3b8;
-  --app-border: rgba(51, 65, 85, 0.5);
-  --app-border-dark: rgba(71, 85, 105, 0.8);
+/* Sunset Orange (Hoàng hôn Cam) - Rực rỡ & Vàng Đồng */
+body.sunset-orange-theme {
+  --app-bg: #fff7ed; /* Light sunset sky */
+  --app-sidebar-bg: rgba(254, 215, 170, 0.75);
+  --app-card-bg: #fffaf0;
+  --app-primary: #ea580c; /* Rich Orange */
+  --app-primary-light: #fb923c;
+  --app-primary-hover: #c2410c;
+  --app-secondary: #f59e0b; /* Golden Amber */
+  --app-text-dark: #7c2d12; /* Deep brown-orange text */
+  --app-text-gray: #92400e;
+  --app-border: rgba(234, 88, 12, 0.2);
+  --app-border-dark: rgba(234, 88, 12, 0.3);
 
-  --glass-bg: rgba(30, 41, 59, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(251, 146, 60, 0.4);
+  --glass-shadow: 0 8px 32px 0 rgba(234, 88, 12, 0.12);
 
-  background: radial-gradient(circle at top left, #0f172a 0%, #1e293b 100%);
+  /* Blob Colors (Sunset Orange - Golden Hour) */
+  --blob-1: rgba(251, 146, 60, 0.5); /* Orange */
+  --blob-2: rgba(253, 224, 71, 0.6); /* Bright Yellow */
+  --blob-3: rgba(254, 215, 170, 0.6); /* Peach */
+  --blob-4: rgba(245, 158, 11, 0.4); /* Amber */
+
+  background: radial-gradient(circle at bottom right, #fff7ed 0%, #ffedd5 100%);
 }
 
-body.dark-theme .glass-effect {
+/* Sunset Purple (Hoàng hôn Tím) - Huyền bí & Sang trọng */
+body.sunset-purple-theme, body.dark-theme {
+  --app-bg: #0f172a;
+  --app-sidebar-bg: rgba(15, 23, 42, 0.85);
+  --app-card-bg: #1e293b;
+  --app-primary: #fb7185; /* Sunset Rose */
+  --app-primary-light: #fda4af;
+  --app-primary-hover: #e11d48;
+  --app-secondary: #818cf8; /* Deep indigo */
+  --app-text-dark: #f8fafc;
+  --app-text-gray: #94a3b8;
+  --app-border: rgba(244, 63, 94, 0.15);
+  --app-border-dark: rgba(244, 63, 94, 0.25);
+
+  --glass-bg: rgba(15, 23, 42, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+
+  /* Blob Colors (Sunset Purple) */
+  --blob-1: rgba(30, 27, 75, 0.8);
+  --blob-2: rgba(76, 29, 149, 0.6);
+  --blob-3: rgba(112, 26, 117, 0.6);
+  --blob-4: rgba(139, 92, 246, 0.2);
+
+  background: radial-gradient(circle at top left, #020617 0%, #1e1b4b 100%);
+}
+
+body.sunset-orange-theme .glass-effect,
+body.sunset-purple-theme .glass-effect {
   background: var(--glass-bg);
   border-color: var(--glass-border);
 }
@@ -93,6 +123,34 @@ body.dark-theme .glass-effect {
 body.dashboard-layout {
   height: 100vh;
   overflow: hidden;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--app-text-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.theme-toggle-btn:hover {
+    background: var(--app-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
+}
+
+body.dark-theme .theme-toggle-btn {
+    color: #f8fafc;
 }
 
 /* ==================== 
@@ -2868,6 +2926,68 @@ body.dark-theme .empty-state h2 {
   50% {
     transform: translate(-50%, -110%);
   }
+}
+
+/* Background Blobs */
+.bg-blob {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.6;
+  animation: blobFloat 20s infinite alternate;
+  transition: all 1s ease;
+}
+
+.blob-1 {
+  top: -100px;
+  left: -100px;
+  background: var(--blob-1);
+  filter: blur(100px) brightness(1.2); /* Sunset-specific blur/glow */
+}
+
+.blob-2 {
+  bottom: -100px;
+  right: -100px;
+  background: var(--blob-2);
+  animation-delay: -5s;
+  filter: blur(100px) brightness(1.2); /* Sunset-specific blur/glow */
+}
+
+.blob-3 {
+  top: 40%;
+  left: 30%;
+  width: 300px;
+  height: 300px;
+  background: var(--blob-3);
+  animation-delay: -10s;
+  filter: blur(100px) brightness(1.2); /* Sunset-specific blur/glow */
+}
+
+.blob-4 {
+  bottom: 20%;
+  left: 10%;
+  width: 400px;
+  height: 400px;
+  background: var(--blob-4, transparent);
+  animation-delay: -15s;
+  display: none;
+}
+
+body.dark-theme .blob-4,
+body.sunset-orange-theme .blob-4,
+body.sunset-purple-theme .blob-4 {
+  display: block;
+  filter: blur(120px) brightness(1.1);
+}
+
+@keyframes blobFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0, 0) scale(1); }
 }
 
 .widget-content {

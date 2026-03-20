@@ -12,18 +12,20 @@
 
 /* Sidebar Styling */
 .itinerary-sidebar {
-  width: 400px;
-  background: white;
-  border-right: 1px solid var(--app-border-dark);
+  width: 420px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   flex-direction: column;
   z-index: 10;
-  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.03);
+  box-shadow: 10px 0 40px rgba(0, 0, 0, 0.05);
 }
 
 .iti-sidebar-header {
-  padding: 24px;
-  border-bottom: 1px solid var(--app-border-dark);
+  padding: 32px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .status-badge {
@@ -47,10 +49,11 @@
 }
 
 .iti-main-title {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--app-text-dark);
-  line-height: 1.2;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.1;
+  letter-spacing: -1px;
 }
 
 .btn-edit-inline {
@@ -91,24 +94,24 @@
 .toggle-btn {
   flex: 1;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 12px;
+  border-radius: 10px;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   background: transparent;
-  color: var(--app-text-gray);
+  color: #64748b;
 }
 
 .toggle-btn.active {
-  background: var(--app-primary);
-  color: white;
-  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.25);
+  background: white;
+  color: #0ea5e9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* Tabs */
@@ -120,28 +123,29 @@
 }
 
 .day-tab {
-  padding: 16px 20px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--app-text-gray);
+  padding: 20px 24px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #94a3b8;
   cursor: pointer;
   position: relative;
   white-space: nowrap;
+  transition: all 0.3s ease;
 }
 
 .day-tab.active {
-  color: var(--app-primary);
+  color: #0ea5e9;
 }
 
 .day-tab.active::after {
   content: "";
   position: absolute;
-  bottom: -1px;
-  left: 20px;
-  right: 20px;
-  height: 3px;
-  background: var(--app-primary);
-  border-radius: 3px 3px 0 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: #0ea5e9;
+  border-radius: 4px 4px 0 0;
 }
 
 /* Content Area */
@@ -186,20 +190,27 @@
 
 .item-card {
   flex: 1;
-  background: #f8fafc;
-  border-radius: 16px;
+  background: white;
+  border-radius: 20px;
   padding: 16px;
   display: flex;
-  gap: 12px;
-  margin-bottom: 8px;
-  border: 1px solid transparent;
-  transition: all 0.2s;
+  gap: 16px;
+  margin-bottom: 12px;
+  border: 1px solid #f1f5f9;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
 }
 
 .item-card:hover {
-  background: white;
-  border-color: var(--app-border-dark);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transform: translateX(6px);
+  border-color: #0ea5e9;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.item-card.active-iti-highlight {
+  border-color: #0ea5e9;
+  background: rgba(14, 165, 233, 0.05);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.1);
 }
 
 .item-img {
@@ -239,15 +250,17 @@
 }
 
 .transport-info {
-  margin: 12px 0 12px 12px;
-  padding-left: 28px;
-  border-left: 2px dashed #cbd5e1;
+  margin: 16px 0 16px 12px;
+  padding: 12px 12px 12px 32px;
+  background: rgba(241, 245, 249, 0.5);
+  border-radius: 12px;
+  border-left: 3px solid #cbd5e1;
   font-size: 0.8rem;
+  font-weight: 600;
   color: #64748b;
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-height: 40px;
+  gap: 10px;
 }
 
 .btn-add-spot {
@@ -380,9 +393,53 @@
   transform: translate(-50%, -50%);
 }
 
-.map-line-svg {
-  width: 100%;
-  height: 100%;
+/* Map Markers & Popups */
+.iti-map-marker-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iti-map-marker {
+  width: 32px;
+  height: 32px;
+  background: white;
+  border: 4px solid #0ea5e9;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.iti-map-marker i {
+  transform: rotate(45deg);
+  font-size: 1rem;
+  color: #0ea5e9;
+  display: none; /* Hide icon to show number */
+}
+
+.iti-map-marker .idx {
+  transform: rotate(45deg);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0ea5e9;
+}
+
+.map-popup-mini h7 {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.map-popup-mini p {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin: 0;
 }
 
 /* Bottom Overlay Item */
@@ -413,6 +470,35 @@
   color: var(--app-text-gray);
 }
 
+.btn-iti-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(14, 165, 233, 0.1);
+  border: 1.5px solid rgba(14, 165, 233, 0.2);
+  border-radius: 14px;
+  color: var(--accent-blue);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-iti-preview:hover {
+  background: var(--accent-blue);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(14, 165, 233, 0.2);
+}
+
+.btn-iti-preview.active {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: white;
+  animation: pulseRed 2s infinite;
+}
+
 .btn-find-now {
   margin-left: auto;
   background: var(--app-primary);
@@ -429,11 +515,12 @@
 /* Budget Summary */
 .iti-budget-summary {
   display: none;
-  padding: 20px;
-  background: #f8fafc;
-  border-radius: 16px;
-  border: 1px solid var(--app-border-dark);
+  padding: 24px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
   margin-bottom: 24px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
 }
 
 .budget-header {
@@ -502,21 +589,22 @@
 
 /* Enhanced Search Wrap */
 .search-wrap {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
-  border-radius: 24px;
-  padding: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   max-width: 500px;
   position: relative;
   z-index: 1000;
 }
 
 .search-wrap:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
 }
 
 .search-input-container {
@@ -679,13 +767,52 @@
   }
 }
 
-/* Suggestion Markers */
-.suggestion-marker {
-  z-index: 1000;
+/* Dark Theme Support */
+body.dark-theme .itinerary-sidebar {
+    background: rgba(15, 23, 42, 0.9);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
-.suggestion-marker:hover {
-  z-index: 1001;
+body.dark-theme .iti-sidebar-header,
+body.dark-theme .iti-days-tabs {
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .item-card,
+body.dark-theme .iti-budget-summary,
+body.dark-theme .budget-item,
+body.dark-theme .view-toggle-row {
+    background: #1e293b;
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .iti-main-title,
+body.dark-theme .item-info h3,
+body.dark-theme .budget-amount,
+body.dark-theme .modal-content {
+    color: #f8fafc;
+}
+
+body.dark-theme .modal-content {
+    background: #0f172a;
+}
+
+body.dark-theme .search-wrap {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .search-input {
+    background: rgba(15, 23, 42, 0.6);
+    color: #f1f5f9;
+}
+
+body.dark-theme .day-tab {
+    color: #64748b;
+}
+
+body.dark-theme .day-tab.active {
+    color: #0ea5e9;
 }
 
 /* Add Spot Modal */
