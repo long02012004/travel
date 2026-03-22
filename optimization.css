@@ -743,3 +743,101 @@ body.dark-theme .route-step,
 body.dark-theme .total-row {
     color: #f8fafc;
 }
+
+/* Weather Card Styles */
+.weather-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(240, 249, 255, 0.9));
+    border: 1.5px solid rgba(14, 165, 233, 0.2);
+    border-radius: 24px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 10px 30px rgba(14, 165, 233, 0.1);
+    animation: slideInRight 0.5s ease-out;
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.weather-header h4 {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.weather-icon-large {
+    font-size: 2.5rem;
+    color: #f59e0b;
+}
+
+.weather-temp-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-temp {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--text-dark);
+    line-height: 1;
+}
+
+.weather-desc {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    text-transform: capitalize;
+}
+
+.weather-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.weather-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-gray);
+}
+
+.weather-detail-item i {
+    color: var(--accent-blue);
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+body.dark-theme .weather-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .weather-header h4,
+body.dark-theme .weather-temp {
+    color: #f8fafc;
+}
+
+body.dark-theme .weather-details-grid {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}

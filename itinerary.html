@@ -1,250 +1,213 @@
 <!doctype html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Xem chi tiết lịch trình du lịch Đà Nẵng 7 ngày với bản đồ tương tác, địa điểm tham quan và dự toán chi phí."
-    />
-    <title>Chi tiết Lịch trình | AI Travel Planner</title>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="stylesheet" href="itinerary.css" />
-    <!-- Leaflet Map -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
-    <script
-      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-      async
-    ></script>
-  </head>
 
-  <body class="dashboard-layout">
-    <!-- Top Navbar -->
-    <header class="app-header">
-      <div class="header-container full-width-header">
-        <a href="index.html" class="logo">
-          <div class="logo-icon small-icon">
-            <i class="ph-fill ph-sparkle"></i>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Xem chi tiết lịch trình du lịch Đà Nẵng 7 ngày với bản đồ tương tác, địa điểm tham quan và dự toán chi phí." />
+  <title>Chi tiết Lịch trình | AI Travel Planner</title>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <!-- Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="app.css" />
+  <link rel="stylesheet" href="itinerary.css" />
+  <!-- Leaflet Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" async></script>
+</head>
+
+<body class="dashboard-layout">
+  <!-- Top Navbar -->
+  <header class="app-header">
+    <div class="header-container full-width-header">
+      <a href="index.html" class="logo">
+        <div class="logo-icon small-icon">
+          <i class="ph-fill ph-sparkle"></i>
+        </div>
+        <span>AI Travel Planner</span>
+      </a>
+
+      <nav class="nav-links desktop-nav">
+        <a href="index.html">Trang chủ</a>
+        <a href="explore.html">Khám phá</a>
+        <a href="destination.html">Địa điểm</a>
+        <a href="news.html">Tin tức</a>
+        <a href="review.html">Đánh giá</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle-btn" id="themeToggle" title="Chuyển chế độ tối/sáng">
+          <i class="ph-bold ph-moon"></i>
+        </button>
+        <button class="btn-icon"><i class="ph-fill ph-bell"></i></button>
+        <div class="user-dropdown">
+          <div class="user-trigger">
+            <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar" />
+            <span class="user-name">Người dùng</span>
+            <i class="ph-bold ph-caret-down"></i>
           </div>
-          <span>AI Travel Planner</span>
-        </a>
-
-        <nav class="nav-links desktop-nav">
-          <a href="index.html">Trang chủ</a>
-          <a href="explore.html">Khám phá</a>
-          <a href="destination.html">Địa điểm</a>
-          <a href="news.html">Tin tức</a>
-          <a href="review.html">Đánh giá</a>
-        </nav>
-
-        <div class="header-actions">
-          <button class="theme-toggle-btn" id="themeToggle" title="Chuyển chế độ tối/sáng">
-            <i class="ph-bold ph-moon"></i>
-          </button>
-          <button class="btn-icon"><i class="ph-fill ph-bell"></i></button>
-          <div class="user-dropdown">
-            <div class="user-trigger">
-              <img
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                alt="User Avatar"
-              />
-              <span class="user-name">Người dùng</span>
-              <i class="ph-bold ph-caret-down"></i>
+          <div class="dropdown-menu">
+            <div class="dropdown-header">
+              <span>Tài khoản</span>
+              <div class="user-display-name">Người dùng</div>
             </div>
-            <div class="dropdown-menu">
-              <div class="dropdown-header">
-                <span>Tài khoản</span>
-                <div class="user-display-name">Người dùng</div>
-              </div>
-              <a href="profile.html"
-                ><i class="ph ph-user-circle"></i> Trang cá nhân</a
-              >
-              <a href="planner.html"
-                ><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a
-              >
-              <a href="ai-suggestions.html"
-                ><i class="ph ph-sparkle"></i> Gợi ý từ AI</a
-              >
-              <div class="dropdown-divider"></div>
-              <a href="index.html" class="logout-item"
-                ><i class="ph ph-sign-out"></i> Đăng xuất</a
-              >
-            </div>
+            <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
+            <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
+            <a href="ai-suggestions.html"><i class="ph ph-sparkle"></i> Gợi ý từ AI</a>
+            <div class="dropdown-divider"></div>
+            <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
           </div>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <div class="split-view-container">
-      <!-- Sidebar: Itinerary Details -->
-      <aside class="itinerary-sidebar">
-        <div class="iti-sidebar-header">
-          <div class="iti-title-row">
-            <h1 class="iti-main-title">Hành trình Đà Nẵng 7 Ngày</h1>
-            <button class="btn-edit-inline">
-              <i class="ph-bold ph-pencil-simple"></i> Chỉnh sửa
-            </button>
+  <div class="split-view-container">
+    <!-- Sidebar: Itinerary Details -->
+    <aside class="itinerary-sidebar">
+      <div class="iti-sidebar-header">
+        <div class="iti-title-row">
+          <h1 class="iti-main-title">Hành trình Đà Nẵng 7 Ngày</h1>
+
+        </div>
+        <div class="iti-date-range">12 Th10 - 18 Th10, 2024</div>
+
+        <div class="view-toggle-row">
+          <button class="toggle-btn active">
+            <i class="ph-fill ph-map-trifold"></i> Bản đồ
+          </button>
+          <button class="toggle-btn" onclick="window.location.href = 'dashboard.html'">
+            <i class="ph-fill ph-calendar-blank"></i> Lịch trình
+          </button>
+        </div>
+      </div>
+
+      <div class="iti-days-tabs">
+        <div class="day-tab active">Ngày 1</div>
+        <div class="day-tab">Ngày 2</div>
+        <div class="day-tab">Ngày 3</div>
+        <div class="day-tab">Ngày 4</div>
+      </div>
+
+      <div class="iti-content-scrollable">
+        <!-- Weather Forecast Card -->
+        <div id="weatherContainer"></div>
+
+        <!-- Group: Buổi sáng -->
+        <div class="time-group">
+          <h3 class="group-title">BUỔI SÁNG</h3>
+
+          <div class="iti-item">
+            <div class="item-number">1</div>
+            <div class="item-card">
+              <div class="item-img">
+                <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=200&auto=format&fit=crop"
+                  alt="Cầu Rồng Đà Nẵng" loading="lazy" />
+              </div>
+              <div class="item-info">
+                <h3>Cầu Rồng Đà Nẵng</h3>
+                <div class="item-meta">
+                  <i class="ph-bold ph-clock"></i> 09:00 - 11:30
+                </div>
+                <span class="badge-success">Đã đặt chỗ</span>
+              </div>
+            </div>
           </div>
-          <div class="iti-date-range">12 Th10 - 18 Th10, 2024</div>
 
-          <div class="view-toggle-row">
-            <button class="toggle-btn active">
-              <i class="ph-fill ph-map-trifold"></i> Bản đồ
-            </button>
-            <button
-              class="toggle-btn"
-              onclick="window.location.href = 'dashboard.html'"
-            >
-              <i class="ph-fill ph-calendar-blank"></i> Lịch trình
-            </button>
+          <div class="transport-info">
+            <i class="ph-bold ph-person-walking"></i> Đi bộ 12 phút (850m)
+          </div>
+
+          <div class="iti-item">
+            <div class="item-number">2</div>
+            <div class="item-card">
+              <div class="item-img">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=200&auto=format&fit=crop"
+                  alt="Biển Mỹ Khê" loading="lazy" />
+              </div>
+              <div class="item-info">
+                <h3>Biển Mỹ Khê</h3>
+                <div class="item-meta">
+                  <i class="ph-bold ph-clock"></i> 11:45 - 12:30
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="iti-days-tabs">
-          <div class="day-tab active">Ngày 1</div>
-          <div class="day-tab">Ngày 2</div>
-          <div class="day-tab">Ngày 3</div>
-          <div class="day-tab">Ngày 4</div>
-        </div>
+        <!-- Group: Buổi chiều -->
+        <div class="time-group">
+          <h3 class="group-title">BUỔI CHIỀU</h3>
 
-        <div class="iti-content-scrollable">
-          <!-- Group: Buổi sáng -->
-          <div class="time-group">
-            <h3 class="group-title">BUỔI SÁNG</h3>
-
-            <div class="iti-item">
-              <div class="item-number">1</div>
-              <div class="item-card">
-                <div class="item-img">
-                  <img
-                    src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=200&auto=format&fit=crop"
-                    alt="Cầu Rồng Đà Nẵng"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="item-info">
-                  <h3>Cầu Rồng Đà Nẵng</h3>
-                  <div class="item-meta">
-                    <i class="ph-bold ph-clock"></i> 09:00 - 11:30
-                  </div>
-                  <span class="badge-success">Đã đặt chỗ</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="transport-info">
-              <i class="ph-bold ph-person-walking"></i> Đi bộ 12 phút (850m)
-            </div>
-
-            <div class="iti-item">
-              <div class="item-number">2</div>
-              <div class="item-card">
-                <div class="item-img">
-                  <img
-                    src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=200&auto=format&fit=crop"
-                    alt="Biển Mỹ Khê"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="item-info">
-                  <h3>Biển Mỹ Khê</h3>
-                  <div class="item-meta">
-                    <i class="ph-bold ph-clock"></i> 11:45 - 12:30
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="transport-info">
+            <i class="ph-bold ph-taxi"></i> Taxi/Xe bus 1 giờ (42km)
           </div>
 
-          <!-- Group: Buổi chiều -->
-          <div class="time-group">
-            <h3 class="group-title">BUỔI CHIỀU</h3>
-
-            <div class="transport-info">
-              <i class="ph-bold ph-taxi"></i> Taxi/Xe bus 1 giờ (42km)
-            </div>
-
-            <div class="iti-item">
-              <div class="item-number">3</div>
-              <div class="item-card">
-                <div class="item-img">
-                  <img
-                    src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=200&auto=format&fit=crop"
-                    alt="Bà Nà Hills"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="item-info">
-                  <h3>Bà Nà Hills</h3>
-                  <div class="item-meta">
-                    <i class="ph-bold ph-clock"></i> 13:00 - 16:30
-                  </div>
+          <div class="iti-item">
+            <div class="item-number">3</div>
+            <div class="item-card">
+              <div class="item-img">
+                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=200&auto=format&fit=crop"
+                  alt="Bà Nà Hills" loading="lazy" />
+              </div>
+              <div class="item-info">
+                <h3>Bà Nà Hills</h3>
+                <div class="item-meta">
+                  <i class="ph-bold ph-clock"></i> 13:00 - 16:30
                 </div>
               </div>
             </div>
-          </div>
-
-          <!-- Price Statistics Section -->
-          <div class="iti-budget-summary" id="budgetSummary">
-            <div class="budget-header">
-              <h4 class="budget-title">Dự toán chi phí</h4>
-              <div class="budget-total">~ 4.5tr</div>
-            </div>
-
-            <div class="budget-grid">
-              <div class="budget-item">
-                <div class="budget-category">DI CHUYỂN</div>
-                <div class="budget-amount">850k</div>
-              </div>
-              <div class="budget-item">
-                <div class="budget-category">ĂN UỐNG</div>
-                <div class="budget-amount">1.2tr</div>
-              </div>
-            </div>
-
-            <div class="budget-chart-strip">
-              <div class="budget-chart-transport"></div>
-              <div class="budget-chart-food"></div>
-            </div>
-          </div>
-
-          <div class="header-actions">
-            <button class="btn-iti-preview" id="startItineraryPreview">
-              <i class="ph-fill ph-play-circle"></i> Xem trước
-            </button>
-            <button class="btn-add-spot" id="addSpotBtn">
-              <i class="ph-bold ph-plus"></i> Thêm địa điểm
-            </button>
           </div>
         </div>
-      </aside>
 
-      <!-- Main Content: Full Map View -->
-      <main class="map-view-container">
-        <div
-          id="map"
-          style="width: 100%; height: 100%; z-index: 1"
-          role="application"
-          aria-label="Bản đồ lịch trình du lịch"
-        ></div>
+        <!-- Price Statistics Section -->
+        <div class="iti-budget-summary" id="budgetSummary">
+          <div class="budget-header">
+            <h4 class="budget-title">Dự toán chi phí</h4>
+            <div class="budget-total">~ 4.5tr</div>
+          </div>
 
-        <!-- Map Layer Overlays -->
-        <div
-          class="map-overlays-container"
-          style="
+          <div class="budget-grid">
+            <div class="budget-item">
+              <div class="budget-category">DI CHUYỂN</div>
+              <div class="budget-amount">850k</div>
+            </div>
+            <div class="budget-item">
+              <div class="budget-category">ĂN UỐNG</div>
+              <div class="budget-amount">1.2tr</div>
+            </div>
+          </div>
+
+          <div class="budget-chart-strip">
+            <div class="budget-chart-transport"></div>
+            <div class="budget-chart-food"></div>
+          </div>
+        </div>
+
+        <div class="sidebar-bottom-actions" style="display: flex; align-items: stretch; gap: 12px; margin-top: 24px; height: 52px;">
+          <button class="btn-iti-preview" id="startItineraryPreview" style="white-space: nowrap; padding: 0 20px; border-radius: 14px; height: 100%; box-sizing: border-box;">
+            <i class="ph-fill ph-play-circle"></i> Xem trước
+          </button>
+          <button class="btn-add-spot" id="addSpotBtn" style="flex: 1; margin: 0; border-radius: 14px; height: 100%; box-sizing: border-box;">
+            <i class="ph-bold ph-plus"></i> Thêm địa điểm
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content: Full Map View -->
+    <main class="map-view-container">
+      <div id="map" style="width: 100%; height: 100%; z-index: 1" role="application"
+        aria-label="Bản đồ lịch trình du lịch"></div>
+
+      <!-- Map Layer Overlays -->
+      <div class="map-overlays-container" style="
             position: absolute;
             top: 0;
             left: 0;
@@ -252,389 +215,317 @@
             height: 100%;
             pointer-events: none;
             z-index: 2;
-          "
-        >
-          <!-- Map Controls -->
-          <div class="map-ctrl-stack" style="pointer-events: auto">
-            <div class="ctrl-group">
-              <button id="map-zoom-in" aria-label="Phóng to bản đồ">
-                <i class="ph-bold ph-plus"></i>
-              </button>
-              <button id="map-zoom-out" aria-label="Thu nhỏ bản đồ">
-                <i class="ph-bold ph-minus"></i>
-              </button>
-            </div>
-            <button class="ctrl-btn" aria-label="Định vị vị trí hiện tại">
-              <i class="ph-bold ph-crosshair"></i>
+          ">
+        <!-- Map Controls -->
+        <div class="map-ctrl-stack" style="pointer-events: auto">
+          <div class="ctrl-group">
+            <button id="map-zoom-in" aria-label="Phóng to bản đồ">
+              <i class="ph-bold ph-plus"></i>
+            </button>
+            <button id="map-zoom-out" aria-label="Thu nhỏ bản đồ">
+              <i class="ph-bold ph-minus"></i>
             </button>
           </div>
+          <button class="ctrl-btn" aria-label="Định vị vị trí hiện tại">
+            <i class="ph-bold ph-crosshair"></i>
+          </button>
+        </div>
 
-          <!-- Bottom Search Overlay -->
-          <div class="map-bottom-search" style="pointer-events: auto">
-            <div class="search-wrap">
-              <div class="search-input-container">
-                <div class="search-icons">
-                  <i class="ph-fill ph-magnifying-glass search-main-icon"></i>
-                  <div class="category-icons">
-                    <i
-                      class="ph-fill ph-bed"
-                      style="color: #3b82f6"
-                      title="Khách sạn"
-                    ></i>
-                    <i
-                      class="ph-fill ph-fork-knife"
-                      style="color: #f59e0b"
-                      title="Nhà hàng"
-                    ></i>
-                    <i
-                      class="ph-fill ph-camera"
-                      style="color: #a855f7"
-                      title="Địa điểm tham quan"
-                    ></i>
-                  </div>
-                </div>
-                <input
-                  type="text"
-                  id="mapSearchInput"
-                  placeholder="Tìm khách sạn, nhà hàng, địa điểm..."
-                  class="search-input"
-                />
-                <div class="search-actions">
-                  <button class="btn-clear" id="clearBtn" title="Xóa gợi ý">
-                    <i class="ph-bold ph-x"></i>
-                  </button>
-                  <button class="btn-find-now" id="searchBtn">
-                    <i class="ph-bold ph-magnifying-glass"></i>
-                    <span>Tìm kiếm</span>
-                  </button>
+        <!-- Bottom Search Overlay -->
+        <div class="map-bottom-search" style="pointer-events: auto">
+          <div class="search-wrap">
+            <div class="search-input-container">
+              <div class="search-icons">
+                <i class="ph-fill ph-magnifying-glass search-main-icon" style="color: var(--app-primary)"></i>
+              </div>
+              <div class="search-input-wrapper" style="position: relative; flex: 1; display: flex; align-items: center;">
+                <input type="text" id="mapSearchInput" placeholder="Tìm kiếm địa điểm..." class="search-input" style="width: 100%; border: none; background: transparent; outline: none; padding-right: 36px; font-size: 0.9rem; color: #1e293b;" />
+                <button class="btn-clear-inline" id="clearBtn" title="Xóa" style="position: absolute; right: 0; background: transparent; border: none; padding: 6px; color: #94a3b8; cursor: pointer; border-radius: 50%;">
+                  <i class="ph-bold ph-x"></i>
+                </button>
+              </div>
+              <div class="search-actions">
+                <button class="btn-find-now" id="searchBtn">
+                  <span>Tìm kiếm</span>
+                </button>
+              </div>
+            </div>
+            <div class="search-suggestions" id="searchSuggestions" style="display: none">
+              <div class="suggestion-item" data-type="hotel">
+                <i class="ph-fill ph-bed"></i>
+                <div class="suggestion-info">
+                  <h5>Khách sạn Novotel Đà Nẵng</h5>
+                  <p>Gần Cầu Rồng - 4.8★</p>
                 </div>
               </div>
-              <div
-                class="search-suggestions"
-                id="searchSuggestions"
-                style="display: none"
-              >
-                <div class="suggestion-item" data-type="hotel">
-                  <i class="ph-fill ph-bed"></i>
-                  <div class="suggestion-info">
-                    <h5>Khách sạn Novotel Đà Nẵng</h5>
-                    <p>Gần Cầu Rồng - 4.8★</p>
-                  </div>
+              <div class="suggestion-item" data-type="restaurant">
+                <i class="ph-fill ph-fork-knife"></i>
+                <div class="suggestion-info">
+                  <h5>Nhà hàng Sơn Trà</h5>
+                  <p>Ẩm thực Việt Nam - 4.6★</p>
                 </div>
-                <div class="suggestion-item" data-type="restaurant">
-                  <i class="ph-fill ph-fork-knife"></i>
-                  <div class="suggestion-info">
-                    <h5>Nhà hàng Sơn Trà</h5>
-                    <p>Ẩm thực Việt Nam - 4.6★</p>
-                  </div>
-                </div>
-                <div class="suggestion-item" data-type="attraction">
-                  <i class="ph-fill ph-camera"></i>
-                  <div class="suggestion-info">
-                    <h5>Công viên châu Á</h5>
-                    <p>Địa điểm vui chơi - 4.7★</p>
-                  </div>
+              </div>
+              <div class="suggestion-item" data-type="attraction">
+                <i class="ph-fill ph-camera"></i>
+                <div class="suggestion-info">
+                  <h5>Công viên châu Á</h5>
+                  <p>Địa điểm vui chơi - 4.7★</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
+  </div>
 
-    <!-- Add Spot Modal -->
-    <div id="addSpotModal" class="modal-overlay" style="display: none">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Thêm địa điểm mới</h2>
-          <button class="modal-close" id="modalClose">
-            <i class="ph-bold ph-x"></i>
-          </button>
+  <!-- Add Spot Modal -->
+  <div id="addSpotModal" class="modal-overlay" style="display: none">
+    <div class="modal-content" style="max-width: 400px; padding: 24px;">
+      <div class="modal-header" style="margin-bottom: 20px;">
+        <h2 style="font-size: 1.2rem; font-weight: 800;">Thêm địa điểm nhanh</h2>
+        <button class="modal-close" id="modalClose">
+          <i class="ph-bold ph-x"></i>
+        </button>
+      </div>
+      <form id="addSpotForm" class="add-spot-form">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <input type="text" id="spotName" required placeholder="Tên địa điểm *" style="width: 100%; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 0.95rem;" />
         </div>
-        <form id="addSpotForm" class="add-spot-form">
-          <div class="form-group">
-            <label for="spotName">Tên địa điểm *</label>
-            <input
-              type="text"
-              id="spotName"
-              required
-              placeholder="Ví dụ: Bưu điện Đà Nẵng"
-            />
-          </div>
 
-          <div class="form-group">
-            <label for="spotAddress">Địa chỉ *</label>
-            <input
-              type="text"
-              id="spotAddress"
-              required
-              placeholder="Ví dụ: 123 Đường Trần Phú, Đà Nẵng"
-            />
-          </div>
+        <div class="form-group" style="margin-bottom: 16px;">
+          <input type="text" id="spotAddress" required placeholder="Địa chỉ *" style="width: 100%; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 0.95rem;" />
+        </div>
 
-          <div class="form-group">
-            <label for="spotType">Loại địa điểm *</label>
-            <select id="spotType" required>
-              <option value="">Chọn loại</option>
+        <div style="display: flex; gap: 12px; margin-bottom: 24px;">
+          <div class="form-group" style="flex: 1; margin: 0;">
+            <select id="spotType" required style="width: 100%; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 0.95rem; background: white;">
+              <option value="">Loại *</option>
               <option value="hotel">Khách sạn</option>
               <option value="restaurant">Nhà hàng</option>
-              <option value="attraction">Địa điểm tham quan</option>
-              <option value="shopping">Mua sắm</option>
+              <option value="attraction">Tham quan</option>
               <option value="other">Khác</option>
             </select>
           </div>
 
-          <div class="form-group">
-            <label for="spotTime">Thời gian *</label>
-            <input type="time" id="spotTime" required />
+          <div class="form-group" style="flex: 1; margin: 0;">
+            <input type="time" id="spotTime" required style="width: 100%; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 12px; font-size: 0.95rem; background: white;" />
           </div>
+        </div>
 
-          <div class="form-group">
-            <label for="spotImage">Hình ảnh</label>
-            <input
-              type="file"
-              id="spotImage"
-              accept="image/*"
-              onchange="previewImage(this)"
-            />
-            <div id="imagePreview" class="image-preview" style="display: none">
-              <img
-                id="previewImg"
-                src=""
-                alt="Preview"
-                style="
-                  max-width: 100%;
-                  max-height: 200px;
-                  border-radius: 8px;
-                  margin-top: 8px;
-                "
-              />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="spotDescription">Mô tả</label>
-            <textarea
-              id="spotDescription"
-              placeholder="Mô tả ngắn về địa điểm..."
-              rows="3"
-            ></textarea>
-          </div>
-
-          <div class="form-actions">
-            <button type="button" class="btn-cancel" id="cancelBtn">Hủy</button>
-            <button type="submit" class="btn-submit">Thêm địa điểm</button>
-          </div>
-        </form>
-      </div>
+        <div class="form-actions" style="display: flex; gap: 12px; margin-top: 0;">
+          <button type="button" class="btn-cancel" id="cancelBtn" style="flex: 1; padding: 12px; border-radius: 12px;">Hủy</button>
+          <button type="submit" class="btn-submit" style="flex: 1; padding: 12px; border-radius: 12px;">Thêm</button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <script>
-      // Global variables
-      let map;
-      let userAddedMarkers = [];
-      let routePoints = [
-        [16.0614, 108.227], // Cầu Rồng Đà Nẵng
-        [16.0544, 108.249], // Biển Mỹ Khê
-        [15.9975, 107.992], // Bà Nà Hills
-      ];
-      let locationNames = ["Cầu Rồng Đà Nẵng", "Biển Mỹ Khê", "Bà Nà Hills"];
-      let routeTimes = [9 * 60, 11 * 60 + 45, 13 * 60]; // Times in minutes
-      let markers = [];
-      let routePolyline;
-      let routePolylineOutline;
+  <script>
+    // Global variables
+    let map;
+    let userAddedMarkers = [];
+    let routePoints = [
+      [16.0614, 108.227], // Cầu Rồng Đà Nẵng
+      [16.0544, 108.249], // Biển Mỹ Khê
+      [15.9975, 107.992], // Bà Nà Hills
+    ];
+    let locationNames = ["Cầu Rồng Đà Nẵng", "Biển Mỹ Khê", "Bà Nà Hills"];
+    let routeTimes = [9 * 60, 11 * 60 + 45, 13 * 60]; // Times in minutes
+    let markers = [];
+    let routePolyline;
+    let routePolylineOutline;
 
-      // Add Spot Modal Functionality
-      const addSpotBtn = document.querySelector(".btn-add-spot");
-      const addSpotModal = document.getElementById("addSpotModal");
-      const modalClose = document.getElementById("modalClose");
-      const cancelBtn = document.getElementById("cancelBtn");
-      const addSpotForm = document.getElementById("addSpotForm");
+    // Add Spot Modal Functionality
+    const addSpotBtn = document.querySelector(".btn-add-spot");
+    const addSpotModal = document.getElementById("addSpotModal");
+    const modalClose = document.getElementById("modalClose");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const addSpotForm = document.getElementById("addSpotForm");
 
-      // Image preview function
-      function previewImage(input) {
-        const preview = document.getElementById("imagePreview");
-        const previewImg = document.getElementById("previewImg");
+    // Image preview function
+    function previewImage(input) {
+      const preview = document.getElementById("imagePreview");
+      const previewImg = document.getElementById("previewImg");
 
-        if (input && input.files && input.files[0]) {
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            if (previewImg) {
-              previewImg.src = e.target.result;
-              if (preview) preview.style.display = "block";
-            }
-          };
-          reader.readAsDataURL(input.files[0]);
-        } else {
-          if (preview) preview.style.display = "none";
+      if (input && input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          if (previewImg) {
+            previewImg.src = e.target.result;
+            if (preview) preview.style.display = "block";
+          }
+        };
+        reader.readAsDataURL(input.files[0]);
+      } else {
+        if (preview) preview.style.display = "none";
+      }
+    }
+
+    // Function to update route display on map
+    function updateRouteDisplay() {
+      // Clear existing markers and polylines
+      markers.forEach((marker) => {
+        if (map.hasLayer(marker)) {
+          map.removeLayer(marker);
         }
+      });
+      markers = [];
+
+      if (routePolyline && map.hasLayer(routePolyline)) {
+        map.removeLayer(routePolyline);
+      }
+      if (routePolylineOutline && map.hasLayer(routePolylineOutline)) {
+        map.removeLayer(routePolylineOutline);
       }
 
-      // Function to update route display on map
-      function updateRouteDisplay() {
-        // Clear existing markers and polylines
-        markers.forEach((marker) => {
-          if (map.hasLayer(marker)) {
-            map.removeLayer(marker);
-          }
-        });
-        markers = [];
-
-        if (routePolyline && map.hasLayer(routePolyline)) {
-          map.removeLayer(routePolyline);
-        }
-        if (routePolylineOutline && map.hasLayer(routePolylineOutline)) {
-          map.removeLayer(routePolylineOutline);
-        }
-
-        // Add markers
-        routePoints.forEach((point, index) => {
-          const markerIcon = L.divIcon({
-            className: "iti-map-marker-wrap",
-            html: `<div class="iti-map-marker">
+      // Add markers
+      routePoints.forEach((point, index) => {
+        const markerIcon = L.divIcon({
+          className: "iti-map-marker-wrap",
+          html: `<div class="iti-map-marker">
                      <span class="idx">${index + 1}</span>
                      <i class="ph-fill ph-map-pin"></i>
                    </div>`,
-            iconSize: [36, 44],
-            iconAnchor: [18, 44],
-          });
-          const marker = L.marker(point, { icon: markerIcon }).addTo(map);
-          marker.bindPopup(
-            `<b>${locationNames[index]}</b><br>Điểm ${index + 1} trong lịch trình`,
-          );
-          markers.push(marker);
+          iconSize: [36, 44],
+          iconAnchor: [18, 44],
         });
+        const marker = L.marker(point, { icon: markerIcon }).addTo(map);
+        marker.bindPopup(
+          `<b>${locationNames[index]}</b><br>Điểm ${index + 1} trong lịch trình`,
+        );
+        markers.push(marker);
+      });
 
-        // Add polylines
-        routePolyline = L.polyline(routePoints, {
-          color: "#0ea5e9",
-          weight: 6,
-          opacity: 0.8,
-          dashArray: "1, 12",
-          lineCap: "round",
-          lineJoin: "round",
-        }).addTo(map);
+      // Add polylines
+      routePolyline = L.polyline(routePoints, {
+        color: "#0ea5e9",
+        weight: 6,
+        opacity: 0.8,
+        dashArray: "1, 12",
+        lineCap: "round",
+        lineJoin: "round",
+      }).addTo(map);
 
-        routePolylineOutline = L.polyline(routePoints, {
-          color: "#0ea5e9",
-          weight: 12,
-          opacity: 0.1,
-          lineCap: "round",
-        }).addTo(map);
+      routePolylineOutline = L.polyline(routePoints, {
+        color: "#0ea5e9",
+        weight: 12,
+        opacity: 0.1,
+        lineCap: "round",
+      }).addTo(map);
 
-        // Fit map bounds
-        if (markers.length > 0) {
-          const group = new L.featureGroup(markers);
-          map.fitBounds(group.getBounds().pad(0.1));
-        }
+      // Fit map bounds
+      if (markers.length > 0) {
+        const group = new L.featureGroup(markers);
+        map.fitBounds(group.getBounds().pad(0.1));
+      }
+    }
+
+    // Function to add spot to route
+    function addSpotToRoute(lat, lng, name, time) {
+      // Parse time to minutes for sorting
+      const [hours, minutes] = time.split(":").map(Number);
+      const timeInMinutes = hours * 60 + minutes;
+
+      // Add new point data
+      routePoints.push([lat, lng]);
+      locationNames.push(name);
+      routeTimes.push(timeInMinutes);
+
+      // Create array of indices sorted by time
+      const sortedIndices = routeTimes
+        .map((time, index) => ({ time, index }))
+        .sort((a, b) => a.time - b.time)
+        .map((item) => item.index);
+
+      // Reorder all arrays based on sorted indices
+      const sortedPoints = sortedIndices.map((i) => routePoints[i]);
+      const sortedNames = sortedIndices.map((i) => locationNames[i]);
+      const sortedTimes = sortedIndices.map((i) => routeTimes[i]);
+
+      routePoints = sortedPoints;
+      locationNames = sortedNames;
+      routeTimes = sortedTimes;
+    }
+
+    // Add spot to sidebar itinerary
+    function addSpotToSidebar(name, type, time, description, imageUrl) {
+      // Parse time to determine morning/afternoon
+      const [hours, minutes] = time.split(":").map(Number);
+      const timeInMinutes = hours * 60 + minutes;
+      const isMorning = timeInMinutes < 12 * 60; // Before 12:00
+
+      // Find the appropriate time group
+      const timeGroups = document.querySelectorAll(".time-group");
+      let targetGroup;
+
+      if (isMorning) {
+        // Find morning group
+        targetGroup = Array.from(timeGroups).find((group) =>
+          group.querySelector(".group-title")?.textContent.includes("SÁNG"),
+        );
+      } else {
+        // Find afternoon group
+        targetGroup = Array.from(timeGroups).find((group) =>
+          group.querySelector(".group-title")?.textContent.includes("CHIỀU"),
+        );
       }
 
-      // Function to add spot to route
-      function addSpotToRoute(lat, lng, name, time) {
-        // Parse time to minutes for sorting
-        const [hours, minutes] = time.split(":").map(Number);
-        const timeInMinutes = hours * 60 + minutes;
+      // If target group doesn't exist, create it
+      if (!targetGroup) {
+        const sidebarContent = document.querySelector(
+          ".iti-content-scrollable",
+        );
+        const budgetSummary = document.getElementById("budgetSummary");
 
-        // Add new point data
-        routePoints.push([lat, lng]);
-        locationNames.push(name);
-        routeTimes.push(timeInMinutes);
-
-        // Create array of indices sorted by time
-        const sortedIndices = routeTimes
-          .map((time, index) => ({ time, index }))
-          .sort((a, b) => a.time - b.time)
-          .map((item) => item.index);
-
-        // Reorder all arrays based on sorted indices
-        const sortedPoints = sortedIndices.map((i) => routePoints[i]);
-        const sortedNames = sortedIndices.map((i) => locationNames[i]);
-        const sortedTimes = sortedIndices.map((i) => routeTimes[i]);
-
-        routePoints = sortedPoints;
-        locationNames = sortedNames;
-        routeTimes = sortedTimes;
-      }
-
-      // Add spot to sidebar itinerary
-      function addSpotToSidebar(name, type, time, description, imageUrl) {
-        // Parse time to determine morning/afternoon
-        const [hours, minutes] = time.split(":").map(Number);
-        const timeInMinutes = hours * 60 + minutes;
-        const isMorning = timeInMinutes < 12 * 60; // Before 12:00
-
-        // Find the appropriate time group
-        const timeGroups = document.querySelectorAll(".time-group");
-        let targetGroup;
+        targetGroup = document.createElement("div");
+        targetGroup.className = "time-group";
 
         if (isMorning) {
-          // Find morning group
-          targetGroup = Array.from(timeGroups).find((group) =>
-            group.querySelector(".group-title")?.textContent.includes("SÁNG"),
+          targetGroup.innerHTML = `<h3 class="group-title">BUỔI SÁNG</h3>`;
+          // Insert before afternoon group or budget summary
+          const afternoonGroup = Array.from(timeGroups).find((group) =>
+            group
+              .querySelector(".group-title")
+              ?.textContent.includes("CHIỀU"),
           );
-        } else {
-          // Find afternoon group
-          targetGroup = Array.from(timeGroups).find((group) =>
-            group.querySelector(".group-title")?.textContent.includes("CHIỀU"),
-          );
-        }
-
-        // If target group doesn't exist, create it
-        if (!targetGroup) {
-          const sidebarContent = document.querySelector(
-            ".iti-content-scrollable",
-          );
-          const budgetSummary = document.getElementById("budgetSummary");
-
-          targetGroup = document.createElement("div");
-          targetGroup.className = "time-group";
-
-          if (isMorning) {
-            targetGroup.innerHTML = `<h3 class="group-title">BUỔI SÁNG</h3>`;
-            // Insert before afternoon group or budget summary
-            const afternoonGroup = Array.from(timeGroups).find((group) =>
-              group
-                .querySelector(".group-title")
-                ?.textContent.includes("CHIỀU"),
-            );
-            if (afternoonGroup) {
-              sidebarContent.insertBefore(targetGroup, afternoonGroup);
-            } else {
-              sidebarContent.insertBefore(targetGroup, budgetSummary);
-            }
+          if (afternoonGroup) {
+            sidebarContent.insertBefore(targetGroup, afternoonGroup);
           } else {
-            targetGroup.innerHTML = `<h3 class="group-title">BUỔI CHIỀU</h3>`;
             sidebarContent.insertBefore(targetGroup, budgetSummary);
           }
+        } else {
+          targetGroup.innerHTML = `<h3 class="group-title">BUỔI CHIỀU</h3>`;
+          sidebarContent.insertBefore(targetGroup, budgetSummary);
         }
+      }
 
-        // Get icon based on type
-        const typeIcons = {
-          hotel: "ph-bed",
-          restaurant: "ph-fork-knife",
-          attraction: "ph-camera",
-          shopping: "ph-shopping-bag",
-          other: "ph-map-pin",
-        };
+      // Get icon based on type
+      const typeIcons = {
+        hotel: "ph-bed",
+        restaurant: "ph-fork-knife",
+        attraction: "ph-camera",
+        shopping: "ph-shopping-bag",
+        other: "ph-map-pin",
+      };
 
-        const iconClass = typeIcons[type] || "ph-map-pin";
+      const iconClass = typeIcons[type] || "ph-map-pin";
 
-        // Create new item
-        const newItem = document.createElement("div");
-        newItem.className = "iti-item";
-        newItem.setAttribute("data-time", timeInMinutes); // Store time for sorting
+      // Create new item
+      const newItem = document.createElement("div");
+      newItem.className = "iti-item";
+      newItem.setAttribute("data-time", timeInMinutes); // Store time for sorting
 
-        newItem.innerHTML = `
+      newItem.innerHTML = `
           <div class="item-number">temp</div>
           <div class="item-card">
             <div class="item-img">
-              ${
-                imageUrl
-                  ? `<img src="${imageUrl}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />`
-                  : `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #6b7280, #6b7280dd); display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+              ${imageUrl
+          ? `<img src="${imageUrl}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" />`
+          : `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #6b7280, #6b7280dd); display: flex; align-items: center; justify-content: center; border-radius: 8px;">
                 <i class="ph-fill ${iconClass}" style="font-size: 24px; color: white;"></i>
               </div>`
-              }
+        }
             </div>
             <div class="item-info">
               <h3>${name}</h3>
@@ -646,518 +537,546 @@
           </div>
         `;
 
-        // Add to target group
-        targetGroup.appendChild(newItem);
+      // Add to target group
+      targetGroup.appendChild(newItem);
 
-        // Sort items in all groups by time and update numbers
-        updateItemOrderAndNumbers();
-      }
+      // Sort items in all groups by time and update numbers
+      updateItemOrderAndNumbers();
+    }
 
-      // Update item order and numbers across all time groups
-      function updateItemOrderAndNumbers() {
-        const allItems = document.querySelectorAll(".iti-item");
-        const itemsArray = Array.from(allItems);
+    // Update item order and numbers across all time groups
+    function updateItemOrderAndNumbers() {
+      const allItems = document.querySelectorAll(".iti-item");
+      const itemsArray = Array.from(allItems);
 
-        // Sort by time
-        itemsArray.sort((a, b) => {
+      // Sort by time
+      itemsArray.sort((a, b) => {
+        const timeA = parseInt(a.getAttribute("data-time")) || 0;
+        const timeB = parseInt(b.getAttribute("data-time")) || 0;
+        return timeA - timeB;
+      });
+
+      // Reorder DOM elements and update numbers
+      let currentNumber = 1;
+      const timeGroups = document.querySelectorAll(".time-group");
+
+      timeGroups.forEach((group) => {
+        const groupItems = Array.from(group.querySelectorAll(".iti-item"));
+
+        // Sort items within this group
+        groupItems.sort((a, b) => {
           const timeA = parseInt(a.getAttribute("data-time")) || 0;
           const timeB = parseInt(b.getAttribute("data-time")) || 0;
           return timeA - timeB;
         });
 
-        // Reorder DOM elements and update numbers
-        let currentNumber = 1;
-        const timeGroups = document.querySelectorAll(".time-group");
+        // Clear and re-add items in sorted order
+        const groupTitle = group.querySelector(".group-title");
+        const transportInfos = group.querySelectorAll(".transport-info");
 
-        timeGroups.forEach((group) => {
-          const groupItems = Array.from(group.querySelectorAll(".iti-item"));
+        // Remove all items
+        groupItems.forEach((item) => item.remove());
 
-          // Sort items within this group
-          groupItems.sort((a, b) => {
-            const timeA = parseInt(a.getAttribute("data-time")) || 0;
-            const timeB = parseInt(b.getAttribute("data-time")) || 0;
-            return timeA - timeB;
-          });
+        // Re-add items with updated numbers
+        groupItems.forEach((item, index) => {
+          item.querySelector(".item-number").textContent = currentNumber;
+          currentNumber++;
 
-          // Clear and re-add items in sorted order
-          const groupTitle = group.querySelector(".group-title");
-          const transportInfos = group.querySelectorAll(".transport-info");
-
-          // Remove all items
-          groupItems.forEach((item) => item.remove());
-
-          // Re-add items with updated numbers
-          groupItems.forEach((item, index) => {
-            item.querySelector(".item-number").textContent = currentNumber;
-            currentNumber++;
-
-            // Insert after group title, before transport info if exists
-            if (transportInfos.length > 0 && index === 0) {
-              group.insertBefore(item, transportInfos[0]);
-            } else if (transportInfos.length > 0) {
-              group.insertBefore(item, transportInfos[0]);
-            } else {
-              group.appendChild(item);
-            }
-          });
+          // Insert after group title, before transport info if exists
+          if (transportInfos.length > 0 && index === 0) {
+            group.insertBefore(item, transportInfos[0]);
+          } else if (transportInfos.length > 0) {
+            group.insertBefore(item, transportInfos[0]);
+          } else {
+            group.appendChild(item);
+          }
         });
-      }
+      });
+    }
 
-      // Helper function to get type label
-      function getTypeLabel(type) {
-        const labels = {
-          hotel: "🏨 Khách sạn",
-          restaurant: "🍽️ Nhà hàng",
-          attraction: "📷 Địa điểm tham quan",
-          shopping: "🛍️ Mua sắm",
-          other: "📍 Địa điểm khác",
-        };
-        return labels[type] || "📍 Địa điểm";
-      }
+    // Helper function to get type label
+    function getTypeLabel(type) {
+      const labels = {
+        hotel: "🏨 Khách sạn",
+        restaurant: "🍽️ Nhà hàng",
+        attraction: "📷 Địa điểm tham quan",
+        shopping: "🛍️ Mua sắm",
+        other: "📍 Địa điểm khác",
+      };
+      return labels[type] || "📍 Địa điểm";
+    }
 
-      // Notification system
-      function showNotification(message, type = "info") {
-        // Create notification element
-        const notification = document.createElement("div");
-        notification.className = `notification notification-${type}`;
-        notification.innerHTML = `
+    // Notification system
+    function showNotification(message, type = "info") {
+      // Create notification element
+      const notification = document.createElement("div");
+      notification.className = `notification notification-${type}`;
+      notification.innerHTML = `
           <i class="ph-fill ${type === "success" ? "ph-check-circle" : "ph-info"}"></i>
           <span>${message}</span>
         `;
 
-        // Add to page
-        document.body.appendChild(notification);
+      // Add to page
+      document.body.appendChild(notification);
 
-        // Show with animation
-        setTimeout(() => notification.classList.add("show"), 100);
+      // Show with animation
+      setTimeout(() => notification.classList.add("show"), 100);
 
-        // Auto remove
-        setTimeout(() => {
-          notification.classList.remove("show");
-          setTimeout(() => document.body.removeChild(notification), 300);
-        }, 3000);
+      // Auto remove
+      setTimeout(() => {
+        notification.classList.remove("show");
+        setTimeout(() => document.body.removeChild(notification), 300);
+      }, 3000);
+    }
+
+    // Hide modal functions
+    function hideModal() {
+      if (addSpotModal) {
+        addSpotModal.style.display = "none";
+        document.body.style.overflow = "";
+        if (addSpotForm) addSpotForm.reset();
+        // Reset image preview
+        const preview = document.getElementById("imagePreview");
+        if (preview) preview.style.display = "none";
       }
+    }
 
-      // Hide modal functions
-      function hideModal() {
-        if (addSpotModal) {
-          addSpotModal.style.display = "none";
-          document.body.style.overflow = "";
-          if (addSpotForm) addSpotForm.reset();
-          // Reset image preview
-          const preview = document.getElementById("imagePreview");
-          if (preview) preview.style.display = "none";
-        }
-      }
+    document.addEventListener("DOMContentLoaded", () => {
+      // Leaflet Map Initialization
+      map = L.map("map", {
+        zoomControl: false,
+      }).setView([16.047079, 108.20623], 11);
 
-      document.addEventListener("DOMContentLoaded", () => {
-        // Leaflet Map Initialization
-        map = L.map("map", {
-          zoomControl: false,
-        }).setView([16.047079, 108.20623], 11);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: "© CartoDB",
+        subdomains: 'abcd',
+        maxZoom: 20
+      }).addTo(map);
 
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-          attribution: "© CartoDB",
-          subdomains: 'abcd',
-          maxZoom: 20
-        }).addTo(map);
+      // Initialize route
+      updateRouteDisplay();
 
-        // Initialize route
-        updateRouteDisplay();
+      // Map controls
+      document
+        .getElementById("map-zoom-in")
+        ?.addEventListener("click", () => map.zoomIn());
+      document
+        .getElementById("map-zoom-out")
+        ?.addEventListener("click", () => map.zoomOut());
 
-        // Map controls
-        document
-          .getElementById("map-zoom-in")
-          ?.addEventListener("click", () => map.zoomIn());
-        document
-          .getElementById("map-zoom-out")
-          ?.addEventListener("click", () => map.zoomOut());
+      const tabs = document.querySelectorAll(".day-tab");
+      const timeGroups = document.querySelectorAll(".time-group");
+      const budget = document.getElementById("budgetSummary");
 
-        const tabs = document.querySelectorAll(".day-tab");
-        const timeGroups = document.querySelectorAll(".time-group");
-        const budget = document.getElementById("budgetSummary");
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
 
-        tabs.forEach((tab) => {
-          tab.addEventListener("click", () => {
-            tabs.forEach((t) => t.classList.remove("active"));
-            tab.classList.add("active");
-
-            if (tab.classList.contains("tab-stats")) {
-              timeGroups.forEach((g) => (g.style.display = "none"));
-              budget.style.display = "block";
-            } else {
-              timeGroups.forEach((g) => (g.style.display = "block"));
-              budget.style.display = "none";
-            }
-          });
-        });
-
-        // Add click-to-pan for itinerary items
-        const itiContainer = document.querySelector(".iti-content-scrollable");
-        if (itiContainer) {
-          itiContainer.addEventListener('click', (e) => {
-            const itemCard = e.target.closest('.item-card');
-            if (itemCard) {
-              const itiItem = itemCard.closest('.iti-item');
-              const numEl = itiItem.querySelector('.item-number');
-              if (numEl) {
-                const idx = parseInt(numEl.textContent) - 1;
-                
-                if (!isNaN(idx) && routePoints[idx]) {
-                  // Highlight active item
-                  document.querySelectorAll('.item-card').forEach(c => c.classList.remove('active-iti-highlight'));
-                  itemCard.classList.add('active-iti-highlight');
-                  
-                  // Fly to marker
-                  map.flyTo(routePoints[idx], 15, {
-                      duration: 1.2
-                  });
-                  
-                  // Open popup
-                  if (markers[idx]) markers[idx].openPopup();
-                }
-              }
-            }
-          });
-        }
-
-        // Itinerary Preview Slideshow
-        const previewBtn = document.getElementById("startItineraryPreview");
-        let isPreviewing = false;
-
-        if (previewBtn) {
-            previewBtn.addEventListener('click', async () => {
-                if (isPreviewing) return;
-                isPreviewing = true;
-                previewBtn.classList.add('active');
-                previewBtn.innerHTML = `<i class="ph-bold ph-stop-circle"></i> Dừng`;
-
-                for (let i = 0; i < routePoints.length; i++) {
-                    if (!isPreviewing) break;
-
-                    // Highlight item in sidebar
-                    const itemCards = document.querySelectorAll('.item-card');
-                    itemCards.forEach((card, idx) => {
-                        if (idx === i) {
-                            itemCards.forEach(c => c.classList.remove('active-iti-highlight'));
-                            card.classList.add('active-iti-highlight');
-                            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
-                    });
-
-                    // Pan Map
-                    map.flyTo(routePoints[i], 16, {
-                        duration: 1.5
-                    });
-
-                    // Open Marker Popup
-                    if (markers[i]) markers[i].openPopup();
-
-                    await new Promise(r => setTimeout(r, 2500));
-                }
-
-                isPreviewing = false;
-                previewBtn.classList.remove('active');
-                previewBtn.innerHTML = `<i class="ph-fill ph-play-circle"></i> Xem trước`;
-                
-                // Reset view
-                const bounds = L.latLngBounds(routePoints);
-                map.fitBounds(bounds.pad(0.2));
-            });
-        }
-
-        // Enhanced Search Functionality
-        const searchInput = document.getElementById("mapSearchInput");
-        const searchBtn = document.getElementById("searchBtn");
-        const searchSuggestions = document.getElementById("searchSuggestions");
-        const suggestionItems = document.querySelectorAll(".suggestion-item");
-
-        let suggestionMarkers = [];
-
-        // Clear existing suggestion markers
-        function clearSuggestionMarkers() {
-          try {
-            suggestionMarkers.forEach((marker) => {
-              if (map.hasLayer(marker)) {
-                map.removeLayer(marker);
-              }
-            });
-            suggestionMarkers = [];
-          } catch (error) {
-            console.error("Error clearing suggestion markers:", error);
+          if (tab.classList.contains("tab-stats")) {
+            timeGroups.forEach((g) => (g.style.display = "none"));
+            budget.style.display = "block";
+          } else {
+            timeGroups.forEach((g) => (g.style.display = "block"));
+            budget.style.display = "none";
           }
+        });
+      });
+
+      // Add click-to-pan for itinerary items
+      const itiContainer = document.querySelector(".iti-content-scrollable");
+      if (itiContainer) {
+        itiContainer.addEventListener('click', (e) => {
+          const itemCard = e.target.closest('.item-card');
+          if (itemCard) {
+            const itiItem = itemCard.closest('.iti-item');
+            const numEl = itiItem.querySelector('.item-number');
+            if (numEl) {
+              const idx = parseInt(numEl.textContent) - 1;
+
+              if (!isNaN(idx) && routePoints[idx]) {
+                // Highlight active item
+                document.querySelectorAll('.item-card').forEach(c => c.classList.remove('active-iti-highlight'));
+                itemCard.classList.add('active-iti-highlight');
+
+                // Fly to marker
+                map.flyTo(routePoints[idx], 15, {
+                  duration: 1.2
+                });
+
+                // Open popup
+                if (markers[idx]) markers[idx].openPopup();
+              }
+            }
+          }
+        });
+      }
+
+      // Itinerary Preview Slideshow
+      const previewBtn = document.getElementById("startItineraryPreview");
+      let isPreviewing = false;
+
+      if (previewBtn) {
+        previewBtn.addEventListener('click', async () => {
+          if (isPreviewing) return;
+          isPreviewing = true;
+          previewBtn.classList.add('active');
+          previewBtn.innerHTML = `<i class="ph-bold ph-stop-circle"></i> Dừng`;
+
+          for (let i = 0; i < routePoints.length; i++) {
+            if (!isPreviewing) break;
+
+            // Highlight item in sidebar
+            const itemCards = document.querySelectorAll('.item-card');
+            itemCards.forEach((card, idx) => {
+              if (idx === i) {
+                itemCards.forEach(c => c.classList.remove('active-iti-highlight'));
+                card.classList.add('active-iti-highlight');
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            });
+
+            // Pan Map
+            map.flyTo(routePoints[i], 16, {
+              duration: 1.5
+            });
+
+            // Open Marker Popup
+            if (markers[i]) markers[i].openPopup();
+
+            await new Promise(r => setTimeout(r, 2500));
+          }
+
+          isPreviewing = false;
+          previewBtn.classList.remove('active');
+          previewBtn.innerHTML = `<i class="ph-fill ph-play-circle"></i> Xem trước`;
+
+          // Reset view
+          const bounds = L.latLngBounds(routePoints);
+          map.fitBounds(bounds.pad(0.2));
+        });
+      }
+
+      // Enhanced Search Functionality
+      const searchInput = document.getElementById("mapSearchInput");
+      const searchBtn = document.getElementById("searchBtn");
+      const searchSuggestions = document.getElementById("searchSuggestions");
+      const suggestionItems = document.querySelectorAll(".suggestion-item");
+
+      let suggestionMarkers = [];
+
+      // Clear existing suggestion markers
+      function clearSuggestionMarkers() {
+        try {
+          suggestionMarkers.forEach((marker) => {
+            if (map.hasLayer(marker)) {
+              map.removeLayer(marker);
+            }
+          });
+          suggestionMarkers = [];
+        } catch (error) {
+          console.error("Error clearing suggestion markers:", error);
         }
+      }
 
-        // Add suggestion markers to map
-        function addSuggestionMarkers() {
-          clearSuggestionMarkers();
+      // Add suggestion markers to map
+      function addSuggestionMarkers() {
+        clearSuggestionMarkers();
 
-          const currentZoom = map.getZoom();
-          const currentCenter = map.getCenter();
+        const currentZoom = map.getZoom();
+        const currentCenter = map.getCenter();
 
-          const suggestions = [
-            {
-              lat: 16.0605,
-              lng: 108.2265,
-              name: "Khách sạn Novotel Đà Nẵng",
-              type: "hotel",
-              icon: "ph-bed",
-            },
-            {
-              lat: 16.055,
-              lng: 108.248,
-              name: "Nhà hàng Sơn Trà",
-              type: "restaurant",
-              icon: "ph-fork-knife",
-            },
-            {
-              lat: 16.038,
-              lng: 108.225,
-              name: "Công viên châu Á",
-              type: "attraction",
-              icon: "ph-camera",
-            },
-            {
-              lat: 16.062,
-              lng: 108.23,
-              name: "Khách sạn Pullman Đà Nẵng",
-              type: "hotel",
-              icon: "ph-bed",
-            },
-            {
-              lat: 16.053,
-              lng: 108.245,
-              name: "Quán ăn ven biển",
-              type: "restaurant",
-              icon: "ph-fork-knife",
-            },
-          ];
+        const suggestions = [
+          {
+            lat: 16.0605,
+            lng: 108.2265,
+            name: "Khách sạn Novotel Đà Nẵng",
+            type: "hotel",
+            icon: "ph-bed",
+          },
+          {
+            lat: 16.055,
+            lng: 108.248,
+            name: "Nhà hàng Sơn Trà",
+            type: "restaurant",
+            icon: "ph-fork-knife",
+          },
+          {
+            lat: 16.038,
+            lng: 108.225,
+            name: "Công viên châu Á",
+            type: "attraction",
+            icon: "ph-camera",
+          },
+          {
+            lat: 16.062,
+            lng: 108.23,
+            name: "Khách sạn Pullman Đà Nẵng",
+            type: "hotel",
+            icon: "ph-bed",
+          },
+          {
+            lat: 16.053,
+            lng: 108.245,
+            name: "Quán ăn ven biển",
+            type: "restaurant",
+            icon: "ph-fork-knife",
+          },
+        ];
 
-          suggestions.forEach((suggestion, index) => {
-            try {
-              const iconHtml = `<div style="background-color: ${suggestion.type === "hotel" ? "#3b82f6" : suggestion.type === "restaurant" ? "#f59e0b" : "#a855f7"}; width: 32px; height: 32px; border: 3px solid white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 12px;">
+        suggestions.forEach((suggestion, index) => {
+          try {
+            const iconHtml = `<div style="background-color: ${suggestion.type === "hotel" ? "#3b82f6" : suggestion.type === "restaurant" ? "#f59e0b" : "#a855f7"}; width: 32px; height: 32px; border: 3px solid white; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 12px;">
                                 <i class="ph-fill ${suggestion.icon}" style="font-size: 14px;"></i>
                              </div>`;
 
-              const markerIcon = L.divIcon({
-                className: "suggestion-marker",
-                html: iconHtml,
-                iconSize: [32, 32],
-                iconAnchor: [16, 32],
-              });
-
-              const marker = L.marker([suggestion.lat, suggestion.lng], {
-                icon: markerIcon,
-              }).addTo(map);
-              marker.bindPopup(
-                `<b>${suggestion.name}</b><br><small>${suggestion.type === "hotel" ? "Khách sạn" : suggestion.type === "restaurant" ? "Nhà hàng" : "Địa điểm"}</small>`,
-              );
-              suggestionMarkers.push(marker);
-            } catch (error) {
-              console.error("Error adding marker for", suggestion.name, error);
-            }
-          });
-
-          // Keep current zoom and center to prevent layout breaking
-          map.setView(currentCenter, currentZoom);
-        }
-
-        // Show suggestions
-        function showSuggestions() {
-          if (searchSuggestions) {
-            searchSuggestions.style.display = "block";
-            searchSuggestions.classList.add("show");
-          }
-        }
-
-        // Hide suggestions
-        function hideSuggestions() {
-          if (searchSuggestions) {
-            searchSuggestions.style.display = "none";
-            searchSuggestions.classList.remove("show");
-          }
-        }
-
-        // Search button click
-        if (searchBtn) {
-          searchBtn.addEventListener("click", () => {
-            const query = searchInput ? searchInput.value.trim() : "";
-            if (query) {
-              addSuggestionMarkers();
-              hideSuggestions();
-              if (searchInput) searchInput.value = "";
-            } else {
-              showSuggestions();
-            }
-          });
-        }
-
-        // Search input enter
-        if (searchInput) {
-          searchInput.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") {
-              if (searchBtn) searchBtn.click();
-            }
-          });
-        }
-
-        // Clear button
-        const clearBtn = document.getElementById("clearBtn");
-        if (clearBtn) {
-          clearBtn.addEventListener("click", () => {
-            clearSuggestionMarkers();
-            if (searchInput) searchInput.value = "";
-            hideSuggestions();
-          });
-        }
-
-        // Suggestion item click
-        if (suggestionItems) {
-          suggestionItems.forEach((item) => {
-            item.addEventListener("click", () => {
-              addSuggestionMarkers();
-              hideSuggestions();
+            const markerIcon = L.divIcon({
+              className: "suggestion-marker",
+              html: iconHtml,
+              iconSize: [32, 32],
+              iconAnchor: [16, 32],
             });
-          });
-        }
 
-        // Hide suggestions when clicking outside
-        document.addEventListener("click", (e) => {
-          if (searchInput && searchBtn && searchSuggestions && clearBtn) {
-            if (
-              !searchInput.contains(e.target) &&
-              !searchBtn.contains(e.target) &&
-              !searchSuggestions.contains(e.target) &&
-              !clearBtn.contains(e.target)
-            ) {
-              hideSuggestions();
-            }
+            const marker = L.marker([suggestion.lat, suggestion.lng], {
+              icon: markerIcon,
+            }).addTo(map);
+            marker.bindPopup(
+              `<b>${suggestion.name}</b><br><small>${suggestion.type === "hotel" ? "Khách sạn" : suggestion.type === "restaurant" ? "Nhà hàng" : "Địa điểm"}</small>`,
+            );
+            suggestionMarkers.push(marker);
+          } catch (error) {
+            console.error("Error adding marker for", suggestion.name, error);
           }
         });
 
-        // Show modal
-        if (addSpotBtn) {
-          addSpotBtn.addEventListener("click", () => {
-            if (addSpotModal) {
-              addSpotModal.style.display = "flex";
-              document.body.style.overflow = "hidden";
-            }
-          });
+        // Keep current zoom and center to prevent layout breaking
+        map.setView(currentCenter, currentZoom);
+      }
+
+      // Show suggestions
+      function showSuggestions() {
+        if (searchSuggestions) {
+          searchSuggestions.style.display = "block";
+          searchSuggestions.classList.add("show");
         }
+      }
 
-        if (modalClose) modalClose.addEventListener("click", hideModal);
-        if (cancelBtn) cancelBtn.addEventListener("click", hideModal);
-
-        // Click outside to close
-        if (addSpotModal) {
-          addSpotModal.addEventListener("click", (e) => {
-            if (e.target === addSpotModal) {
-              hideModal();
-            }
-          });
+      // Hide suggestions
+      function hideSuggestions() {
+        if (searchSuggestions) {
+          searchSuggestions.style.display = "none";
+          searchSuggestions.classList.remove("show");
         }
+      }
 
-        // Form submit
-        if (addSpotForm) {
-          addSpotForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
+      // Search button click
+      if (searchBtn) {
+        searchBtn.addEventListener("click", () => {
+          const query = searchInput ? searchInput.value.trim() : "";
+          if (query) {
+            addSuggestionMarkers();
+            hideSuggestions();
+            if (searchInput) searchInput.value = "";
+          } else {
+            showSuggestions();
+          }
+        });
+      }
 
-            const spotName = document.getElementById("spotName").value.trim();
-            const spotAddress = document
-              .getElementById("spotAddress")
-              .value.trim();
-            const spotType = document.getElementById("spotType").value;
-            const spotTime = document.getElementById("spotTime").value;
-            const spotImage = document.getElementById("spotImage").files[0];
-            const spotDescription = document
-              .getElementById("spotDescription")
-              .value.trim();
+      // Search input enter
+      if (searchInput) {
+        searchInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            if (searchBtn) searchBtn.click();
+          }
+        });
+      }
 
-            if (!spotName || !spotAddress || !spotType || !spotTime) {
-              alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
-              return;
-            }
+      // Clear button
+      const clearBtn = document.getElementById("clearBtn");
+      if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+          clearSuggestionMarkers();
+          if (searchInput) searchInput.value = "";
+          hideSuggestions();
+        });
+      }
 
-            try {
-              // Show loading
-              const submitBtn = document.querySelector(".btn-submit");
-              const originalText = submitBtn.textContent;
-              submitBtn.textContent = "Đang xử lý...";
-              submitBtn.disabled = true;
-
-              // Geocode address to get coordinates
-              const coordinates = await geocodeAddress(spotAddress);
-
-              // Create image URL
-              let imageUrl = null;
-              if (spotImage) {
-                imageUrl = URL.createObjectURL(spotImage);
-              }
-
-              // Create marker
-              const iconColors = {
-                hotel: "#3b82f6",
-                restaurant: "#f59e0b",
-                attraction: "#a855f7",
-                shopping: "#10b981",
-                other: "#6b7280",
-              };
-
-              // Add to route (this will update routePoints, locationNames, routeTimes)
-              addSpotToRoute(
-                coordinates.lat,
-                coordinates.lng,
-                spotName,
-                spotTime,
-              );
-
-              // Update route display (this will recreate all markers and polylines)
-              updateRouteDisplay();
-
-              // Add to sidebar itinerary
-              addSpotToSidebar(
-                spotName,
-                spotType,
-                spotTime,
-                spotDescription,
-                imageUrl,
-              );
-
-              // Show notification
-              showNotification(
-                `Đã thêm "${spotName}" vào bản đồ và lịch trình!`,
-                "success",
-              );
-
-              hideModal();
-            } catch (error) {
-              console.error("Error adding spot:", error);
-              alert(
-                "Có lỗi xảy ra khi thêm địa điểm. Vui lòng kiểm tra địa chỉ và thử lại.",
-              );
-            } finally {
-              // Reset button
-              const submitBtn = document.querySelector(".btn-submit");
-              submitBtn.textContent = "Thêm địa điểm";
-              submitBtn.disabled = false;
-            }
+      // Suggestion item click
+      if (suggestionItems) {
+        suggestionItems.forEach((item) => {
+          item.addEventListener("click", () => {
+            addSuggestionMarkers();
+            hideSuggestions();
           });
-        }
+        });
+      }
 
-        // Update budget summary if needed (optional)
-        function updateBudgetSummary() {
-          // This could be enhanced to recalculate costs based on added spots
-          // For now, just ensure the summary is visible
-          const budget = document.getElementById("budgetSummary");
-          if (budget) {
-            budget.style.display = "block";
+      // Hide suggestions when clicking outside
+      document.addEventListener("click", (e) => {
+        if (searchInput && searchBtn && searchSuggestions && clearBtn) {
+          if (
+            !searchInput.contains(e.target) &&
+            !searchBtn.contains(e.target) &&
+            !searchSuggestions.contains(e.target) &&
+            !clearBtn.contains(e.target)
+          ) {
+            hideSuggestions();
           }
         }
       });
-    </script>
-    <script src="auth.js" defer></script>
-    <script src="chat-widget.js" defer></script>
-    <script src="theme.js"></script>
-      <script src="theme.js"></script>
-  </body>
+
+      // Show modal
+      if (addSpotBtn) {
+        addSpotBtn.addEventListener("click", () => {
+          if (addSpotModal) {
+            addSpotModal.style.display = "flex";
+            document.body.style.overflow = "hidden";
+          }
+        });
+      }
+
+      if (modalClose) modalClose.addEventListener("click", hideModal);
+      if (cancelBtn) cancelBtn.addEventListener("click", hideModal);
+
+      // Click outside to close
+      if (addSpotModal) {
+        addSpotModal.addEventListener("click", (e) => {
+          if (e.target === addSpotModal) {
+            hideModal();
+          }
+        });
+      }
+
+      // Form submit
+      if (addSpotForm) {
+        addSpotForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const spotName = document.getElementById("spotName").value.trim();
+          const spotAddress = document
+            .getElementById("spotAddress")
+            .value.trim();
+          const spotType = document.getElementById("spotType").value;
+          const spotTime = document.getElementById("spotTime").value;
+          const spotImage = document.getElementById("spotImage").files[0];
+          const spotDescription = document
+            .getElementById("spotDescription")
+            .value.trim();
+
+          if (!spotName || !spotAddress || !spotType || !spotTime) {
+            alert("Vui lòng điền đầy đủ thông tin bắt buộc!");
+            return;
+          }
+
+          try {
+            // Show loading
+            const submitBtn = document.querySelector(".btn-submit");
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = "Đang xử lý...";
+            submitBtn.disabled = true;
+
+            // Geocode address to get coordinates
+            const coordinates = await geocodeAddress(spotAddress);
+
+            // Create image URL
+            let imageUrl = null;
+            if (spotImage) {
+              imageUrl = URL.createObjectURL(spotImage);
+            }
+
+            // Create marker
+            const iconColors = {
+              hotel: "#3b82f6",
+              restaurant: "#f59e0b",
+              attraction: "#a855f7",
+              shopping: "#10b981",
+              other: "#6b7280",
+            };
+
+            // Add to route (this will update routePoints, locationNames, routeTimes)
+            addSpotToRoute(
+              coordinates.lat,
+              coordinates.lng,
+              spotName,
+              spotTime,
+            );
+
+            // Update route display (this will recreate all markers and polylines)
+            updateRouteDisplay();
+
+            // Add to sidebar itinerary
+            addSpotToSidebar(
+              spotName,
+              spotType,
+              spotTime,
+              spotDescription,
+              imageUrl,
+            );
+
+            // Show notification
+            showNotification(
+              `Đã thêm "${spotName}" vào bản đồ và lịch trình!`,
+              "success",
+            );
+
+            hideModal();
+          } catch (error) {
+            console.error("Error adding spot:", error);
+            alert(
+              "Có lỗi xảy ra khi thêm địa điểm. Vui lòng kiểm tra địa chỉ và thử lại.",
+            );
+          } finally {
+            // Reset button
+            const submitBtn = document.querySelector(".btn-submit");
+            submitBtn.textContent = "Thêm địa điểm";
+            submitBtn.disabled = false;
+          }
+        });
+      }
+
+      // --- Weather Integration Logic ---
+      async function initWeather() {
+        const container = document.getElementById('weatherContainer');
+        if (!container) return;
+        const trips = JSON.parse(localStorage.getItem('userTrips')) || [];
+        let dest = "Đà Nẵng";
+        if (trips.length > 0) dest = trips[trips.length - 1].title.replace('Khám phá ', '');
+
+        container.innerHTML = `<div class="weather-card"><div class="loading-box" style="padding:10px;text-align:center;"><i class="ph-bold ph-circle-notch spin" style="color:var(--app-primary)"></i></div></div>`;
+
+        try {
+          const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(dest)}&count=1&language=vi&format=json`);
+          const geoData = await geoRes.json();
+          if (!geoData.results) throw "error";
+          const { latitude, longitude, name: city } = geoData.results[0];
+          const wRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=relativehumidity_2m`);
+          const wData = await wRes.json();
+          const curr = wData.current_weather;
+          const humidity = wData.hourly ? wData.hourly.relativehumidity_2m[0] : 65;
+
+          const wMap = {
+            0: { d: "Trời quang", i: "ph-sun", c: "#f59e0b" }, 1: { d: "Ít mây", i: "ph-cloud-sun", c: "#f59e0b" }, 2: { d: "Nhiều mây", i: "ph-cloud", c: "#64748b" },
+            3: { d: "U ám", i: "ph-clouds", c: "#64748b" }, 45: { d: "Sương mù", i: "ph-cloud-fog", c: "#94a3b8" }, 51: { d: "Mưa phùn", i: "ph-cloud-rain", c: "#0ea5e9" },
+            61: { d: "Mưa nhẹ", i: "ph-cloud-rain", c: "#0ea5e9" }, 63: { d: "Mưa vừa", i: "ph-cloud-rain", c: "#0ea5e9" }, 80: { d: "Mưa rào", i: "ph-cloud-rain", c: "#0ea5e9" },
+            95: { d: "Dông", i: "ph-cloud-lightning", c: "#6366f1" }
+          };
+          const cond = wMap[curr.weathercode] || { d: "Ổn định", i: "ph-cloud-sun", c: "#f59e0b" };
+
+          container.innerHTML = `
+              <div class="weather-card">
+                <div class="weather-header"><h4><i class="ph-fill ph-map-pin"></i> ${city}</h4><span style="font-size:0.6rem;font-weight:800;color:var(--app-primary);background:rgba(0,255,255,0.1);padding:2px 6px;border-radius:4px;">Dự báo</span></div>
+                <div class="weather-main"><i class="ph-fill ${cond.i} weather-icon-large" style="color:${cond.c}"></i><div class="weather-temp-group"><span class="weather-temp">${Math.round(curr.temperature)}°C</span><span class="weather-desc">${cond.d}</span></div></div>
+                <div class="weather-details-grid"><div class="weather-detail-item"><i class="ph-bold ph-drop"></i><span>Ẩm: ${humidity}%</span></div><div class="weather-detail-item"><i class="ph-bold ph-navigation-arrow"></i><span>Gió: ${curr.windspeed}km/h</span></div></div>
+              </div>`;
+        } catch (e) { container.innerHTML = ''; }
+      }
+      initWeather();
+    });
+  </script>
+  <script src="auth.js" defer></script>
+  <script src="chat-widget.js" defer></script>
+  <script src="theme.js"></script>
+</body>
+
 </html>

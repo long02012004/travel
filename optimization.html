@@ -124,6 +124,9 @@
       <div class="opt-content-grid">
         <!-- Left Sidebar (Selection) -->
         <aside class="opt-sidebar">
+          <!-- Weather Forecast Card (Dynamic) -->
+          <div id="weatherContainer"></div>
+
           <div class="opt-card selected-places-card">
             <div class="opt-card-header">
               <i class="ph-fill ph-map-pin"></i>
@@ -385,8 +388,128 @@
             if (loadingIndicator) loadingIndicator.style.opacity = '0';
             setTimeout(() => {
                 if (loadingIndicator) loadingIndicator.style.display = 'none';
+                // Trigger weather fetch after optimization is "done"
+                initWeather();
             }, 500);
         }, 1500);
+
+        // Weather Integration Logic
+        async function initWeather() {
+            const container = document.getElementById('weatherContainer');
+            if (!container) return;
+
+            // 1. Get destination from localStorage
+            const trips = JSON.parse(localStorage.getItem('userTrips')) || [];
+            let destination = "Hà Nội"; // Default
+            if (trips.length > 0) {
+                const latestTrip = trips[trips.length - 1];
+                destination = latestTrip.title.replace('Khám phá ', '');
+            }
+
+            container.innerHTML = `
+                <div class="weather-card" id="weatherLoader">
+                    <div class="loading-box" style="padding: 20px;">
+                        <i class="ph-bold ph-circle-notch spin"></i>
+                        <span style="font-size: 0.8rem;">Đang tải thời tiết ${destination}...</span>
+                    </div>
+                </div>
+            `;
+
+            try {
+                // 2. Geocoding
+                const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(destination)}&count=1&language=vi&format=json`);
+                const geoData = await geoRes.json();
+                
+                if (!geoData.results || geoData.results.length === 0) {
+                    throw new Error("Không tìm thấy địa điểm");
+                }
+
+                const { latitude, longitude, name: cityName } = geoData.results[0];
+
+                // 3. Forecast
+                const weatherRes = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&hourly=relativehumidity_2m,windspeed_10m`);
+                const weatherData = await weatherRes.json();
+                const current = weatherData.current_weather;
+
+                // 4. Update UI
+                renderWeatherCard(cityName, current, weatherData);
+            } catch (err) {
+                console.error("Weather Error:", err);
+                container.innerHTML = `
+                    <div class="weather-card">
+                        <p style="font-size: 0.8rem; color: #ef4444; font-weight: 700;">
+                            <i class="ph-bold ph-warning-circle"></i> Không thể tải thời tiết cho ${destination}
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        function renderWeatherCard(city, weather, rawData) {
+            const container = document.getElementById('weatherContainer');
+            const temp = Math.round(weather.temperature);
+            const code = weather.weathercode;
+            
+            // Map WMO codes to description and icons
+            const weatherMap = {
+                0: { desc: "Trời quang", icon: "ph-sun", color: "#f59e0b" },
+                1: { desc: "Ít mây", icon: "ph-cloud-sun", color: "#f59e0b" },
+                2: { desc: "Nhiều mây", icon: "ph-cloud", color: "#64748b" },
+                3: { desc: "U ám", icon: "ph-clouds", color: "#64748b" },
+                45: { desc: "Sương mù", icon: "ph-cloud-fog", color: "#94a3b8" },
+                51: { desc: "Mưa phùn nhẹ", icon: "ph-cloud-rain", color: "#0ea5e9" },
+                61: { desc: "Mưa nhẹ", icon: "ph-cloud-rain", color: "#0ea5e9" },
+                63: { desc: "Mưa vừa", icon: "ph-cloud-rain", color: "#0ea5e9" },
+                71: { desc: "Tuyết nhẹ", icon: "ph-cloud-snow", color: "#e2e8f0" },
+                80: { desc: "Mưa rào nhẹ", icon: "ph-cloud-rain", color: "#0ea5e9" },
+                95: { desc: "Dông sét", icon: "ph-cloud-lightning", color: "#6366f1" }
+            };
+
+            const condition = weatherMap[code] || { desc: "Ổn định", icon: "ph-cloud-sun", color: "#f59e0b" };
+            
+            // Get humidity from hourly if available (taking first index)
+            const humidity = rawData.hourly ? rawData.hourly.relativehumidity_2m[0] : 65;
+            const wind = weather.windspeed;
+
+            container.innerHTML = `
+                <div class="weather-card">
+                    <div class="weather-header">
+                        <h4><i class="ph-fill ph-map-pin"></i> ${city}</h4>
+                        <span class="badge-opt-status active" style="font-size: 0.6rem;">REAL-TIME</span>
+                    </div>
+                    <div class="weather-main">
+                        <i class="ph-fill ${condition.icon} weather-icon-large" style="color: ${condition.color}"></i>
+                        <div class="weather-temp-group">
+                            <span class="weather-temp">${temp}°C</span>
+                            <span class="weather-desc">${condition.desc}</span>
+                        </div>
+                    </div>
+                    <div class="weather-details-grid">
+                        <div class="weather-detail-item">
+                            <i class="ph-bold ph-drop"></i>
+                            <span>Ẩm: ${humidity}%</span>
+                        </div>
+                        <div class="weather-detail-item">
+                            <i class="ph-bold ph-wind"></i>
+                            <span>Gió: ${wind} km/h</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Hook into "Tối ưu lộ trình" button
+        const optBtn = document.querySelector(".btn-opt-primary");
+        if (optBtn) {
+            optBtn.addEventListener('click', () => {
+                // Show loading state and re-fetch weather
+                initWeather();
+                
+                // Also show a toast/alert as requested "thông báo hiển thị trên cho người dùng xem 1 cách rõ ràng"
+                const destinationName = document.querySelector(".weather-card h4")?.textContent.trim() || "địa điểm này";
+                alert(`AI đang tối ưu hóa lại lộ trình dựa trên tình hình thời tiết mới nhất tại ${destinationName}.`);
+            });
+        }
 
         // Map setup
         const hanoiCoords = [21.0285, 105.8542];

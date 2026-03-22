@@ -82,10 +82,7 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="form-label-row">
-                                <label for="login-password">Mật khẩu</label>
-                                <a href="#" class="forgot-link">Quên mật khẩu?</a>
-                            </div>
+                            <label for="login-password">Mật khẩu</label>
                             <div class="input-container">
                                 <i class="ph-duotone ph-lock-key input-icon"></i>
                                 <input type="password" id="login-password" placeholder="Nhập mật khẩu" required>
@@ -93,9 +90,12 @@
                             </div>
                         </div>
 
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">Ghi nhớ đăng nhập</label>
+                        <div class="form-actions-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                            <div class="checkbox-group" style="margin-bottom: 0;">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Ghi nhớ đăng nhập</label>
+                            </div>
+                            <a href="forgot-password.html" class="forgot-link" style="margin-bottom: 0;">Quên mật khẩu?</a>
                         </div>
 
                         <button type="submit" class="btn-submit">Đăng nhập</button>
