@@ -138,16 +138,14 @@
 /* Filter Section */
 .explore-filters {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  gap: 28px;
+  gap: 12px;
   margin-bottom: 40px;
   padding: 20px 28px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(248, 250, 252, 0.95) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(248, 250, 252, 0.95) 100%);
   border-radius: 24px;
   border: 1px solid rgba(226, 232, 240, 0.8);
   box-shadow:
@@ -188,12 +186,13 @@
 }
 
 .btn-advanced-filter {
-  padding: 10px 20px;
+  padding: 0px 16px;
+  height: 40px;
   background: white;
   border: 1px solid var(--app-primary);
   border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--app-primary);
   cursor: pointer;
   display: flex;
@@ -208,12 +207,13 @@
 }
 
 .btn-sort {
-  padding: 10px 16px;
+  padding: 0px 16px;
+  height: 40px;
   background: #f8fafc;
   border: 1px solid var(--app-border-dark);
   border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--app-text-dark);
   cursor: pointer;
   display: flex;
@@ -231,10 +231,9 @@
 .filter-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex: 1 1 200px;
-  justify-content: flex-end;
-  min-width: 180px;
+  gap: 10px;
+  justify-content: flex-start;
+  width: fit-content;
 }
 
 .filter-search {
@@ -440,6 +439,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -451,6 +451,7 @@
   .explore-main {
     padding: 100px 24px 80px;
   }
+
   .explore-title {
     font-size: 2.75rem;
   }
@@ -460,30 +461,37 @@
   .explore-title {
     font-size: 2.25rem;
   }
+
   .explore-subtitle {
     font-size: 1rem;
   }
+
   .explore-filters {
     flex-direction: column;
     gap: 20px;
     align-items: stretch;
     padding: 24px 20px;
   }
+
   .header-search {
     width: 100%;
     order: -1;
   }
+
   .header-search:focus-within {
     width: 100%;
   }
+
   .filter-group {
     flex-wrap: wrap;
     justify-content: center;
   }
+
   .btn-dropdown {
     flex: 1;
     min-width: 140px;
   }
+
   .filter-actions {
     justify-content: center;
   }
@@ -496,6 +504,7 @@
     align-items: stretch;
     padding: 20px 10px;
   }
+
   .header-search,
   .filter-group,
   .filter-actions {
@@ -503,14 +512,17 @@
     max-width: 100%;
     flex: 1 1 100%;
   }
+
   .header-search {
     order: 1;
     margin-bottom: 8px;
   }
+
   .filter-group {
     order: 2;
     margin-bottom: 8px;
   }
+
   .filter-actions {
     order: 3;
     justify-content: flex-start;

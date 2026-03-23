@@ -71,123 +71,51 @@
   <div class="split-view-container">
     <!-- Sidebar: Itinerary Details -->
     <aside class="itinerary-sidebar">
-      <div class="iti-sidebar-header">
+      <div class="iti-sidebar-header" style="padding-bottom: 24px;">
         <div class="iti-title-row">
-          <h1 class="iti-main-title">Hành trình Đà Nẵng 7 Ngày</h1>
-
+          <h1 class="iti-main-title" style="font-size: 1.5rem; line-height: 1.4;">Khám phá địa điểm du lịch</h1>
         </div>
-        <div class="iti-date-range">12 Th10 - 18 Th10, 2024</div>
-
-        <div class="view-toggle-row">
-          <button class="toggle-btn active">
-            <i class="ph-fill ph-map-trifold"></i> Bản đồ
-          </button>
-          <button class="toggle-btn" onclick="window.location.href = 'dashboard.html'">
-            <i class="ph-fill ph-calendar-blank"></i> Lịch trình
-          </button>
-        </div>
-      </div>
-
-      <div class="iti-days-tabs">
-        <div class="day-tab active">Ngày 1</div>
-        <div class="day-tab">Ngày 2</div>
-        <div class="day-tab">Ngày 3</div>
-        <div class="day-tab">Ngày 4</div>
+        <p style="color: #64748b; font-size: 0.95rem; margin-top: 8px;">
+          Tham khảo các địa điểm tham quan tuyệt vời và thêm vào cuốn lưu bút du lịch của riêng bạn.
+        </p>
       </div>
 
       <div class="iti-content-scrollable">
         <!-- Weather Forecast Card -->
         <div id="weatherContainer"></div>
 
-        <!-- Group: Buổi sáng -->
-        <div class="time-group">
-          <h3 class="group-title">BUỔI SÁNG</h3>
-
-          <div class="iti-item">
-            <div class="item-number">1</div>
-            <div class="item-card">
-              <div class="item-img">
-                <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=200&auto=format&fit=crop"
-                  alt="Cầu Rồng Đà Nẵng" loading="lazy" />
+        <div class="places-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 0 4px;">
+           <div class="item-card square-card" data-idx="0" style="aspect-ratio: 1/1; display:flex; flex-direction:column; border-radius: 16px; overflow:hidden; position:relative; cursor:pointer;" onmouseover="this.querySelector('.place-img').style.transform='scale(1.1)'" onmouseout="this.querySelector('.place-img').style.transform='scale(1)'">
+              <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=400&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover; transition: transform 0.4s;" class="place-img" />
+              <div style="position:absolute; bottom:0; left:0; width:100%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 24px 12px 12px; color: white;">
+                 <h3 style="margin: 0; font-size: 1rem; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">Cầu Rồng Đà Nẵng</h3>
+                 <span style="font-size: 12px; opacity: 0.9; display: flex; align-items: center; gap: 4px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 4px; margin-top: 6px;"><i class="ph-fill ph-map-pin"></i> Đà Nẵng</span>
               </div>
-              <div class="item-info">
-                <h3>Cầu Rồng Đà Nẵng</h3>
-                <div class="item-meta">
-                  <i class="ph-bold ph-clock"></i> 09:00 - 11:30
-                </div>
-                <span class="badge-success">Đã đặt chỗ</span>
+           </div>
+           
+           <div class="item-card square-card" data-idx="1" style="aspect-ratio: 1/1; display:flex; flex-direction:column; border-radius: 16px; overflow:hidden; position:relative; cursor:pointer;" onmouseover="this.querySelector('.place-img').style.transform='scale(1.1)'" onmouseout="this.querySelector('.place-img').style.transform='scale(1)'">
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=400&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover; transition: transform 0.4s;" class="place-img" />
+              <div style="position:absolute; bottom:0; left:0; width:100%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 24px 12px 12px; color: white;">
+                 <h3 style="margin: 0; font-size: 1rem; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">Biển Mỹ Khê</h3>
+                 <span style="font-size: 12px; opacity: 0.9; display: flex; align-items: center; gap: 4px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 4px; margin-top: 6px;"><i class="ph-fill ph-map-pin"></i> Bãi biển đẹp nhất</span>
               </div>
-            </div>
-          </div>
-
-          <div class="transport-info">
-            <i class="ph-bold ph-person-walking"></i> Đi bộ 12 phút (850m)
-          </div>
-
-          <div class="iti-item">
-            <div class="item-number">2</div>
-            <div class="item-card">
-              <div class="item-img">
-                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=200&auto=format&fit=crop"
-                  alt="Biển Mỹ Khê" loading="lazy" />
+           </div>
+           
+           <div class="item-card square-card" data-idx="2" style="aspect-ratio: 1/1; display:flex; flex-direction:column; border-radius: 16px; overflow:hidden; position:relative; cursor:pointer;" onmouseover="this.querySelector('.place-img').style.transform='scale(1.1)'" onmouseout="this.querySelector('.place-img').style.transform='scale(1)'">
+              <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=400&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover; transition: transform 0.4s;" class="place-img" />
+              <div style="position:absolute; bottom:0; left:0; width:100%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 24px 12px 12px; color: white;">
+                 <h3 style="margin: 0; font-size: 1rem; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">Bà Nà Hills</h3>
+                 <span style="font-size: 12px; opacity: 0.9; display: flex; align-items: center; gap: 4px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 4px; margin-top: 6px;"><i class="ph-fill ph-map-pin"></i> Khu du lịch</span>
               </div>
-              <div class="item-info">
-                <h3>Biển Mỹ Khê</h3>
-                <div class="item-meta">
-                  <i class="ph-bold ph-clock"></i> 11:45 - 12:30
-                </div>
+           </div>
+           
+           <div class="item-card square-card" data-idx="3" style="aspect-ratio: 1/1; display:flex; flex-direction:column; border-radius: 16px; overflow:hidden; position:relative; cursor:pointer;" onmouseover="this.querySelector('.place-img').style.transform='scale(1.1)'" onmouseout="this.querySelector('.place-img').style.transform='scale(1)'">
+              <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=400&auto=format&fit=crop" style="width:100%; height:100%; object-fit:cover; transition: transform 0.4s;" class="place-img" />
+              <div style="position:absolute; bottom:0; left:0; width:100%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: 24px 12px 12px; color: white;">
+                 <h3 style="margin: 0; font-size: 1rem; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">Cầu Vàng</h3>
+                 <span style="font-size: 12px; opacity: 0.9; display: flex; align-items: center; gap: 4px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 4px; margin-top: 6px;"><i class="ph-fill ph-map-pin"></i> Đà Nẵng</span>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Group: Buổi chiều -->
-        <div class="time-group">
-          <h3 class="group-title">BUỔI CHIỀU</h3>
-
-          <div class="transport-info">
-            <i class="ph-bold ph-taxi"></i> Taxi/Xe bus 1 giờ (42km)
-          </div>
-
-          <div class="iti-item">
-            <div class="item-number">3</div>
-            <div class="item-card">
-              <div class="item-img">
-                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=200&auto=format&fit=crop"
-                  alt="Bà Nà Hills" loading="lazy" />
-              </div>
-              <div class="item-info">
-                <h3>Bà Nà Hills</h3>
-                <div class="item-meta">
-                  <i class="ph-bold ph-clock"></i> 13:00 - 16:30
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Price Statistics Section -->
-        <div class="iti-budget-summary" id="budgetSummary">
-          <div class="budget-header">
-            <h4 class="budget-title">Dự toán chi phí</h4>
-            <div class="budget-total">~ 4.5tr</div>
-          </div>
-
-          <div class="budget-grid">
-            <div class="budget-item">
-              <div class="budget-category">DI CHUYỂN</div>
-              <div class="budget-amount">850k</div>
-            </div>
-            <div class="budget-item">
-              <div class="budget-category">ĂN UỐNG</div>
-              <div class="budget-amount">1.2tr</div>
-            </div>
-          </div>
-
-          <div class="budget-chart-strip">
-            <div class="budget-chart-transport"></div>
-            <div class="budget-chart-food"></div>
-          </div>
+           </div>
         </div>
 
         <div class="sidebar-bottom-actions" style="display: flex; align-items: stretch; gap: 12px; margin-top: 24px; height: 52px;">
@@ -329,8 +257,9 @@
       [16.0614, 108.227], // Cầu Rồng Đà Nẵng
       [16.0544, 108.249], // Biển Mỹ Khê
       [15.9975, 107.992], // Bà Nà Hills
+      [15.9950, 107.9876] // Cầu Vàng
     ];
-    let locationNames = ["Cầu Rồng Đà Nẵng", "Biển Mỹ Khê", "Bà Nà Hills"];
+    let locationNames = ["Cầu Rồng Đà Nẵng", "Biển Mỹ Khê", "Bà Nà Hills", "Cầu Vàng"];
     let routeTimes = [9 * 60, 11 * 60 + 45, 13 * 60]; // Times in minutes
     let markers = [];
     let routePolyline;
@@ -683,21 +612,20 @@
         });
       });
 
-      // Add click-to-pan for itinerary items
+      // Add click-to-pan for square cards
       const itiContainer = document.querySelector(".iti-content-scrollable");
       if (itiContainer) {
         itiContainer.addEventListener('click', (e) => {
-          const itemCard = e.target.closest('.item-card');
+          const itemCard = e.target.closest('.square-card');
           if (itemCard) {
-            const itiItem = itemCard.closest('.iti-item');
-            const numEl = itiItem.querySelector('.item-number');
-            if (numEl) {
-              const idx = parseInt(numEl.textContent) - 1;
+            const idxStr = itemCard.getAttribute('data-idx');
+            if (idxStr !== null) {
+              const idx = parseInt(idxStr);
 
               if (!isNaN(idx) && routePoints[idx]) {
                 // Highlight active item
-                document.querySelectorAll('.item-card').forEach(c => c.classList.remove('active-iti-highlight'));
-                itemCard.classList.add('active-iti-highlight');
+                document.querySelectorAll('.square-card').forEach(c => c.style.border = 'none');
+                itemCard.style.border = '3px solid #0ea5e9';
 
                 // Fly to marker
                 map.flyTo(routePoints[idx], 15, {
