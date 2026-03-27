@@ -587,27 +587,73 @@ body {
 @media (max-width: 768px) {
     .auth-container {
         flex-direction: column;
+        min-height: auto;
+        max-width: 100%;
+        border-radius: 0;
+        margin: 0;
     }
     
     .auth-left {
-        padding: 40px 30px;
-        border-right: none !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        transform: none !important; /* Reset swap for mobile */
+        width: 100% !important;
+        padding: 40px 24px;
+        order: 2; /* Move info box below form on mobile */
+        transform: none !important;
+        min-height: auto;
     }
     
     .auth-container:not(.is-signup) .auth-left {
-        border-left: none !important;
         transform: none !important;
     }
     
+    .left-content-box {
+        position: relative;
+        width: 100%;
+        left: auto;
+        top: auto;
+        transform: none !important;
+        opacity: 1 !important;
+        pointer-events: all !important;
+        text-align: center;
+    }
+
+    .auth-left h1 {
+        font-size: 2rem;
+    }
+    
     .auth-right {
-        padding: 40px 30px;
-        transform: none !important; /* Reset swap for mobile */
+        width: 100% !important;
+        padding: 60px 24px 40px;
+        transform: none !important;
+        order: 1;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
     }
     
     .auth-container:not(.is-signup) .auth-right {
         transform: none !important;
+    }
+    
+    .form-section {
+        position: relative;
+        width: 100%;
+        left: auto;
+        top: auto;
+        transform: none !important;
+        opacity: 0;
+        pointer-events: none;
+        display: none;
+    }
+
+    .auth-container:not(.is-signup) .section-login,
+    .auth-container.is-signup .section-register {
+        display: block;
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .form-header h2 {
+        font-size: 1.8rem;
     }
     
     .social-buttons {
@@ -621,5 +667,13 @@ body {
     .auth-header {
         padding: 20px;
         justify-content: center;
+    }
+
+    .auth-main {
+        padding: 0;
+    }
+
+    .checkbox-group label {
+        font-size: 0.9rem;
     }
 }

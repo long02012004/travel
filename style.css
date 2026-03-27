@@ -248,6 +248,19 @@ ul {
     background-color: #00e5e5;
 }
 
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1001; /* Above mobile menu */
+    align-items: center;
+    justify-content: center;
+}
+
 /* ==================== 
    4. Hero Section 
 ==================== */
@@ -1922,17 +1935,61 @@ ul {
 
 @media (max-width: 768px) {
 
-    .nav-links,
-    .login-btn {
-        display: none;
-        /* Simplified header for mobile */
+    .mobile-menu-btn {
+        display: flex;
     }
 
-    .hero-search-widget {
+    .nav-links {
+        display: flex;
         flex-direction: column;
-        border-radius: 20px;
-        padding: 20px;
-        gap: 10px;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        padding: 80px 24px 30px;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 999;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .login-btn {
+        display: none;
+    }
+
+    .nav-actions {
+        gap: 12px;
+    }
+
+    .cta-btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    .premium-search-widget {
+        flex-direction: column !important;
+        border-radius: 24px !important;
+        padding: 20px !important;
+        gap: 10px !important;
+    }
+
+    .suggestions-dropdown {
+        position: relative !important;
+        top: 0 !important;
+        width: 100% !important;
+        transform: none !important;
+        margin-top: 10px;
+        box-shadow: none !important;
+        border: 1px solid rgba(0,0,0,0.1) !important;
     }
     
     .search-divider {

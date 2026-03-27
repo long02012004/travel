@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="app.css" />
     <!-- App specific styles -->
     <link rel="stylesheet" href="explore.css" />
-    <!-- Explore specific styles -->
+    <link rel="stylesheet" href="mobile-app.css" />
   </head>
 
   <body class="bg-gray-50">
@@ -30,14 +30,22 @@
 
     <!-- Top Navbar (Standard App Nav) -->
     <header class="app-header explore-header">
-      <div class="header-container full-width-header">
-        <a href="index.html" class="logo">
-          <div class="logo-icon small-icon">
-            <i class="ph-fill ph-sparkle"></i>
-          </div>
-          <span>AI Travel Planner</span>
-        </a>
+      <div class="header-container full-width-header">            <a href="index.html" class="logo">
+                <div class="logo-icon small-icon mobile-hide-icon">
+                    <i class="ph-fill ph-sparkle"></i>
+                </div>
+                <span>AI Travel Planner</span>
+            </a>
 
+            <div class="header-actions mobile-only-actions">
+                <button class="mobile-notification-btn" aria-label="Notifications">
+                    <i class="ph-fill ph-bell"></i>
+                    <span class="notification-badge"></span>
+                </button>
+                <a href="profile.html" class="mobile-header-avatar-link">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="mobile-header-avatar">
+                </a>
+            </div>
         <nav class="nav-links desktop-nav">
           <a href="index.html">Trang chủ</a>
           <a href="explore.html" class="active">Khám phá</a>
@@ -47,7 +55,7 @@
           <a href="review.html">Đánh giá</a>
         </nav>
 
-        <div class="header-actions">
+        <div class="header-actions desktop-only-actions">
           <div class="user-dropdown">
             <div class="user-trigger">
               <img
@@ -405,6 +413,31 @@
         </div>
       </div>
     </footer>
+
+    <!-- MOBILE ONLY: Bottom Nav & FAB -->
+    <button class="mobile-fab-btn"><i class="ph-fill ph-sparkle"></i></button>
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="ph-bold ph-compass"></i>
+            <span>Explore</span>
+        </a>
+        <a href="explore.html" class="nav-item active">
+            <i class="ph-fill ph-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="planner.html" class="nav-item">
+            <i class="ph-bold ph-map-trifold"></i>
+            <span>Trips</span>
+        </a>
+        <a href="dashboard.html" class="nav-item">
+            <i class="ph-bold ph-plus-circle"></i>
+            <span>Plan</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="ph-bold ph-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
 
     <script src="auth.js"></script>
     <script src="app.js"></script>

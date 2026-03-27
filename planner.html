@@ -18,6 +18,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css"> <!-- Base styles (fonts, resets) -->
     <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="mobile-app.css">
 </head>
 
 <body class="planner-layout">
@@ -26,22 +27,12 @@
     <header class="app-header explore-header">
         <div class="header-container full-width-header">
             <a href="index.html" class="logo">
-                <div class="logo-icon small-icon">
+                <div class="logo-icon small-icon mobile-hide-icon">
                     <i class="ph-fill ph-sparkle"></i>
                 </div>
                 <span>AI Travel Planner</span>
             </a>
-
-            <nav class="nav-links desktop-nav">
-                <a href="index.html">Trang chủ</a>
-                <a href="explore.html">Khám phá</a>
-
-                <a href="ai-suggestions.html">Gợi ý AI</a>
-                <a href="news.html">Tin tức</a>
-                <a href="review.html">Đánh giá</a>
-            </nav>
-
-            <div class="header-actions">
+            <div class="header-actions desktop-only-actions">
                 <div class="user-dropdown">
                     <div class="user-trigger">
                         <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
@@ -61,6 +52,19 @@
                     </div>
                 </div>
             </div>
+            <div class="header-actions mobile-only-actions">
+                <button class="mobile-notification-btn" aria-label="Notifications">
+                    <i class="ph-fill ph-bell"></i>
+                    <span class="notification-badge"></span>
+                </button>
+                <a href="profile.html" class="mobile-header-avatar-link">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="mobile-header-avatar">
+                </a>
+            </div>
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="ph-bold ph-list"></i>
+            </button>
         </div>
     </header>
 
@@ -358,10 +362,53 @@
             }
         });
     </script>
+    <!-- MOBILE ONLY: Bottom Nav & FAB -->
+    <button class="mobile-fab-btn"><i class="ph-fill ph-sparkle"></i></button>
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="ph-bold ph-compass"></i>
+            <span>Explore</span>
+        </a>
+        <a href="explore.html" class="nav-item">
+            <i class="ph-bold ph-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="planner.html" class="nav-item active">
+            <i class="ph-fill ph-map-trifold"></i>
+            <span>Trips</span>
+        </a>
+        <a href="dashboard.html" class="nav-item">
+            <i class="ph-bold ph-plus-circle"></i>
+            <span>Plan</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="ph-bold ph-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
     <script src="auth.js"></script>
     <script src="app.js"></script>
     <script src="planner.js"></script>
     <script src="chat-widget.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            if (mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (navLinks.classList.contains('active')) {
+                        icon.classList.remove('ph-list');
+                        icon.classList.add('ph-x');
+                    } else {
+                        icon.classList.remove('ph-x');
+                        icon.classList.add('ph-list');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

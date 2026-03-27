@@ -1,0 +1,537 @@
+/* --- High-Fidelity Mobile App Redesign --- */
+@media (max-width: 768px) {
+    /* Hide desktop elements */
+    .desktop-only-hero, .timeline, .why-us, .expert-itinerary, .destinations, .related-destinations, .how-it-works-section, .testimonials-section, .app-global-footer,
+    .nav-actions .login-btn, .nav-actions .cta-btn, .nav-actions .theme-toggle-btn,
+    .sidebar, .topbar, .app-header .nav-links.desktop-nav, .desktop-only-actions {
+        display: none !important;
+    }
+
+    /* Dashboard specific mobile fixes */
+    .dashboard-layout .app-container {
+        display: block !important;
+    }
+    .dashboard-layout .main-content {
+        margin-left: 0 !important;
+        padding: 80px 16px 20px !important;
+    }
+    .dashboard-top-row {
+        flex-direction: column !important;
+        gap: 16px !important;
+    }
+    .status-clock-station {
+        flex-direction: column !important;
+        height: auto !important;
+        padding: 20px !important;
+    }
+    .station-right {
+        margin-top: 16px;
+        border-left: none !important;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding-top: 16px !important;
+        padding-left: 0 !important;
+    }
+
+    /* Fix Z-index for Chat Widget to avoid overlap with Bottom Nav */
+    #chat-widget-container, .chat-widget-launcher {
+        bottom: 80px !important; /* Move up above Bottom Nav */
+    }
+
+    /* Push FAB up slightly to avoid tight collision with account label */
+    .mobile-fab-btn {
+        bottom: 100px !important;
+    }
+
+    body {
+        padding-bottom: 80px; /* space for bottom nav */
+        background-color: #f8fafc;
+    }
+
+    /* Header redesign */
+    .header-logo {
+        flex: 1;
+    }
+    .mobile-hide-icon {
+        display: none;
+    }
+    .mobile-header-avatar {
+        display: block !important;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 2px solid white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .mobile-header-avatar-link {
+        display: block !important;
+        margin-left: 8px;
+    }
+    .logo span {
+        white-space: nowrap;
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #0f172a;
+    }
+    .mobile-notification-btn {
+        display: block !important;
+        background: transparent;
+        border: none;
+        color: #64748b;
+        font-size: 1.5rem;
+        position: relative;
+        cursor: pointer;
+    }
+    .mobile-notification-btn .notification-badge {
+        position: absolute;
+        top: 2px;
+        right: 4px;
+        width: 8px;
+        height: 8px;
+        background-color: #ef4444;
+        border-radius: 50%;
+        border: 2px solid white;
+    }
+
+    .mobile-only-actions {
+        display: flex !important;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .mobile-menu-btn {
+        display: none !important;
+    }
+
+    /* Hide desktop-only user dropdown elements */
+    .user-trigger span, .user-trigger i.ph-caret-down {
+        display: none !important;
+    }
+    .user-dropdown .dropdown-menu {
+        display: none !important; /* Force hide on mobile, use bottom nav instead */
+    }
+    .user-trigger {
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    /* Hero section */
+    .hero {
+        padding: 80px 16px 20px;
+        background: none;
+    }
+    .mobile-app-hero {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        height: 280px;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        margin-bottom: 32px;
+    }
+    .mobile-hero-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .mobile-hero-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+    }
+    .mobile-hero-content {
+        position: absolute;
+        bottom: 85px;
+        left: 24px;
+        right: 24px;
+        color: white;
+        text-align: left;
+    }
+    .mobile-hero-title {
+        font-size: 1.4rem;
+        font-weight: 800;
+        line-height: 1.25;
+        margin-bottom: 6px;
+        max-width: 90%;
+    }
+    .mobile-hero-subtitle {
+        font-size: 0.8rem;
+        opacity: 0.85;
+    }
+    .mobile-hero-search {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        background: white;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        padding: 4px 4px 4px 16px;
+        height: 52px;
+    }
+    .mobile-hero-search .search-icon {
+        color: #3b82f6;
+        font-size: 1.15rem;
+        margin-right: 12px;
+        flex-shrink: 0;
+    }
+    .mobile-hero-input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 0.9rem;
+        color: #333;
+        background: transparent;
+        width: 50%; /* Allow shrinking but flex-1 handles the rest */
+    }
+    .mobile-hero-btn {
+        background: #3b82f6;
+        color: white;
+        border: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Categories */
+    .mobile-categories {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding: 0 16px 32px;
+        scrollbar-width: none;
+        margin-top: -8px;
+    }
+    .mobile-categories::-webkit-scrollbar {
+        display: none;
+    }
+    .cat-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 100px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #475569;
+        white-space: nowrap;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .cat-pill.active {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        color: #1e3a8a;
+    }
+
+    /* AI Suggestions */
+    .mobile-ai-suggestions, .mobile-upcoming-trip {
+        padding: 0 16px 32px;
+    }
+    .mobile-section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: 16px;
+    }
+    .mobile-section-header h2 {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin: 0;
+    }
+    .mobile-section-header .see-all {
+        font-size: 0.85rem;
+        color: #3b82f6;
+        font-weight: 600;
+        text-decoration: none;
+    }
+    .mobile-ai-featured-card {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        height: 200px;
+        margin-bottom: 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .mobile-ai-featured-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .card-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.8));
+        display: flex;
+        align-items: flex-end;
+        padding: 16px;
+        border-radius: 20px;
+    }
+    .card-info h3 {
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+        margin-top: 0;
+    }
+    .card-rating {
+        color: rgba(255,255,255,0.9);
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+    .card-rating i { color: #fbbf24; }
+    .card-badge {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(4px);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 4px 8px;
+        border-radius: 6px;
+    }
+    .mobile-ai-grid {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        padding: 0 16px 16px;
+        margin: 0 -16px;
+        scrollbar-width: none;
+    }
+    .mobile-ai-grid::-webkit-scrollbar { display: none; }
+    .mobile-grid-card {
+        flex: 0 0 170px;
+        height: 180px;
+        border-radius: 16px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .mobile-grid-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .mobile-grid-card .card-action {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 28px;
+        height: 28px;
+        background: white;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        z-index: 2;
+    }
+    .mobile-grid-card .card-overlay {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        border-radius: 16px;
+    }
+    .mobile-grid-card h4 {
+        color: white;
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+    .mobile-grid-card p {
+        color: rgba(255,255,255,0.8);
+        font-size: 0.75rem;
+        margin: 4px 0 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    /* Upcoming Trip */
+    .mobile-trip-card {
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .trip-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+    .trip-icon {
+        width: 40px;
+        height: 40px;
+        background: #eff6ff;
+        color: #3b82f6;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+    .trip-info h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin: 0;
+    }
+    .trip-info p {
+        font-size: 0.8rem;
+        color: #64748b;
+        margin: 0;
+    }
+    .btn-more {
+        margin-left: auto;
+        background: transparent;
+        border: none;
+        color: #94a3b8;
+        font-size: 1.5rem;
+    }
+    .trip-timeline {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 24px;
+    }
+    .trip-timeline::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 4px; bottom: 0;
+        width: 2px;
+        background: #e2e8f0;
+    }
+    .timeline-point {
+        position: relative;
+        margin-bottom: 24px;
+    }
+    .timeline-point:last-child { margin-bottom: 0; }
+    .point-dot {
+        position: absolute;
+        left: -20px;
+        top: 4px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #cbd5e1;
+        border: 2px solid white;
+        box-shadow: 0 0 0 1px #e2e8f0;
+        transform: translateX(-1px);
+    }
+    .timeline-point.active .point-dot {
+        background: #3b82f6;
+        box-shadow: 0 0 0 2px #bfdbfe;
+    }
+    .point-time {
+        font-size: 0.75rem;
+        color: #3b82f6;
+        font-weight: 700;
+        margin-bottom: 4px;
+        display: block;
+    }
+    .timeline-point:not(.active) .point-time { color: #64748b; }
+    .point-content h4 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 2px;
+    }
+    .point-content p {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin: 0;
+    }
+    .trip-map-snapshot {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        height: 120px;
+    }
+    .trip-map-snapshot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .btn-open-map {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(59, 130, 246, 0.9);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 100px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        backdrop-filter: blur(4px);
+    }
+
+    /* FAB & Bottom Nav */
+    .mobile-fab-btn {
+        position: fixed;
+        bottom: 90px;
+        right: 16px;
+        width: 56px;
+        height: 56px;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+    }
+    .mobile-bottom-nav {
+        display: flex !important;
+        position: fixed;
+        bottom: 0; left: 0; width: 100%;
+        height: 70px;
+        background: white;
+        justify-content: space-around;
+        align-items: center;
+        border-top: 1px solid #f1f5f9;
+        padding-bottom: env(safe-area-inset-bottom);
+        z-index: 1000;
+    }
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #94a3b8;
+        gap: 4px;
+        background: transparent;
+    }
+    .nav-item i { font-size: 1.4rem; }
+    .nav-item span { font-size: 0.65rem; font-weight: 500; }
+    .nav-item.active { color: #3b82f6; }
+}
+
+@media (min-width: 769px) {
+    .mobile-app-hero, .mobile-categories, .mobile-ai-suggestions, .mobile-upcoming-trip, .mobile-fab-btn, .mobile-bottom-nav, .mobile-header-avatar, .mobile-notification-btn, .mobile-app-header {
+        display: none !important;
+    }
+}

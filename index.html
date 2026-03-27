@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mobile-app.css">
 </head>
 
 <body>
@@ -32,7 +32,7 @@
     <header class="navbar" data-aos="fade-down" data-aos-duration="800">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <div class="logo-icon">
+                <div class="logo-icon small-icon mobile-hide-icon">
                     <i class="ph-fill ph-sparkle"></i>
                 </div>
                 <span>AI Travel Planner</span>
@@ -47,30 +47,14 @@
                 <a href="review.html">Đánh giá</a>
             </nav>
 
-            <div class="nav-actions">
-                <div class="user-dropdown" style="display: none;">
-                    <div class="user-trigger">
-                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="User Avatar">
-                        <span class="user-name">Người dùng</span>
-                        <i class="ph-bold ph-caret-down"></i>
-                    </div>
-                    <div class="dropdown-menu">
-                        <div class="dropdown-header">
-                            <span>Tài khoản</span>
-                            <div class="user-display-name">Người dùng</div>
-                        </div>
-                        <a href="profile.html"><i class="ph ph-user-circle"></i> Trang cá nhân</a>
-                        <a href="planner.html"><i class="ph ph-map-trifold"></i> Lịch trình của tôi</a>
-                        <a href="ai-suggestions.html"><i class="ph ph-sparkle"></i> Gợi ý từ AI</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="index.html" class="logout-item"><i class="ph ph-sign-out"></i> Đăng xuất</a>
-                    </div>
-                </div>
-                <button class="theme-toggle-btn" id="themeToggle" title="Chuyển chế độ tối/sáng">
-                    <i class="ph-bold ph-moon"></i>
+            <div class="header-actions mobile-only-actions">
+                <button class="mobile-notification-btn" aria-label="Notifications">
+                    <i class="ph-fill ph-bell"></i>
+                    <span class="notification-badge"></span>
                 </button>
-                <a href="login.html" class="login-btn">Đăng nhập</a>
-                <a href="login.html?mode=register" class="cta-btn">Bắt đầu ngay</a>
+                <a href="profile.html" class="mobile-header-avatar-link">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="mobile-header-avatar">
+                </a>
             </div>
         </div>
     </header>
@@ -78,7 +62,22 @@
     <main>
         <!-- Hero Section -->
         <section class="hero">
-            <div class="container hero-container" data-aos="zoom-in" data-aos-duration="1000">
+            <!-- MOBILE ONLY: App-like Hero Card -->
+            <div class="mobile-app-hero">
+                <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&q=80&w=800" alt="Eiffel Tower" class="mobile-hero-bg">
+                <div class="mobile-hero-overlay"></div>
+                <div class="mobile-hero-content">
+                    <h1 class="mobile-hero-title">Lên kế hoạch chuyến đi mơ ước với AI</h1>
+                    <p class="mobile-hero-subtitle">Cá nhân hóa lịch trình chỉ trong vài giây.</p>
+                </div>
+                <div class="mobile-hero-search">
+                    <i class="ph-bold ph-magnifying-glass search-icon"></i>
+                    <input type="text" placeholder="Bạn muốn đi đâu?" class="mobile-hero-input">
+                    <button class="mobile-hero-btn"><i class="ph-fill ph-sparkle"></i></button>
+                </div>
+            </div>
+
+            <div class="container hero-container desktop-only-hero" data-aos="zoom-in" data-aos-duration="1000">
                 <div class="hero-badge" data-aos="fade-up" data-aos-delay="200">
                     <span class="badge-icon">✨</span>
                     <span class="badge-text">MỚI: TRẢI NGHIỆM AI LÊN KẾ HOẠCH</span>
@@ -185,6 +184,91 @@
             </div>
         </section>
         <!-- End Hero -->
+
+        <!-- MOBILE ONLY: Category Pills -->
+        <div class="mobile-categories">
+            <button class="cat-pill active"><i class="ph-fill ph-waves" style="color:#3b82f6;"></i> Biển đảo</button>
+            <button class="cat-pill"><i class="ph-fill ph-mountains" style="color:#64748b;"></i> Leo núi</button>
+            <button class="cat-pill"><i class="ph-fill ph-bank" style="color:#64748b;"></i> Văn hóa</button>
+            <button class="cat-pill"><i class="ph-fill ph-star" style="color:#64748b;"></i> Nổi bật</button>
+        </div>
+
+        <!-- MOBILE ONLY: AI Suggestions -->
+        <section class="mobile-ai-suggestions">
+            <div class="mobile-section-header">
+                <h2>Gợi ý từ AI</h2>
+                <a href="ai-suggestions.html" class="see-all">Xem tất cả</a>
+            </div>
+            <div class="mobile-ai-featured-card">
+                <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=80&w=600" alt="Ha Long">
+                <div class="card-overlay">
+                    <div class="card-info">
+                        <h3>Hạ Long, Việt Nam</h3>
+                        <div class="card-rating">
+                            <i class="ph-fill ph-star"></i> 4.9 (2.1k đánh giá)
+                        </div>
+                    </div>
+                    <span class="card-badge">PHỔ BIẾN</span>
+                </div>
+            </div>
+            <div class="mobile-ai-grid">
+                <div class="mobile-grid-card">
+                    <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&q=80&w=300" alt="Kyoto">
+                    <button class="card-action"><i class="ph-fill ph-heart" style="color:#ef4444;"></i></button>
+                    <div class="card-overlay">
+                        <h4>Kyoto, Nhật Bản</h4>
+                        <p>Vẻ đẹp cổ kính</p>
+                    </div>
+                </div>
+                <div class="mobile-grid-card">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=300" alt="Bali">
+                    <button class="card-action"><i class="ph-fill ph-heart" style="color:#cbd5e1;"></i></button>
+                    <div class="card-overlay">
+                        <h4>Bali, Indonesia</h4>
+                        <p>Thiên đường nghỉ dưỡng</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MOBILE ONLY: Upcoming Itinerary -->
+        <section class="mobile-upcoming-trip">
+            <div class="mobile-section-header">
+                <h2>Lịch trình sắp tới</h2>
+            </div>
+            <div class="mobile-trip-card">
+                <div class="trip-header">
+                    <div class="trip-icon"><i class="ph-bold ph-airplane-tilt"></i></div>
+                    <div class="trip-info">
+                        <h3>Chuyến đi Đà Lạt</h3>
+                        <p>15 Th05 - 18 Th05 (4 ngày)</p>
+                    </div>
+                    <button class="btn-more"><i class="ph-bold ph-dots-three-vertical"></i></button>
+                </div>
+                <div class="trip-timeline">
+                    <div class="timeline-point active">
+                        <div class="point-dot"></div>
+                        <div class="point-content">
+                            <span class="point-time">08:00 AM</span>
+                            <h4>Cà phê tại Túi Mơ To</h4>
+                            <p>Thưởng thức view thung lũng</p>
+                        </div>
+                    </div>
+                    <div class="timeline-point">
+                        <div class="point-dot"></div>
+                        <div class="point-content">
+                            <span class="point-time">10:30 AM</span>
+                            <h4>Tham quan Thác Datanla</h4>
+                            <p><i>Gợi ý: Mang theo giày leo núi</i></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="trip-map-snapshot">
+                    <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=600" alt="Map">
+                    <button class="btn-open-map">Mở Bản Đồ</button>
+                </div>
+            </div>
+        </section>
 
         <!-- Timeline Section -->
         <section class="timeline">
@@ -1134,6 +1218,23 @@
                 }
             });
 
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            if (mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (navLinks.classList.contains('active')) {
+                        icon.classList.remove('ph-list');
+                        icon.classList.add('ph-x');
+                    } else {
+                        icon.classList.remove('ph-x');
+                        icon.classList.add('ph-list');
+                    }
+                });
+            }
+
             // Handle Search Submit
             const searchForm = document.getElementById('hero-search-form');
             const dateInput = document.getElementById('dates-input');
@@ -1202,6 +1303,31 @@
             }
         })();
     </script>
+    <!-- MOBILE ONLY: Bottom Nav & FAB -->
+    <button class="mobile-fab-btn"><i class="ph-fill ph-sparkle"></i></button>
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="ph-fill ph-compass"></i>
+            <span>Explore</span>
+        </a>
+        <a href="explore.html" class="nav-item">
+            <i class="ph-bold ph-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="planner.html" class="nav-item">
+            <i class="ph-bold ph-map-trifold"></i>
+            <span>Trips</span>
+        </a>
+        <a href="dashboard.html" class="nav-item">
+            <i class="ph-bold ph-plus-circle"></i>
+            <span>Plan</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="ph-bold ph-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
+
     <script src="auth.js"></script>
     <script src="chat-widget.js"></script>
     <script src="theme.js"></script>

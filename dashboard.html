@@ -15,10 +15,33 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="mobile-app.css">
     <!-- Leaflet Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
+
+    <!-- MOBILE HEADER (REPLACING SIDEBAR ON SMALL SCREENS) -->
+    <header class="navbar mobile-app-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon small-icon mobile-hide-icon">
+                    <i class="ph-fill ph-sparkle"></i>
+                </div>
+                <span>AI Dashboard</span>
+            </a>
+
+            <div class="header-actions mobile-only-actions">
+                <button class="mobile-notification-btn" aria-label="Notifications">
+                    <i class="ph-fill ph-bell"></i>
+                    <span class="notification-badge"></span>
+                </button>
+                <a href="profile.html" class="mobile-header-avatar-link">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026704d" alt="Avatar" class="mobile-header-avatar">
+                </a>
+            </div>
+        </div>
+    </header>
 
 <body class="dashboard-layout">
 
@@ -204,6 +227,30 @@
 
     </div>
 
+    <!-- MOBILE ONLY: Bottom Nav & FAB -->
+    <button class="mobile-fab-btn"><i class="ph-fill ph-sparkle"></i></button>
+    <nav class="mobile-bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="ph-bold ph-compass"></i>
+            <span>Explore</span>
+        </a>
+        <a href="explore.html" class="nav-item">
+            <i class="ph-bold ph-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="planner.html" class="nav-item">
+            <i class="ph-bold ph-map-trifold"></i>
+            <span>Trips</span>
+        </a>
+        <a href="dashboard.html" class="nav-item active">
+            <i class="ph-fill ph-plus-circle"></i>
+            <span>Plan</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <i class="ph-bold ph-user"></i>
+            <span>Account</span>
+        </a>
+    </nav>
     <script src="auth.js"></script>
     <script src="dashboard.js"></script>
     <script src="chat-widget.js"></script>
